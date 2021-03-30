@@ -24,7 +24,7 @@ const Review: VFC<Props> = ({ setShowModal }) => {
       <TableBody>
         <TableRow onClick={toggleReviewCollapse}>
           <TableCell>
-            <img src="/images/profile-default.png" alt="user-default-profile-image" />
+            <img src="../images/profile-default.png" alt="user-default-profile-image" />
           </TableCell>
           <TableCell>맛있어요~</TableCell>
           <TableCell>nickname</TableCell>
@@ -46,7 +46,7 @@ const Review: VFC<Props> = ({ setShowModal }) => {
 
         <TableRow onClick={openModal}>
           <TableCell>
-            <img src="/images/profile-default.png" alt="user-default-profile-image" />
+            <img src="../images/profile-default.png" alt="user-default-profile-image" />
           </TableCell>
           <TableCell>깔끔해요~</TableCell>
           <TableCell>nickname</TableCell>
@@ -60,7 +60,7 @@ const Review: VFC<Props> = ({ setShowModal }) => {
 
         <TableRow onClick={openModal}>
           <TableCell>
-            <img src="/images/profile-default.png" alt="user-default-profile-image" />
+            <img src="../images/profile-default.png" alt="user-default-profile-image" />
           </TableCell>
           <TableCell>별로에요~</TableCell>
           <TableCell>nickname</TableCell>
@@ -74,7 +74,7 @@ const Review: VFC<Props> = ({ setShowModal }) => {
 
         <TableRow onClick={openModal}>
           <TableCell>
-            <img src="/images/profile-default.png" alt="user-default-profile-image" />
+            <img src="../images/profile-default.png" alt="user-default-profile-image" />
           </TableCell>
           <TableCell>최고에요!</TableCell>
           <TableCell>nickname</TableCell>

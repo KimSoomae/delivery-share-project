@@ -6,7 +6,7 @@ const Info: VFC = () => {
   return (
     <>
       <MapImage>
-        <LazyLoadImage src="/images/map.PNG" alt="restaurant-location-image" />
+        <LazyLoadImage src="../images/map.PNG" alt="restaurant-location-image" />
       </MapImage>
       <ListWrapper>
         <SubTitle>위치</SubTitle>
