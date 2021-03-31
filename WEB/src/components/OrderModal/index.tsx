@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React, { useCallback, VFC } from 'react';
 import {
   ButtonWrapper,
   CloseButton,
@@ -11,18 +11,21 @@ import {
 
 interface Props {
   show: boolean;
-  info: string;
-  onCloseModal: () => void;
+  data: any;
   setShowModal: (flag: boolean) => void;
 }
 
-const OrderModal: VFC<Props> = ({ show, info, onCloseModal, setShowModal }) => {
+const OrderModal: VFC<Props> = ({ show, data, setShowModal }) => {
+  const onCloseModal = useCallback(() => {
+    setShowModal(false);
+  }, []);
+
   if (!show) return null;
 
   return (
     <Modal>
       <div>
-        <ModalHeader>주문번호 {info}</ModalHeader>
+        <ModalHeader>주문번호 #{data.id.substr(0, 8)}</ModalHeader>
         <ModalBody>
           <ModalItem>
             <h1>주문메뉴</h1>
@@ -36,6 +39,18 @@ const OrderModal: VFC<Props> = ({ show, info, onCloseModal, setShowModal }) => {
             <div>
               <p>조심히 오세요~</p>
               <p>2인분으로 나눠주세요~</p>
+            </div>
+          </ModalItem>
+          <ModalItem>
+            <h1>시간</h1>
+            <div>
+              <p>{data.date}</p>
+            </div>
+          </ModalItem>
+          <ModalItem>
+            <h1>장소</h1>
+            <div>
+              <p>{data.location}</p>
             </div>
           </ModalItem>
           <ButtonWrapper>

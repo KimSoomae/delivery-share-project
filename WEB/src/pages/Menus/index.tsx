@@ -1,16 +1,39 @@
 import Menu from '@components/Menu';
-import React, { VFC } from 'react';
-import { Container } from './styles';
+import MenuModal from '@components/MenuModal';
+import React, { useState, VFC } from 'react';
+import { Container, Grid, SubTitle } from './styles';
+import { dummyMenu } from './../../utils/dummyDB';
 
-interface Props {
-  setShowModal: (flag: boolean) => void;
-  setModalInfo: (content: string) => void;
-}
+const Menus: VFC = () => {
+  const [showMenuModal, setShowMenuModal] = useState(false);
+  const [menuInfo, setMenuInfo] = useState('');
 
-const Menus: VFC<Props> = ({ setShowModal, setModalInfo }) => {
   return (
     <Container>
-      <Menu setShowModal={setShowModal} setModalInfo={setModalInfo} />
+      <SubTitle>치킨</SubTitle>
+      <Grid>
+        {dummyMenu.slice(0, 2).map(data => (
+          <Menu
+            key={data.id}
+            data={data}
+            setShowModal={setShowMenuModal}
+            setModalInfo={setMenuInfo}
+          />
+        ))}
+      </Grid>
+
+      <SubTitle>사이드</SubTitle>
+      <Grid>
+        {dummyMenu.slice(2).map(data => (
+          <Menu
+            key={data.id}
+            data={data}
+            setShowModal={setShowMenuModal}
+            setModalInfo={setMenuInfo}
+          />
+        ))}
+      </Grid>
+      <MenuModal show={showMenuModal} data={menuInfo} setShowModal={setShowMenuModal} />
     </Container>
   );
 };

@@ -1,73 +1,57 @@
 import React, { useCallback, VFC } from 'react';
-import { Table, TableBody, TableCell, TableHeader, TableRow } from './styles';
+import {
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+  TableWrapper,
+} from '@components/TableContents/styles';
+import { dummyOrder } from '@utils/dummyDB';
+import { MemoTableContentOrder } from '@components/TableContents';
 
 interface Props {
   setShowModal: (flag: boolean) => void;
   setModalInfo: (content: string) => void;
 }
 
-const Tables: VFC<Props> = ({ setShowModal, setModalInfo }) => {
-  const openModal = useCallback((e: React.MouseEvent<HTMLTableRowElement>) => {
+const Order: VFC<Props> = ({ setShowModal, setModalInfo }) => {
+  const openModal = useCallback(data => {
     setShowModal(true);
-    setModalInfo(e.currentTarget.id);
+    setModalInfo(data);
   }, []);
 
   return (
-    <Table>
+    <TableWrapper>
       <TableHeader>
         <TableRow>
-          <TableCell>주문번호</TableCell>
-          <TableCell>주문날짜</TableCell>
-          <TableCell>주문자</TableCell>
-          <TableCell>장소</TableCell>
-          <TableCell>가격</TableCell>
-          <TableCell>상태</TableCell>
+          <TableCell flexStart={true} cellCount={6}>
+            주문번호
+          </TableCell>
+          <TableCell flexStart={true} cellCount={6} className="tw-wd">
+            장소
+          </TableCell>
+          <TableCell flexStart={true} cellCount={6} className="tw-wd">
+            시간
+          </TableCell>
+          <TableCell cellCount={6} className="tn-wd">
+            주문자
+          </TableCell>
+          <TableCell cellCount={6} className="tn-wd">
+            가격
+          </TableCell>
+          <TableCell cellCount={6}>상태</TableCell>
         </TableRow>
       </TableHeader>
+
       <TableBody>
-        <TableRow id="#1" onClick={openModal}>
-          <TableCell>#1</TableCell>
-          <TableCell>2021.03.20 17:20:41</TableCell>
-          <TableCell>nickname</TableCell>
-          <TableCell>서울특별시 동대문구</TableCell>
-          <TableCell>55,000</TableCell>
-          <TableCell>
-            <span className="pending">대기중</span>
-          </TableCell>
-        </TableRow>
-        <TableRow id="#2" onClick={openModal}>
-          <TableCell>#2</TableCell>
-          <TableCell>2021.03.21 12:20:41</TableCell>
-          <TableCell>nickname</TableCell>
-          <TableCell>서울특별시 동대문구</TableCell>
-          <TableCell>55,000</TableCell>
-          <TableCell>
-            <span className="delivered">완료</span>
-          </TableCell>
-        </TableRow>
-        <TableRow id="#3" onClick={openModal}>
-          <TableCell>#3</TableCell>
-          <TableCell>2021.03.22 13:20:41</TableCell>
-          <TableCell>nickname</TableCell>
-          <TableCell>서울특별시 동대문구</TableCell>
-          <TableCell>55,000</TableCell>
-          <TableCell>
-            <span className="canceled">취소</span>
-          </TableCell>
-        </TableRow>
-        <TableRow id="#4" onClick={openModal}>
-          <TableCell>#4</TableCell>
-          <TableCell>2021.03.23 14:20:41</TableCell>
-          <TableCell>nickname</TableCell>
-          <TableCell>서울특별시 동대문구</TableCell>
-          <TableCell>55,000</TableCell>
-          <TableCell>
-            <span className="pending">대기중</span>
-          </TableCell>
-        </TableRow>
+        {dummyOrder.map(data => (
+          <TableRow key={data.id} onClick={() => openModal(data)}>
+            <MemoTableContentOrder data={data} />
+          </TableRow>
+        ))}
       </TableBody>
-    </Table>
+    </TableWrapper>
   );
 };
 
-export default React.memo(Tables);
+export default Order;

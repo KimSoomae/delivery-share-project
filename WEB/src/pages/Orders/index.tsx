@@ -1,16 +1,20 @@
 import Order from '@components/Order';
-import React, { VFC } from 'react';
+import OrderModal from '@components/OrderModal';
+import React, { useState, VFC } from 'react';
 import { Container } from './styles';
 
-interface Props {
-  setShowModal: (flag: boolean) => void;
-  setModalInfo: (content: string) => void;
-}
+const Orders: VFC = () => {
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [orderData, setOrderInfo] = useState('');
 
-const Orders: VFC<Props> = ({ setShowModal, setModalInfo }) => {
   return (
     <Container>
-      <Order setModalInfo={setModalInfo} setShowModal={setShowModal} />
+      <Order setModalInfo={setOrderInfo} setShowModal={setShowOrderModal} />
+      <OrderModal
+        show={showOrderModal}
+        data={orderData}
+        setShowModal={setShowOrderModal}
+      />
     </Container>
   );
 };

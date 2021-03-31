@@ -1,0 +1,125 @@
+import { v4 as uuid } from 'uuid';
+
+export const dummyReview = [
+  {
+    id: uuid(),
+    src: '../images/profile-default.png',
+    alt: 'user-default-profile-image',
+    content: '맛있어요~',
+    nickname: 'KGLEE',
+    stars: 4.0,
+  },
+  {
+    id: uuid(),
+    src: '../images/profile-default.png',
+    alt: 'user-default-profile-image',
+    content: '별로에요 ㅠㅠ',
+    nickname: 'ac123',
+    stars: 3.5,
+  },
+  {
+    id: uuid(),
+    src: '../images/profile-default.png',
+    alt: 'user-default-profile-image',
+    content: '배송이 빠르군요!~',
+    nickname: 'OHOH',
+    stars: 4.5,
+  },
+  {
+    id: uuid(),
+    src: '../images/profile-default.png',
+    alt: 'user-default-profile-image',
+    content: '최악의 최악입니다 -_-',
+    nickname: 'BACK',
+    stars: 1.5,
+  },
+];
+
+export const dummyOrder = [
+  {
+    id: uuid(),
+    date: '2021.03.20 17:20:41',
+    nickname: 'KGLEE',
+    location: '서울특별시 동대문구',
+    price: '55,000',
+    state: 'pending',
+  },
+  {
+    id: uuid(),
+    date: '2021.03.20 15:35:11',
+    nickname: 'KG123',
+    location: '서울특별시 이문동',
+    price: '15,000',
+    state: 'delivered',
+  },
+  {
+    id: uuid(),
+    date: '2021.03.20 14:00:41',
+    nickname: 'afegse',
+    location: '서울특별시 휘경동',
+    price: '5,000',
+    state: 'pending',
+  },
+  {
+    id: uuid(),
+    date: '2021.03.20 13:20:51',
+    nickname: 'fgggge',
+    location: '서울특별시 쌍문동',
+    price: '35,000',
+    state: 'pending',
+  },
+  {
+    id: uuid(),
+    date: '2021.03.20 12:40:41',
+    nickname: 'qwert',
+    location: '서울특별시 장안동',
+    price: '50,000',
+    state: 'canceled',
+  },
+  {
+    id: uuid(),
+    date: '2021.03.20 12:20:41',
+    nickname: 'hhhtt',
+    location: '서울특별시 전농동',
+    price: '515,000',
+    state: 'delivered',
+  },
+  {
+    id: uuid(),
+    date: '2021.03.20 11:20:41',
+    nickname: 'afafafaf',
+    location: '서울특별시 휘문동',
+    price: '8,500',
+    state: 'delivered',
+  },
+];
+
+export const dummyMenu = [
+  {
+    id: uuid(),
+    src: '../images/chicken1.jpg',
+    alt: 'chicken1-img',
+    name: '뿌링클',
+    category: '치킨',
+    price: '12,500',
+    desc: '뿌링클 뿌링클 치킨입니다.',
+  },
+  {
+    id: uuid(),
+    src: '../images/chicken2.png',
+    alt: 'chicken2-img',
+    name: '포테킹',
+    category: '치킨',
+    price: '15,500',
+    desc: '포테포테킹! 치킨입니다.',
+  },
+  {
+    id: uuid(),
+    src: '../images/cheeseball.png',
+    alt: 'cheeseball-img',
+    name: '치즈볼',
+    category: '사이드',
+    price: '2,500',
+    desc: '치이즈보오올 입니다.',
+  },
+];
