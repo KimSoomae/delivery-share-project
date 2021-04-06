@@ -1,9 +1,11 @@
 export interface PropsReview {
+  id: string;
   src: string;
   alt: string;
   content: string;
   nickname: string;
   stars: number;
+  comment?: string;
 }
 
 export interface PropsOrder {

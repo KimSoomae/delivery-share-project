@@ -32,6 +32,7 @@ export const dummyReview = [
     content: '최악의 최악입니다 -_-',
     nickname: 'BACK',
     stars: 1.5,
+    comment: '리뷰 남겨주셔서 감사합니다. 더 좋은 서비스로 보답하겠습니다.',
   },
 ];
 
