@@ -1,11 +1,11 @@
-import Review from '@components/Review';
+import ReviewWrapper from '@components/ReviewWrapper';
 import React, { VFC } from 'react';
 import { Container } from './styles';
 
 const Reviews: VFC = () => {
   return (
     <Container>
-      <Review />
+      <ReviewWrapper />
     </Container>
   );
 };

@@ -2,15 +2,20 @@ import React, { VFC } from 'react';
 import { TableCell } from './styles';
 import MakeStars from '@utils/MakeStars';
 import { PropsOrder, PropsReview } from '@utils/type';
+import { BsCheckCircle } from 'react-icons/bs';
 
 type ReviewProps = {
   data: PropsReview;
 };
 const TableContentReview: VFC<ReviewProps> = ({ data }) => {
-  const { src, alt, content, nickname, stars } = data;
-  const cellCount = 5;
+  const { src, alt, content, nickname, stars, comment } = data;
+  const classProperty = comment ? 'checked' : '';
+  const cellCount = 6;
   return (
     <>
+      <TableCell cellCount={cellCount} className="icon">
+        <BsCheckCircle className={'check-icon ' + classProperty} />
+      </TableCell>
       <TableCell cellCount={cellCount}>
         <img src={src} alt={alt} />
       </TableCell>

@@ -22,7 +22,7 @@ export const TableRow = styled.div`
   display: flex;
   justify-content: space-around;
   padding: 1.5rem 0;
-  border-bottom: 1px solid #ededed;
+  border-top: 1px solid #ededed;
   gap: 20px;
   box-sizing: border-box;
 
@@ -39,6 +39,9 @@ export const TableCell = styled.div<{ cellCount?: number; flexStart?: boolean }>
   justify-content: ${({ flexStart }) =>
     flexStart && flexStart ? 'flex-start' : 'center'};
 
+  &.icon {
+    width: 50px;
+  }
   &.nickname {
     width: 10%;
 
@@ -83,6 +86,14 @@ export const TableCell = styled.div<{ cellCount?: number; flexStart?: boolean }>
   svg {
     font-size: 1.5rem;
     color: #f77204;
+  }
+
+  svg.check-icon {
+    font-size: 2.5rem;
+    color: #9d9d9d;
+  }
+  svg.check-icon.checked {
+    color: #31ad3b;
   }
 
   span {
