@@ -15,7 +15,7 @@ interface Props {
 }
 
 const Order: VFC<Props> = ({ setShowModal, setModalInfo }) => {
-  const openModal = useCallback(data => {
+  const onOpenModal = useCallback(data => {
     setShowModal(true);
     setModalInfo(data);
   }, []);
@@ -45,7 +45,7 @@ const Order: VFC<Props> = ({ setShowModal, setModalInfo }) => {
 
       <TableBody>
         {dummyOrder.map(data => (
-          <TableRow key={data.id} onClick={() => openModal(data)}>
+          <TableRow key={data.id} onClick={() => onOpenModal(data)}>
             <MemoTableContentOrder data={data} />
           </TableRow>
         ))}
