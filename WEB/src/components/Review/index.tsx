@@ -20,8 +20,6 @@ const Review: VFC<Props> = ({ data }) => {
   const childRef = useRef<HTMLFormElement>(null);
   const comment = data?.comment;
 
-  console.log(comment);
-
   const onOpenCollapse = useCallback(() => {
     if (parentRef.current === null || childRef.current === null) return;
 

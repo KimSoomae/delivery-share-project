@@ -1,4 +1,4 @@
-import React, { useCallback, VFC } from 'react';
+import React, { useCallback, useEffect, useState, VFC } from 'react';
 import {
   TableBody,
   TableCell,
@@ -8,13 +8,40 @@ import {
 } from '@components/TableContents/styles';
 import { dummyOrder } from '@utils/dummyDB';
 import { MemoTableContentOrder } from '@components/TableContents';
+import Pagination from '@components/Pagination';
 
 interface Props {
   setShowModal: (flag: boolean) => void;
   setModalInfo: (content: string) => void;
 }
 
+const PER_PAGE = 7;
+
 const Order: VFC<Props> = ({ setShowModal, setModalInfo }) => {
+  const orders = dummyOrder;
+  const rest = orders.length % PER_PAGE;
+  const pages = ((orders.length / PER_PAGE) >> 0) + (rest ? 1 : 0);
+  const [page, setPage] = useState(1);
+  const [curOrders, setCurOrders] = useState(
+    orders.slice((page - 1) * PER_PAGE, page * PER_PAGE),
+  );
+
+  useEffect(() => {
+    setCurOrders(orders.slice((page - 1) * PER_PAGE, page * PER_PAGE));
+  }, [page]);
+
+  useEffect(() => {
+    const target = document.querySelector(`.pagination-num-${page}`);
+    target?.classList.add('selected');
+    return () => {
+      target?.classList.remove('selected');
+    };
+  }, [page]);
+
+  const onClickPage = (page: number) => {
+    setPage(page);
+  };
+
   const onOpenModal = useCallback(data => {
     setShowModal(true);
     setModalInfo(data);
@@ -44,12 +71,13 @@ const Order: VFC<Props> = ({ setShowModal, setModalInfo }) => {
       </TableHeader>
 
       <TableBody>
-        {dummyOrder.map(data => (
+        {curOrders.map(data => (
           <TableRow key={data.id} onClick={() => onOpenModal(data)}>
             <MemoTableContentOrder data={data} />
           </TableRow>
         ))}
       </TableBody>
+      <Pagination pages={pages} onClickPage={onClickPage} />
     </TableWrapper>
   );
 };
