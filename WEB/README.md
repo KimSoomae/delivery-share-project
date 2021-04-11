@@ -27,8 +27,16 @@ https://kangyeollee.github.io/delivery-share-project
 
 - 주문접수 / 리뷰관리 TAB Pagination 적용
 
+### 04.11
+
+- 더미데이터 포맷 변경: 주문사항 메뉴와 요청 모두 fetch
+
 # Issues
 
 ### 04.10
 
-- type checking 관련 event type을 MouseEvent로 마킹할 시 오류 발생
+- type checking 관련 event type을 MouseEvent로 마킹할 시 오류 발생 [MenuModal.index.tsx / OrderModal.index.tsx]
+
+### 04.11
+
+- 더미데이터 fetch 관련 Type을 임시로 선언 : 추후 백엔드와 데이터베이스 연동 시 실제 데이터 타입으로 변경 필요
