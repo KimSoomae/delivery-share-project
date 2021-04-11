@@ -8,10 +8,24 @@ export interface PropsReview {
   comment?: string;
 }
 
+type temporalMenuType = {
+  id: string;
+  name: string;
+  count: number;
+};
+
+type temporalRequestsType = {
+  id: string;
+  nickname: string;
+  content: string;
+};
+
 export interface PropsOrder {
   date: string;
   location: string;
   state: string;
+  menus: temporalMenuType[];
+  requests?: temporalRequestsType[];
   price: string;
   nickname: string;
   id: string;

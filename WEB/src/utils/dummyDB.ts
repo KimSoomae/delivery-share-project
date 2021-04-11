@@ -142,6 +142,30 @@ export const dummyOrder = [
     date: '2021.03.20 17:20:41',
     nickname: 'KGLEE',
     location: '서울특별시 동대문구',
+    menus: [
+      {
+        id: uuid(),
+        name: '뿌링클',
+        count: 1,
+      },
+      {
+        id: uuid(),
+        name: '치즈볼(5개입)',
+        count: 1,
+      },
+    ],
+    requests: [
+      {
+        id: uuid(),
+        nickname: 'abc',
+        content: '조심히 오세요~',
+      },
+      {
+        id: uuid(),
+        nickname: 'bbb',
+        content: '빨리 오세요!',
+      },
+    ],
     price: '55,000',
     state: 'pending',
   },
@@ -150,6 +174,30 @@ export const dummyOrder = [
     date: '2021.03.20 15:35:11',
     nickname: 'KG123',
     location: '서울특별시 이문동',
+    menus: [
+      {
+        id: uuid(),
+        name: '뿌링클',
+        count: 1,
+      },
+      {
+        id: uuid(),
+        name: '치즈볼(5개입)',
+        count: 3,
+      },
+    ],
+    requests: [
+      {
+        id: uuid(),
+        nickname: 'abc',
+        content: '대충대충 오세요~',
+      },
+      {
+        id: uuid(),
+        nickname: 'bbb',
+        content: '후딱후딱 오세요!',
+      },
+    ],
     price: '15,000',
     state: 'delivered',
   },
@@ -158,6 +206,30 @@ export const dummyOrder = [
     date: '2021.03.20 14:00:41',
     nickname: 'afegse',
     location: '서울특별시 휘경동',
+    menus: [
+      {
+        id: uuid(),
+        name: '호랑이치킨',
+        count: 1,
+      },
+      {
+        id: uuid(),
+        name: '감자스틱(5개입)',
+        count: 1,
+      },
+    ],
+    requests: [
+      {
+        id: uuid(),
+        nickname: 'abc',
+        content: '아 제발 싸게싸게 오세요~',
+      },
+      {
+        id: uuid(),
+        nickname: 'bbb',
+        content: '가나다라마바사 오세요!',
+      },
+    ],
     price: '5,000',
     state: 'pending',
   },
@@ -166,6 +238,19 @@ export const dummyOrder = [
     date: '2021.03.20 13:20:51',
     nickname: 'fgggge',
     location: '서울특별시 쌍문동',
+    menus: [
+      {
+        id: uuid(),
+        name: '간장치킨',
+        count: 3,
+      },
+      {
+        id: uuid(),
+        name: '치즈볼(5개입)',
+        count: 1,
+      },
+    ],
+    requests: [],
     price: '35,000',
     state: 'pending',
   },
@@ -174,6 +259,19 @@ export const dummyOrder = [
     date: '2021.03.20 12:40:41',
     nickname: 'qwert',
     location: '서울특별시 장안동',
+    menus: [
+      {
+        id: uuid(),
+        name: '애국가치킨',
+        count: 1,
+      },
+      {
+        id: uuid(),
+        name: '고구마튀김(5개입)',
+        count: 1,
+      },
+    ],
+    requests: [],
     price: '50,000',
     state: 'canceled',
   },
@@ -182,6 +280,19 @@ export const dummyOrder = [
     date: '2021.03.20 12:20:41',
     nickname: 'hhhtt',
     location: '서울특별시 전농동',
+    menus: [
+      {
+        id: uuid(),
+        name: '범내려온다치킨',
+        count: 1,
+      },
+      {
+        id: uuid(),
+        name: '새우튀김(5개입)',
+        count: 1,
+      },
+    ],
+    requests: [],
     price: '515,000',
     state: 'delivered',
   },
@@ -190,6 +301,19 @@ export const dummyOrder = [
     date: '2021.03.20 11:20:41',
     nickname: 'afafafaf',
     location: '서울특별시 휘문동',
+    menus: [
+      {
+        id: uuid(),
+        name: '마돈나치킨',
+        count: 2,
+      },
+      {
+        id: uuid(),
+        name: '치즈볼(5개입)',
+        count: 2,
+      },
+    ],
+    requests: [],
     price: '8,500',
     state: 'delivered',
   },
@@ -198,6 +322,19 @@ export const dummyOrder = [
     date: '2021.03.20 13:20:51',
     nickname: 'fgggge',
     location: '서울특별시 쌍문동',
+    menus: [
+      {
+        id: uuid(),
+        name: '뿌링클',
+        count: 1,
+      },
+      {
+        id: uuid(),
+        name: '치즈볼(5개입',
+        count: 1,
+      },
+    ],
+    requests: [],
     price: '35,000',
     state: 'pending',
   },
@@ -206,6 +343,19 @@ export const dummyOrder = [
     date: '2021.03.20 12:40:41',
     nickname: 'qwert',
     location: '서울특별시 장안동',
+    menus: [
+      {
+        id: uuid(),
+        name: '뿌링클',
+        count: 1,
+      },
+      {
+        id: uuid(),
+        name: '치즈볼(5개입',
+        count: 1,
+      },
+    ],
+    requests: [],
     price: '50,000',
     state: 'canceled',
   },
@@ -214,6 +364,19 @@ export const dummyOrder = [
     date: '2021.03.20 12:20:41',
     nickname: 'hhhtt',
     location: '서울특별시 전농동',
+    menus: [
+      {
+        id: uuid(),
+        name: '뿌링클',
+        count: 1,
+      },
+      {
+        id: uuid(),
+        name: '치즈볼(5개입',
+        count: 1,
+      },
+    ],
+    requests: [],
     price: '515,000',
     state: 'delivered',
   },
@@ -222,6 +385,19 @@ export const dummyOrder = [
     date: '2021.03.20 11:20:41',
     nickname: 'afafafaf',
     location: '서울특별시 휘문동',
+    menus: [
+      {
+        id: uuid(),
+        name: '뿌링클',
+        count: 1,
+      },
+      {
+        id: uuid(),
+        name: '치즈볼(5개입',
+        count: 1,
+      },
+    ],
+    requests: [],
     price: '8,500',
     state: 'delivered',
   },
