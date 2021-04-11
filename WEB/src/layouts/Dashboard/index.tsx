@@ -19,8 +19,8 @@ const Dashboard: VFC = () => {
       <Mainboard>
         <Switch>
           <Route path="/dashboard/order" component={Orders} />
-          <Route path="/dashboard/menu" component={Menus} />
           <Route path="/dashboard/review" component={Reviews} />
+          <Route path="/dashboard/menu" component={Menus} />
           <Route path="/dashboard/info" component={Infos} />
         </Switch>
       </Mainboard>

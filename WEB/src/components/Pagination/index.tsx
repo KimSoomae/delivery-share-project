@@ -1,4 +1,4 @@
-import React, { useEffect, VFC } from 'react';
+import React, { VFC } from 'react';
 import { PaginationWrapp, Page } from './styles';
 
 type Props = {
