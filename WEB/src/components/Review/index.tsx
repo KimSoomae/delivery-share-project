@@ -6,6 +6,7 @@ import {
   SubmitButton,
   Comment,
   Divider,
+  UserReview,
 } from '../Review/styles';
 import { TableRow } from '@components/TableContents/styles';
 import { MemoTableContentReview } from '@components/TableContents';
@@ -39,6 +40,7 @@ const Review: VFC<Props> = ({ data }) => {
       </TableRow>
       <FormWrapper ref={parentRef}>
         <ReviewForm ref={childRef}>
+          <UserReview>{data.content}</UserReview>
           {comment ? (
             <>
               <VscReply />

@@ -10,7 +10,7 @@ type ReviewProps = {
 const TableContentReview: VFC<ReviewProps> = ({ data }) => {
   const { src, alt, content, nickname, stars, comment } = data;
   const classProperty = comment ? 'checked' : '';
-  const cellCount = 6;
+  const cellCount = 5;
   return (
     <>
       <TableCell cellCount={cellCount} className="icon">
@@ -19,9 +19,9 @@ const TableContentReview: VFC<ReviewProps> = ({ data }) => {
       <TableCell cellCount={cellCount}>
         <img src={src} alt={alt} />
       </TableCell>
-      <TableCell cellCount={cellCount} className="content">
+      {/* <TableCell cellCount={cellCount} className="content">
         <p>{content}</p>
-      </TableCell>
+      </TableCell> */}
       <TableCell cellCount={cellCount} className="nickname">
         <p>{nickname}</p>
       </TableCell>
