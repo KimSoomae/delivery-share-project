@@ -1,0 +1,17 @@
+type Query {
+    allUsers: [User]
+    user(seq: Int) : User
+}
+
+type User {
+    seq: Int!
+    ID: String!
+    password: String!
+    name: String!
+    #createdAt: String
+    #updatedAt: String
+    thumbnail: String
+    token: String
+    status: String!
+
+}
