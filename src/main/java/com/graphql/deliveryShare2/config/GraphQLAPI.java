@@ -7,10 +7,18 @@ import javax.annotation.PostConstruct;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.graphql.deliveryShare2.sample.UserDataFetcher;
+<<<<<<< HEAD
 import com.graphql.deliveryShare2.sample.RunTimeDataFetcher;
 import com.graphql.deliveryShare2.sample.SelectedMenuDataFetcher;
 import com.graphql.deliveryShare2.sample.ResReviewDataFetcher;
 import com.graphql.deliveryShare2.sample.RestaurantDataFetcher;
+=======
+import com.graphql.deliveryShare2.sample.OptionDataFetcher;
+import com.graphql.deliveryShare2.sample.OptionItemDataFetcher;
+import com.graphql.deliveryShare2.sample.OrderDataFetcher;
+import com.graphql.deliveryShare2.sample.ReplyDataFetcher;
+import com.graphql.deliveryShare2.sample.ReportDataFetcher;
+>>>>>>> 6745b2c1085d27c34dfc23087f07d5f88d8e2bfa
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,11 +37,20 @@ import graphql.schema.idl.TypeRuntimeWiring;
 @Component
 public class GraphQLAPI {
 
+<<<<<<< HEAD
   @Autowired UserDataFetcher dataFetcher1;
   @Autowired RunTimeDataFetcher dataFetcher2;
   @Autowired SelectedMenuDataFetcher dataFetcher3;
   @Autowired ResReviewDataFetcher dataFetcher4;
   @Autowired RestaurantDataFetcher dataFetcher5;
+=======
+  @Autowired UserDataFetcher dataFetcher;
+  @Autowired OptionDataFetcher optionDataFetcher;
+  @Autowired OptionItemDataFetcher optionItemDataFetcher;
+  @Autowired OrderDataFetcher orderDataFetcher;
+  @Autowired ReplyDataFetcher replyDataFetcher;
+  @Autowired ReportDataFetcher reportDataFetcher;
+>>>>>>> 6745b2c1085d27c34dfc23087f07d5f88d8e2bfa
 
   private GraphQL graphQL;
 
@@ -68,6 +85,7 @@ public class GraphQLAPI {
     .type(
       TypeRuntimeWiring
       .newTypeWiring("Query")
+<<<<<<< HEAD
       .dataFetcher("allUsers", dataFetcher1.allUsers())
       .dataFetcher("User", dataFetcher1.User())  
       .dataFetcher("allRunTimes", dataFetcher2.allRunTimes())
@@ -79,6 +97,20 @@ public class GraphQLAPI {
       .dataFetcher("allRestaurants", dataFetcher5.allRestaurants())  
       .dataFetcher("Restaurant", dataFetcher5.Restaurant())  
 
+=======
+      .dataFetcher("allUsers", dataFetcher.allUsers())
+      .dataFetcher("User", dataFetcher.User())    
+      .dataFetcher("allOptions", optionDataFetcher.allOptions())
+      .dataFetcher("Option", optionDataFetcher.Option()) 
+      .dataFetcher("allOptionItems",optionItemDataFetcher.allOptionItems())
+      .dataFetcher("OptionItem", optionItemDataFetcher.OptionItem()) 
+      .dataFetcher("allOrders",orderDataFetcher.allOrders())
+      .dataFetcher("Order",orderDataFetcher.Order()) 
+      .dataFetcher("allReplies",replyDataFetcher.allReplies())
+      .dataFetcher("Reply",replyDataFetcher.Reply()) 
+      .dataFetcher("allReports",reportDataFetcher.allReports())
+      .dataFetcher("Report",reportDataFetcher.Report()) 
+>>>>>>> 6745b2c1085d27c34dfc23087f07d5f88d8e2bfa
 
     )
 
