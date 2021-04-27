@@ -7,6 +7,10 @@ import javax.annotation.PostConstruct;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.graphql.deliveryShare2.sample.UserDataFetcher;
+import com.graphql.deliveryShare2.sample.RunTimeDataFetcher;
+import com.graphql.deliveryShare2.sample.SelectedMenuDataFetcher;
+import com.graphql.deliveryShare2.sample.ResReviewDataFetcher;
+import com.graphql.deliveryShare2.sample.RestaurantDataFetcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +29,11 @@ import graphql.schema.idl.TypeRuntimeWiring;
 @Component
 public class GraphQLAPI {
 
-  @Autowired UserDataFetcher dataFetcher;
+  @Autowired UserDataFetcher dataFetcher1;
+  @Autowired RunTimeDataFetcher dataFetcher2;
+  @Autowired SelectedMenuDataFetcher dataFetcher3;
+  @Autowired ResReviewDataFetcher dataFetcher4;
+  @Autowired RestaurantDataFetcher dataFetcher5;
 
   private GraphQL graphQL;
 
@@ -60,9 +68,28 @@ public class GraphQLAPI {
     .type(
       TypeRuntimeWiring
       .newTypeWiring("Query")
-      .dataFetcher("allUsers", dataFetcher.allUsers())
-      .dataFetcher("User", dataFetcher.User())      
+      .dataFetcher("allUsers", dataFetcher1.allUsers())
+      .dataFetcher("User", dataFetcher1.User())  
+      .dataFetcher("allRunTimes", dataFetcher2.allRunTimes())
+      .dataFetcher("RunTime", dataFetcher2.RunTime())  
+      .dataFetcher("allSelectedMenus", dataFetcher3.allSelectedMenus())  
+      .dataFetcher("SelectedMenu", dataFetcher3.SelectedMenu())  
+      .dataFetcher("allResReviews", dataFetcher4.allResReviews())  
+      .dataFetcher("ResReview", dataFetcher4.ResReview())  
+      .dataFetcher("allRestaurants", dataFetcher5.allRestaurants())  
+      .dataFetcher("Restaurant", dataFetcher5.Restaurant())  
+
+
     )
+
+    //.type(
+    //  TypeRuntimeWiring
+    //  .newTypeWiring("Query")
+    //  .dataFetcher("allRunTimes", dataFetcher2.allRunTimes())
+    //  .dataFetcher("RunTime", dataFetcher2.RunTime())     
+    //)
+
+
     .build();
   }
 

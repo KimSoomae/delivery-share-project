@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor(access=AccessLevel.PUBLIC)
-@Table(name = "USER")
+@Table(name = "user")
 @Getter
 public class UserEntity {
 

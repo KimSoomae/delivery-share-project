@@ -1,6 +1,19 @@
 type Query {
     allUsers: [User]
-    user(seq: Int) : User
+    User(seq: Int!) : User
+
+    allRunTimes: [RunTime]
+    RunTime(seq : Int!) : RunTime
+
+    allSelectedMenus: [SelectedMenu]
+    SelectedMenu(seq: Int!) : SelectedMenu
+
+    allResReviews : [ResReview]
+    ResReview(seq: Int!) : ResReview
+
+    allRestaurants : [Restaurant]
+    Restaurant(seq: Int!): Restaurant
+
 }
 
 type User {
@@ -15,3 +28,42 @@ type User {
     status: String!
 
 }
+
+type RunTime {
+    seq : ID!
+    day : String!
+    open : String!
+    close : String!
+}
+
+type SelectedMenu {
+    seq : ID!
+    count : Int!
+}
+
+type ResReview {
+    seq : ID!
+    createdAt : String!
+    updatedAt : String
+    rate : Float!
+    content : String!
+    image : String
+}
+
+type Restaurant {
+    seq : ID!
+    name : String!
+    id : String!
+    password : String!
+    createdAt : String!
+    dayoff : String!
+    isOpen : Int!
+    minOrder : Int!
+    deliveryTip : Int!
+    seperatable : Int!
+    introduction : String
+    thumbnail : String
+    rate : Float!
+    category : String!
+}
+
