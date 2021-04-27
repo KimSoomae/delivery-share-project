@@ -7,6 +7,11 @@ import javax.annotation.PostConstruct;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.graphql.deliveryShare2.sample.UserDataFetcher;
+import com.graphql.deliveryShare2.sample.OptionDataFetcher;
+import com.graphql.deliveryShare2.sample.OptionItemDataFetcher;
+import com.graphql.deliveryShare2.sample.OrderDataFetcher;
+import com.graphql.deliveryShare2.sample.ReplyDataFetcher;
+import com.graphql.deliveryShare2.sample.ReportDataFetcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +31,11 @@ import graphql.schema.idl.TypeRuntimeWiring;
 public class GraphQLAPI {
 
   @Autowired UserDataFetcher dataFetcher;
+  @Autowired OptionDataFetcher optionDataFetcher;
+  @Autowired OptionItemDataFetcher optionItemDataFetcher;
+  @Autowired OrderDataFetcher orderDataFetcher;
+  @Autowired ReplyDataFetcher replyDataFetcher;
+  @Autowired ReportDataFetcher reportDataFetcher;
 
   private GraphQL graphQL;
 
@@ -61,7 +71,18 @@ public class GraphQLAPI {
       TypeRuntimeWiring
       .newTypeWiring("Query")
       .dataFetcher("allUsers", dataFetcher.allUsers())
-      .dataFetcher("User", dataFetcher.User())      
+      .dataFetcher("User", dataFetcher.User())    
+      .dataFetcher("allOptions", optionDataFetcher.allOptions())
+      .dataFetcher("Option", optionDataFetcher.Option()) 
+      .dataFetcher("allOptionItems",optionItemDataFetcher.allOptionItems())
+      .dataFetcher("OptionItem", optionItemDataFetcher.OptionItem()) 
+      .dataFetcher("allOrders",orderDataFetcher.allOrders())
+      .dataFetcher("Order",orderDataFetcher.Order()) 
+      .dataFetcher("allReplies",replyDataFetcher.allReplies())
+      .dataFetcher("Reply",replyDataFetcher.Reply()) 
+      .dataFetcher("allReports",reportDataFetcher.allReports())
+      .dataFetcher("Report",reportDataFetcher.Report()) 
+
     )
     .build();
   }

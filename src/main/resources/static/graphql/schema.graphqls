@@ -1,6 +1,16 @@
 type Query {
     allUsers: [User]
-    user(seq: Int) : User
+    User(seq: Int) : User
+    allOptions: [Option]
+    Option(seq: Int): Option
+    allOptionItems: [OptionItem]
+    OptionItem(seq: Int): OptionItem
+    allOrders: [Order]
+    Order(seq: Int) :Order
+    allReplies: [Reply]
+    Reply(seq: Int) :Reply
+    allReports: [Report]
+    Report(seq: Int) : Report
 }
 
 type User {
@@ -8,10 +18,45 @@ type User {
     ID: String!
     password: String!
     name: String!
-    #createdAt: String
-    #updatedAt: String
+    createdAt: String
+    updatedAt: String
     thumbnail: String
     token: String
     status: String!
 
+}
+
+type Option{
+    seq: Int!
+    category: String!
+    isRequired: Boolean!
+    isMultiple: Boolean!
+}
+
+type OptionItem{
+    seq:Int!
+    content:String!
+    price:Int!
+}
+
+type Order{
+    seq:Int!
+    createdAt: String!
+    updatedAt: String
+    deliveryTime: String!
+    status: String!
+}
+
+type Reply{
+    seq:Int!
+    content:String!
+    createdAt: String!
+    updatedAt: String
+}
+
+type Report{
+    seq: Int!
+    reason: String!
+    createdAt: String!
+    updatedAt: String
 }

@@ -1,2 +1,1 @@
-
-SELECT * FROM USER;
+SELECT * FROM user;

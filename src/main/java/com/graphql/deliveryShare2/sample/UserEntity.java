@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor(access=AccessLevel.PUBLIC)
-@Table(name = "USER")
+@Table(name = "user")
 @Getter
 public class UserEntity {
 
@@ -32,11 +32,11 @@ public class UserEntity {
     @Column(name = "name", nullable=false)
     private String name;
 
-    //@Column(name = "createdAt", nullable=false)
-    //private String createdAt;
+    @Column(name = "createdAt", nullable=false)
+    private String createdAt;
 
-    //@Column(name = "updatedAt", nullable=true)
-    //private String updatedAt;
+    @Column(name = "updatedAt", nullable=true)
+    private String updatedAt;
 
     @Column(name = "thumbnail", nullable=true)
     private String thumbnail;
@@ -47,10 +47,12 @@ public class UserEntity {
     @Column(name = "status", nullable=false)
     private String status;
 
-    public UserEntity(String ID, String name, String password, String status){
+    public UserEntity(String ID, String name, String password, String createdAt, String updatedAt, String status){
         this.ID=ID;
         this.name=name;
         this.password=password;
+        this.createdAt=createdAt;
+        this.updatedAt=updatedAt;
         this.status=status;
     }
 
