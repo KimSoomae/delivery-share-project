@@ -29,8 +29,12 @@ public class OptionItemEntity {
     @Column(name = "price",nullable=false)
     private int price;
 
-    public OptionItemEntity(String content, int price){
+    @Column(name = "option_seq", nullable=false)
+    private int option_seq;
+
+    public OptionItemEntity(String content, int price, int option_seq){
         this.content=content;
         this.price=price;
+        this.option_seq=option_seq;
     }
 }

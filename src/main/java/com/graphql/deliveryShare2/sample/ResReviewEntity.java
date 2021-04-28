@@ -23,8 +23,6 @@ public class ResReviewEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int seq;
 
-
-
     @Column(name = "createdAt", nullable=false)
     private String createdAt;
 
