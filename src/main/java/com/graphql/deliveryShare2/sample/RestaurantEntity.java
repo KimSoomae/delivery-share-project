@@ -39,7 +39,6 @@ public class RestaurantEntity {
     private String dayoff;
 
     @Column(name = "isOpen", nullable=true)
-    private int isOpen;
 
     @Column(name = "minOrder", nullable=true)
     private int minOrder;
@@ -60,12 +59,7 @@ public class RestaurantEntity {
     private float rate;
 
     @Column(name = "category", nullable=true)
-    private String category;
 
-
-   
-
-    public RestaurantEntity(String id, String password, String name, String createdAt, String dayoff, int isOpen, int minOrder, int deliveryTip, int seperatable, String introduction, String thumbnail, float rate, String category){
         this.name=name;
         this.id=id;
         this.password=password;
