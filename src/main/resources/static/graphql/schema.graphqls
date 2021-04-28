@@ -1,6 +1,5 @@
 type Query {
     allUsers: [User]
-<<<<<<< HEAD
     User(seq: Int!) : User
 
     allRunTimes: [RunTime]
@@ -15,8 +14,9 @@ type Query {
     allRestaurants : [Restaurant]
     Restaurant(seq: Int!): Restaurant
 
-=======
-    User(seq: Int) : User
+    allUserReviews : [UserReview]
+    UserReview(seq: Int!) : UserReview
+
     allOptions: [Option]
     Option(seq: Int): Option
     allOptionItems: [OptionItem]
@@ -27,7 +27,6 @@ type Query {
     Reply(seq: Int) :Reply
     allReports: [Report]
     Report(seq: Int) : Report
->>>>>>> 6745b2c1085d27c34dfc23087f07d5f88d8e2bfa
 }
 
 type User {
@@ -43,7 +42,6 @@ type User {
 
 }
 
-<<<<<<< HEAD
 type RunTime {
     seq : ID!
     day : String!
@@ -70,11 +68,11 @@ type Restaurant {
     name : String!
     id : String!
     password : String!
-    createdAt : String!
+    created_at : String!
     dayoff : String!
-    isOpen : Int!
-    minOrder : Int!
-    deliveryTip : Int!
+    is_open : Int!
+    min_order : Int!
+    delivery_tip : Int
     seperatable : Int!
     introduction : String
     thumbnail : String
@@ -82,18 +80,20 @@ type Restaurant {
     category : String!
 }
 
-=======
 type Option{
     seq: Int!
     category: String!
     isRequired: Boolean!
     isMultiple: Boolean!
+    options: [OptionItem]
 }
 
 type OptionItem{
     seq:Int!
     content:String!
     price:Int!
+    Option: Int
+    #option_seq: [Option] @link(by: "seq")
 }
 
 type Order{
@@ -117,4 +117,13 @@ type Report{
     createdAt: String!
     updatedAt: String
 }
->>>>>>> 6745b2c1085d27c34dfc23087f07d5f88d8e2bfa
+
+type UserReview{
+    seq : Int!
+    createdAt: String!
+    updatedAt: String
+    rate : Float!
+    content : String
+    to_seq : Int
+    from_seq : Int
+}

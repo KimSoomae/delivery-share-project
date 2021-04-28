@@ -32,20 +32,20 @@ public class RestaurantEntity {
     @Column(name = "name", nullable=false)
     private String name;
 
-    @Column(name = "createdAt", nullable=false)
-    private String createdAt;
+    @Column(name = "created_at", nullable=false)
+    private String created_at;
 
     @Column(name = "dayoff", nullable=true)
     private String dayoff;
 
-    @Column(name = "isOpen", nullable=true)
-    private int isOpen;
+    @Column(name = "is_open", nullable=true)
+    private int is_open;
 
-    @Column(name = "minOrder", nullable=true)
-    private int minOrder;
+    @Column(name = "min_order", nullable=true)
+    private int min_order;
 
-    @Column(name = "deliveryTip", nullable=true)
-    private int deliveryTip;
+    @Column(name = "delivery_tip", nullable=true)
+    private int delivery_tip;
 
     @Column(name = "seperatable", nullable=true)
     private int seperatable;
@@ -65,15 +65,15 @@ public class RestaurantEntity {
 
    
 
-    public RestaurantEntity(String id, String password, String name, String createdAt, String dayoff, int isOpen, int minOrder, int deliveryTip, int seperatable, String introduction, String thumbnail, float rate, String category){
+    public RestaurantEntity(String id, String password, String name, String created_at, String dayoff, int is_open, int min_order, int delivery_tip, int seperatable, String introduction, String thumbnail, float rate, String category){
         this.name=name;
         this.id=id;
         this.password=password;
-        this.createdAt=createdAt;
+        this.created_at=created_at;
         this.dayoff = dayoff;
-        this.isOpen = isOpen;
-        this.minOrder = minOrder;
-        this.deliveryTip = deliveryTip;
+        this.is_open = is_open;
+        this.min_order = min_order;
+        this.delivery_tip = delivery_tip;
         this.seperatable = seperatable;
         this.introduction = introduction;
         this.thumbnail = thumbnail;
