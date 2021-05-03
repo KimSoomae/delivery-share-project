@@ -16,6 +16,7 @@ import com.graphql.deliveryShare2.sample.OptionItemDataFetcher;
 import com.graphql.deliveryShare2.sample.OrderDataFetcher;
 import com.graphql.deliveryShare2.sample.ReplyDataFetcher;
 import com.graphql.deliveryShare2.sample.ReportDataFetcher;
+import com.graphql.deliveryShare2.sample.UserReviewDataFetcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +40,7 @@ public class GraphQLAPI {
   @Autowired SelectedMenuDataFetcher dataFetcher3;
   @Autowired ResReviewDataFetcher dataFetcher4;
   @Autowired RestaurantDataFetcher dataFetcher5;
+  @Autowired UserReviewDataFetcher dataFetcher6;
   @Autowired UserDataFetcher dataFetcher;
   @Autowired OptionDataFetcher optionDataFetcher;
   @Autowired OptionItemDataFetcher optionItemDataFetcher;
@@ -88,7 +90,9 @@ public class GraphQLAPI {
       .dataFetcher("allResReviews", dataFetcher4.allResReviews())  
       .dataFetcher("ResReview", dataFetcher4.ResReview())  
       .dataFetcher("allRestaurants", dataFetcher5.allRestaurants())  
-      .dataFetcher("Restaurant", dataFetcher5.Restaurant())    
+      .dataFetcher("Restaurant", dataFetcher5.Restaurant())   
+      .dataFetcher("allUserReviews", dataFetcher6.allUserReviews())
+      .dataFetcher("UserReview", dataFetcher6.UserReview())  
       .dataFetcher("allOptions", optionDataFetcher.allOptions())
       .dataFetcher("Option", optionDataFetcher.Option()) 
       .dataFetcher("allOptionItems",optionItemDataFetcher.allOptionItems())
@@ -101,17 +105,8 @@ public class GraphQLAPI {
       .dataFetcher("Report",reportDataFetcher.Report()) 
 
     )
-    //.scalar(ExtendedScalars.DataTime)
-    //.type(
-    //  TypeRuntimeWiring
-    //  .newTypeWiring("Query")
-    //  .dataFetcher("allRunTimes", dataFetcher2.allRunTimes())
-    //  .dataFetcher("RunTime", dataFetcher2.RunTime())     
-    //)
-
 
     .build();
   }
 
 }
-

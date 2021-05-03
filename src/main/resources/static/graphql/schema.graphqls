@@ -14,6 +14,9 @@ type Query {
     allRestaurants : [Restaurant]
     Restaurant(seq: Int!): Restaurant
 
+    allUserReviews : [UserReview]
+    UserReview(seq: Int!) : UserReview
+
     allOptions: [Option]
     Option(seq: Int): Option
     allOptionItems: [OptionItem]
@@ -65,11 +68,11 @@ type Restaurant {
     name : String!
     id : String!
     password : String!
-    createdAt : String!
+    created_at : String!
     dayoff : String!
-    isOpen : Boolean!
-    minOrder : Int!
-    deliveryTip : Int
+    is_open : Int!
+    min_order : Int!
+    delivery_tip : Int
     seperatable : Int!
     introduction : String
     thumbnail : String
@@ -113,4 +116,14 @@ type Report{
     reason: String!
     createdAt: String!
     updatedAt: String
+}
+
+type UserReview{
+    seq : Int!
+    createdAt: String!
+    updatedAt: String
+    rate : Float!
+    content : String
+    to_seq : Int
+    from_seq : Int
 }
