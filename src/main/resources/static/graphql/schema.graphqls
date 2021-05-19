@@ -1,3 +1,9 @@
+
+schema{
+    query: Query
+    mutation: Mutation
+}
+
 type Query {
     allUsers: [User]
     User(seq: Int!) : User
@@ -27,6 +33,49 @@ type Query {
     Reply(seq: Int) :Reply
     allReports: [Report]
     Report(seq: Int) : Report
+
+    allCallings: [Calling]
+    Calling(seq:Int) : Calling
+    
+    allCarts: [Cart]
+    Cart(seq:Int) : Cart
+
+    allChats: [Chat]
+    Chat(seq:Int) : Chat
+    
+    allLocations: [Location]
+    Location(seq:Int) : Location
+
+    allMenues: [Menu]
+    Menu(seq:Int) : Menu
+
+    allMessages: [Message]
+    Message(seq:Int) : Message
+
+    getNearCalls: [Calling]
+    allResLocations: [ResLocation]
+    allCallLocations: [CallLocation]
+    CallLocation: CallLocation
+    #식당마다 모든 리뷰들 보여주기
+    getResReviews(resseq:Int):[ResReview]
+
+    #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
+    getReviewCount(resseq: Int): Restaurant
+}
+
+type Mutation{
+    #선택된 메뉴에 메뉴, 수량 추가
+    createSelectedMenu(menuSeq: Int!, count:Int!): SelectedMenu!
+    #선택된 메뉴에서 수량바꾸기
+    updateSelectedMenu(count: Int!, seq: Int! ): SelectedMenu!
+    #선택된 메뉴 삭제
+    deleteSelectedMenu(seq: Int!): Boolean
+    #선택된 메뉴들 장바구니에 최종 추가(콜 호출하러 가기)
+    createCart(selectedmenuSeq: Int!, userSeq: Int!): Cart!
+    #장바구니에서 수량 바꾸기
+    updateCart(count: Int!, seq:Int!):Cart!
+    #장바구니 삭제
+    deleteCart(seq:Int!):Boolean
 }
 
 type User {
@@ -39,6 +88,7 @@ type User {
     thumbnail: String
     token: String
     status: String!
+    rate: Float!
 
 }
 
@@ -52,6 +102,7 @@ type RunTime {
 type SelectedMenu {
     seq : ID!
     count : Int!
+    menu: Menu
 }
 
 type ResReview {
@@ -61,7 +112,12 @@ type ResReview {
     rate : Float!
     content : String!
     image : String
+    resseq: Int!
+    restaurant: Restaurant!
+    
 }
+
+
 
 type Restaurant {
     seq : ID!
@@ -78,7 +134,15 @@ type Restaurant {
     thumbnail : String
     rate : Float!
     category : String!
+    review: ResReview
+    runtime:RunTime
+    rate1count: Int
+    rate2count: Int
+    rate3count: Int
+    rate4count: Int
+    rate5count: Int
 }
+
 
 type Option{
     seq: Int!
@@ -127,3 +191,72 @@ type UserReview{
     to_seq : Int
     from_seq : Int
 }
+
+
+type Calling{
+    seq: Int!
+    createdAt: String
+    expiredAt: String
+    status: String!
+    calltext: String
+    price: Int!
+    user: User
+    restaurant: Restaurant
+    callLocation: CallLocation
+    distance: Float
+    
+}
+
+type Cart{
+    seq: Int!
+    request: String
+    selectedmenu: SelectedMenu
+    user: User
+}
+
+type Location{
+    seq: Int!
+    latitude: Float!
+    longitude: Float!
+    address: String!
+}
+
+type Menu{
+    seq: ID!
+    name: String!
+    thumbnail: String
+    description: String
+    price: Int!
+    isAvailable: Boolean!
+    bestmenu: String
+}
+
+type Chat{
+    seq: Int!
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Message{
+    seq: Int!
+    isRead: Boolean!
+    createdAt: String!
+    updatedAt: String!
+}
+
+type ResLocation{
+    id:Int!
+    name:String!
+    loc: [Float]
+    latitude: Float
+    longitude: Float
+    distance: Float
+}
+
+type CallLocation{
+    seq: Int!
+    place: String!
+    latitude: Float!
+    longitude: Float!
+}
+

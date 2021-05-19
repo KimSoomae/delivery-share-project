@@ -9,7 +9,21 @@ import graphql.schema.DataFetcher;
 public class RestaurantDataFetcher {
     @Autowired
     private RestaurantRepository restaurantRepository;
-  
+
+    @Autowired
+    private RunTimeRepository runTimeRepository;
+
+    @Autowired
+    public RestaurantDataFetcher(RestaurantRepository restaurantRepository, RunTimeRepository runTimeRepository){
+      this.restaurantRepository=restaurantRepository;
+      this.runTimeRepository=runTimeRepository;
+    }
+
+    public RunTimeEntity getRunTime(RestaurantEntity restaurantEntity){
+      return runTimeRepository.findBySeq(restaurantEntity.getRunTime().getSeq());
+    }
+
+
     public DataFetcher<?> allRestaurants () {
       return environment -> {
         return restaurantRepository.findAll();
@@ -22,5 +36,7 @@ public class RestaurantDataFetcher {
         return restaurantRepository.findBySeq(seq);
       };
     }
-  
+
+   
+ 
 }

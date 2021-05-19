@@ -1,7 +1,7 @@
 package com.graphql.deliveryShare2.config;
 import java.io.IOException;
 import java.net.URL;
-
+//import com.coxautodev.graphql.tools.SchemaParser;
 import javax.annotation.PostConstruct;
 
 import com.google.common.base.Charsets;
@@ -17,7 +17,15 @@ import com.graphql.deliveryShare2.sample.OrderDataFetcher;
 import com.graphql.deliveryShare2.sample.ReplyDataFetcher;
 import com.graphql.deliveryShare2.sample.ReportDataFetcher;
 import com.graphql.deliveryShare2.sample.UserReviewDataFetcher;
-
+import com.graphql.deliveryShare2.sample.CallingDataFetcher;
+import com.graphql.deliveryShare2.sample.CartDataFetcher;
+import com.graphql.deliveryShare2.sample.ChatDataFetcher;
+import com.graphql.deliveryShare2.sample.LocationDataFetcher;
+import com.graphql.deliveryShare2.sample.MenuDataFetcher;
+import com.graphql.deliveryShare2.sample.MessageDataFetcher;
+import com.graphql.deliveryShare2.sample.CallLocationDataFetcher;
+import com.graphql.deliveryShare2.sample.SelectedMenuRepository;
+import org.hibernate.jpa.event.internal.CallbackRegistryImplementor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -47,7 +55,13 @@ public class GraphQLAPI {
   @Autowired OrderDataFetcher orderDataFetcher;
   @Autowired ReplyDataFetcher replyDataFetcher;
   @Autowired ReportDataFetcher reportDataFetcher;
-
+  @Autowired CallingDataFetcher callingDataFetcher;
+  @Autowired CartDataFetcher cartDataFetcher;
+  @Autowired ChatDataFetcher chatDataFetcher;
+  @Autowired LocationDataFetcher locationDataFetcher;
+  @Autowired MenuDataFetcher menuDataFetcher;
+  @Autowired MessageDataFetcher messageDataFetcher;
+  @Autowired CallLocationDataFetcher callLocationDataFetcher;
   private GraphQL graphQL;
 
   @Value("classpath:static/graphql/schema.graphqls") 
@@ -67,7 +81,14 @@ public class GraphQLAPI {
     GraphQLSchema graphQLSchema = buildSchema(sdl);
     this.graphQL = GraphQL.newGraphQL(graphQLSchema).build();
   }
-
+  //private static GraphQLSchema buildSchema() {
+  //  SelectedMenuRepository selectedMenuRepository = new SelectedMenuRepository();
+  //  return SchemaParser.newParser()
+	//.file("schema.graphqls")
+	//.resolvers(new Query(selectedMenuRepository), new Mutation(linkRepository))
+	//.build()
+	//.makeExecutableSchema();
+//}
   // (2)
   private GraphQLSchema buildSchema(String sdl) {
     TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(sdl);
@@ -103,9 +124,37 @@ public class GraphQLAPI {
       .dataFetcher("Reply",replyDataFetcher.Reply()) 
       .dataFetcher("allReports",reportDataFetcher.allReports())
       .dataFetcher("Report",reportDataFetcher.Report()) 
-
+      .dataFetcher("allCallings", callingDataFetcher.allCallings())
+      .dataFetcher("Calling",callingDataFetcher.Calling())
+      .dataFetcher("allCarts", cartDataFetcher.allCarts())
+      .dataFetcher("Cart",cartDataFetcher.Cart())
+      .dataFetcher("allChats", chatDataFetcher.allChats())
+      .dataFetcher("Chat",chatDataFetcher.Chat())
+      .dataFetcher("allLocations", locationDataFetcher.allLocations())
+      .dataFetcher("Location",locationDataFetcher.Location())
+      .dataFetcher("allMenues", menuDataFetcher.allMenues())
+      .dataFetcher("Menu",menuDataFetcher.Menu())
+      .dataFetcher("allMessages", messageDataFetcher.allMessages())
+      .dataFetcher("Message",messageDataFetcher.Message())     
+      .dataFetcher("getNearCalls",callingDataFetcher.getNearCalls())
+      .dataFetcher("allCallLocations",callLocationDataFetcher.allCallLocations())
+      .dataFetcher("CallLocation",callLocationDataFetcher.CallLocation())
+      .dataFetcher("getResReviews", dataFetcher4.getResReviews())   
+      .dataFetcher("getReviewCount", dataFetcher4.getReviewCount())   
+      
+      
+      
     )
-
+    .type(
+      TypeRuntimeWiring
+      .newTypeWiring("Mutation")
+      .dataFetcher("createSelectedMenu",dataFetcher3.createSelectedMenu())
+      .dataFetcher("updateSelectedMenu",dataFetcher3.updateSelectedMenu())
+      .dataFetcher("deleteSelectedMenu",dataFetcher3.deleteSelectedMenu())
+      .dataFetcher("createCart",cartDataFetcher.createCart())
+      .dataFetcher("updateCart", cartDataFetcher.updateCart())
+      .dataFetcher("deleteCart", cartDataFetcher.deleteCart())
+    )
     .build();
   }
 

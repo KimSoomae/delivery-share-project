@@ -1,5 +1,6 @@
 package com.graphql.deliveryShare2.sample;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,13 +48,17 @@ public class UserEntity {
     @Column(name = "status", nullable=false)
     private String status;
 
-    public UserEntity(String ID, String name, String password, String createdAt, String updatedAt, String status){
+    @Column(name="rate", nullable=false)
+    private Float rate;
+
+    public UserEntity(String ID, String name, String password, String createdAt, String updatedAt, String status, Float rate){
         this.ID=ID;
         this.name=name;
         this.password=password;
         this.createdAt=createdAt;
         this.updatedAt=updatedAt;
         this.status=status;
+        this.rate=rate;
     }
 
 }
