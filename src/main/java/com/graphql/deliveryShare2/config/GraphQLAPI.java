@@ -6,25 +6,26 @@ import javax.annotation.PostConstruct;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-import com.graphql.deliveryShare2.sample.UserDataFetcher;
-import com.graphql.deliveryShare2.sample.RunTimeDataFetcher;
-import com.graphql.deliveryShare2.sample.SelectedMenuDataFetcher;
-import com.graphql.deliveryShare2.sample.ResReviewDataFetcher;
-import com.graphql.deliveryShare2.sample.RestaurantDataFetcher;
-import com.graphql.deliveryShare2.sample.OptionDataFetcher;
-import com.graphql.deliveryShare2.sample.OptionItemDataFetcher;
-import com.graphql.deliveryShare2.sample.OrderDataFetcher;
-import com.graphql.deliveryShare2.sample.ReplyDataFetcher;
-import com.graphql.deliveryShare2.sample.ReportDataFetcher;
-import com.graphql.deliveryShare2.sample.UserReviewDataFetcher;
-import com.graphql.deliveryShare2.sample.CallingDataFetcher;
-import com.graphql.deliveryShare2.sample.CartDataFetcher;
-import com.graphql.deliveryShare2.sample.ChatDataFetcher;
-import com.graphql.deliveryShare2.sample.LocationDataFetcher;
-import com.graphql.deliveryShare2.sample.MenuDataFetcher;
-import com.graphql.deliveryShare2.sample.MessageDataFetcher;
-import com.graphql.deliveryShare2.sample.CallLocationDataFetcher;
-import com.graphql.deliveryShare2.sample.SelectedMenuRepository;
+import com.graphql.deliveryShare2.sample.AboutCall.CallLocationDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutCall.CallingDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutCall.OrderDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutCart.CartDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutCart.SelectedMenuDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutCart.SelectedMenuRepository;
+import com.graphql.deliveryShare2.sample.AboutChat.ChatDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutChat.MessageDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutResReview.ReplyDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutResReview.ResReviewDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutRestaurant.LocationDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutRestaurant.MenuDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutRestaurant.OptionDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutRestaurant.OptionItemDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutRestaurant.RestaurantDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutRestaurant.RunTimeDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutUser.ReportDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutUser.UserDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutUser.UserReviewDataFetcher;
+
 import org.hibernate.jpa.event.internal.CallbackRegistryImplementor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -141,6 +142,9 @@ public class GraphQLAPI {
       .dataFetcher("CallLocation",callLocationDataFetcher.CallLocation())
       .dataFetcher("getResReviews", dataFetcher4.getResReviews())   
       .dataFetcher("getReviewCount", dataFetcher4.getReviewCount())   
+      .dataFetcher("RestaurantBySeq", dataFetcher5.RestaurantBySeq())  
+      .dataFetcher("OptionByMenu", optionDataFetcher.OptionByMenu()) 
+      .dataFetcher("MenuByRes",menuDataFetcher.MenuByRes())
       
       
       

@@ -1,4 +1,3 @@
-
 schema{
     query: Query
     mutation: Mutation
@@ -17,14 +16,17 @@ type Query {
     allResReviews : [ResReview]
     ResReview(seq: Int!) : ResReview
 
-    allRestaurants : [Restaurant]
-    Restaurant(seq: Int!): Restaurant
+    allRestaurants: [Restaurant]
+    Restaurant(category: String!, isopen: Int!) : [Restaurant]
+    RestaurantBySeq(seq: Int!) : Restaurant
 
     allUserReviews : [UserReview]
     UserReview(seq: Int!) : UserReview
 
     allOptions: [Option]
     Option(seq: Int): Option
+    OptionByMenu(menuseq: Int!) : [Option]
+
     allOptionItems: [OptionItem]
     OptionItem(seq: Int): OptionItem
     allOrders: [Order]
@@ -48,6 +50,7 @@ type Query {
 
     allMenues: [Menu]
     Menu(seq:Int) : Menu
+    MenuByRes(resseq:Int) : [Menu]
 
     allMessages: [Message]
     Message(seq:Int) : Message
@@ -126,7 +129,7 @@ type Restaurant {
     password : String!
     created_at : String!
     dayoff : String!
-    is_open : Int!
+    isopen : Int!
     min_order : Int!
     delivery_tip : Int
     seperatable : Int!
@@ -141,15 +144,17 @@ type Restaurant {
     rate3count: Int
     rate4count: Int
     rate5count: Int
+    menu: Menu!
 }
 
 
 type Option{
     seq: Int!
     category: String!
-    isRequired: Boolean!
-    isMultiple: Boolean!
-    options: [OptionItem]
+    is_required: Boolean!
+    is_multiple: Boolean!
+    option_item: [OptionItem]
+    menuseq: Int!
 }
 
 type OptionItem{
@@ -157,6 +162,7 @@ type OptionItem{
     content:String!
     price:Int!
     Option: Int
+    optionseq: Int
     #option_seq: [Option] @link(by: "seq")
 }
 
@@ -229,6 +235,8 @@ type Menu{
     price: Int!
     isAvailable: Boolean!
     bestmenu: String
+    resseq: Int!
+    restaurant: Restaurant
 }
 
 type Chat{
@@ -259,4 +267,3 @@ type CallLocation{
     latitude: Float!
     longitude: Float!
 }
-
