@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 public class DeliveryShare2Application {
 	
 	public static void main(String[] args) {
+        System.out.println("Hello ds");
 		SpringApplication.run(DeliveryShare2Application.class, args);
 
 	}

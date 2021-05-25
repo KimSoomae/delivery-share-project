@@ -42,8 +42,9 @@ public class RestaurantDataFetcher {
     public DataFetcher<?> Restaurant () {
       return environment -> {
         String category = environment.getArgument("category");
-        int isopen = environment.getArgument("isopen");
-        return restaurantRepository.findByCategoryAndIsopen(category,isopen); 
+        String si = environment.getArgument("si");
+        String dong = environment.getArgument("dong");
+        return restaurantRepository.getPossibleRestaurants(category,si,dong); 
       };
     }
 
