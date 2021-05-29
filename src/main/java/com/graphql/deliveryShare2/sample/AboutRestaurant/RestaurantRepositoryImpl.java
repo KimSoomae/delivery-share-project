@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import com.graphql.deliveryShare2.sample.AboutRestaurant.DeliverylocEntity;
+import com.google.gson.Gson;
 import com.graphql.deliveryShare2.sample.AboutCall.GeometryUtil;
 import com.graphql.deliveryShare2.sample.AboutRestaurant.RestaurantEntity;
 import com.graphql.deliveryShare2.sample.AboutRestaurant.*;
@@ -22,6 +23,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -76,5 +79,93 @@ public class RestaurantRepositoryImpl implements RestaurantCustomRepository{
     }
     return results;
    
+    };
+    
+    @Override
+    public RestaurantEntity getRestaurant(@Param("seq") int seq){
+        //RestaurantEntity re= new RestaurantEntity();
+        EntityManager em5 = emf.createEntityManager();
+        RestaurantEntity re = em5.createQuery("SELECT c"
+        +" FROM RestaurantEntity AS c"
+        +" WHERE c.seq = :seq "
+        ,RestaurantEntity.class).setParameter("seq", seq).getSingleResult();
+        
+        List<String> obj=Arrays.asList(re.getDayoff().split(","));
+        String json = new Gson().toJson(obj);
+
+        
+        re.setDayoff(json);
+        
+        EntityManager em6 = emf.createEntityManager();
+        List<LikesEntity> likes = em6.createQuery("SELECT l"
+        +" FROM LikesEntity AS l"
+        +" WHERE l.resseq = :seq "
+        ,LikesEntity.class).setParameter("seq", seq).getResultList();
+        System.out.println("좋아요 "+likes);
+        System.out.println("좋아요개수"+likes.size());
+        int likescnt = likes.size();
+        System.out.println("좋아요개수저장"+likescnt);
+        re.setLikescount(likescnt);
+        System.out.println("저장됐나"+re.getLikescount());
+        re.setIsliked(false);
+        for (int i=0; i<likes.size(); i++){
+            LikesEntity le = likes.get(i);
+            if (le.getUserseq()==10){
+                re.setIsliked(true);
+            }
+        }
+
+        EntityManager em7 = emf.createEntityManager();
+        List<DeliverylocEntity> deliverylocs = em7.createQuery("SELECT d"
+        +" FROM DeliverylocEntity AS d"
+        +" WHERE d.resseq=:seq "
+        ,DeliverylocEntity.class).setParameter("seq", seq).getResultList();
+        re.setDeliveryloc(deliverylocs);
+        
+        EntityManager em4 = emf.createEntityManager();
+        List<ResReviewEntity> results = em4.createQuery("SELECT v"
+    +" FROM ResReviewEntity AS v"
+    +" LEFT OUTER JOIN RestaurantEntity AS r"
+    +" ON r.seq=v.restaurant"
+    +" WHERE v.resseq = :resseq "
+    ,ResReviewEntity.class).setParameter("resseq", seq).getResultList();
+
+    for (int i=0; i<results.size();i++){
+        
+        ResReviewEntity rre= results.get(i);
+        //re = rre.getRestaurant();
+        
+        double rate=rre.getRate();
+        if (rate==5.0){
+            int cnt = re.getRate5count();
+            cnt++;
+            re.setRate5count(cnt);
+        }
+        else if ((rate<5.0)&&(rate>=4.0)){
+            int cnt = re.getRate4count();
+            cnt++;
+            re.setRate4count(cnt);
+        }
+        else if ((rate<4.0)&&(rate>=3.0)){
+            int cnt = re.getRate3count();
+            cnt++;
+            re.setRate3count(cnt);
+        }
+        else if ((rate<3.0)&&(rate>=2.0)){
+            int cnt = re.getRate2count();
+            cnt++;
+            re.setRate2count(cnt);
+        }
+        else if ((rate<2.0)&&(rate>=1.0)){
+            int cnt = re.getRate1count();
+            cnt++;
+            re.setRate1count(cnt);
+        }
+       
+        
+    }
+
+
+    return re;
     };
 }

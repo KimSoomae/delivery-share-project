@@ -50,8 +50,8 @@ public class RestaurantEntity {
     @Column(name = "delivery_tip", nullable=true)
     private int delivery_tip;
 
-    @Column(name = "seperatable", nullable=true)
-    private int seperatable;
+    //@Column(name = "seperatable", nullable=true)
+    private Boolean seperatable;
 
     @Column(name = "introduction", nullable=true)
     private String introduction;
@@ -92,11 +92,18 @@ public class RestaurantEntity {
     @OneToMany(mappedBy = "restaurant")
     private List<MenuEntity> bestmenus = new ArrayList<>();
   
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<DeliverylocEntity> deliveryloc = new ArrayList<>();
     
     private int reviewcount;
 
-    public RestaurantEntity(String id, String password, String name, String created_at, String dayoff, int isopen, int min_order, int delivery_tip, int seperatable, String introduction, String thumbnail, float rate, String category
-    ,int rate1count, int rate2count, int rate3count, int rate4count, int rate5count){
+    private int likescount;
+
+    private Boolean isLiked;
+
+    public RestaurantEntity(String id, String password, String name, String created_at, String dayoff, int isopen, int min_order, int delivery_tip, String introduction, String thumbnail, float rate, String category
+    ,int rate1count, int rate2count, int rate3count, int rate4count, int rate5count, int reviewcount, int likescount, Boolean isLiked){
         this.name=name;
         this.id=id;
         this.password=password;
@@ -105,7 +112,6 @@ public class RestaurantEntity {
         this.isopen = isopen;
         this.min_order = min_order;
         this.delivery_tip = delivery_tip;
-        this.seperatable = seperatable;
         this.introduction = introduction;
         this.thumbnail = thumbnail;
         this.rate = rate;
@@ -115,6 +121,9 @@ public class RestaurantEntity {
         this.rate3count = rate3count;
         this.rate4count = rate4count;
         this.rate5count = rate5count;
+        this.reviewcount=reviewcount;
+        this.likescount=likescount;
+        this.isLiked=isLiked;
     }
 
     public List<MenuEntity> getBestmenu(){
@@ -123,15 +132,24 @@ public class RestaurantEntity {
     public RunTimeEntity getRunTime(){
         return runtime;
     }
+    public List<DeliverylocEntity> getDeliveryloc(){
+        return deliveryloc;
+    }
 
     public MenuEntity getMenu(){
         return menu;
     }
 
 
-
+    public void setDayoff(String dayoff){
+        this.dayoff=dayoff;
+    }
+    
     public void setBestmenu(List<MenuEntity> bestmenus){
         this.bestmenus=bestmenus;
+    }
+    public void setDeliveryloc(List<DeliverylocEntity> deliveryloc){
+        this.deliveryloc=deliveryloc;
     }
     public void setRate5count(int rate5count) {
         this.rate5count=rate5count;
@@ -152,9 +170,26 @@ public class RestaurantEntity {
     public double getReviewcount(){
         return reviewcount;
     }
+    
+    public int getLikescount(){
+        return likescount;
+    }
 
+    public Boolean getIsliked(){
+        return isLiked;
+    }
     public void setReviewcount(int reviewcount) {
         this.reviewcount=reviewcount;
-      }
+    }
+    
+    public void setLikescount(int likescount){
+        this.likescount=likescount;
+    }
+    public void setIsliked(Boolean isLiked){
+        this.isLiked=isLiked;
+    }
+    public void setSeperatable(Boolean seperatable){
+        this.seperatable=seperatable;
+    }
 
 }

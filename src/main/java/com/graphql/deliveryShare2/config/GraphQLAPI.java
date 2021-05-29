@@ -142,7 +142,7 @@ public class GraphQLAPI {
       .dataFetcher("CallLocation",callLocationDataFetcher.CallLocation())
       .dataFetcher("getResReviews", dataFetcher4.getResReviews())   
       .dataFetcher("getReviewCount", dataFetcher4.getReviewCount())   
-      .dataFetcher("RestaurantBySeq", dataFetcher5.RestaurantBySeq())  
+      .dataFetcher("getRestaurant", dataFetcher5.getRestaurant())  
       .dataFetcher("OptionByMenu", optionDataFetcher.OptionByMenu()) 
       .dataFetcher("MenuByRes",menuDataFetcher.MenuByRes())
       

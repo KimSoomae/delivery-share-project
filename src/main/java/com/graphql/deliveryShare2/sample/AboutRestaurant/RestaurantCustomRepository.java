@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RestaurantCustomRepository {
     List<RestaurantEntity> getPossibleRestaurants(String category, String si, String dong);
+    RestaurantEntity getRestaurant(int seq);
 }

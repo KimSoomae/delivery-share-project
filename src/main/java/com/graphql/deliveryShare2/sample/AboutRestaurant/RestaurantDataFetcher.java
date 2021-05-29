@@ -48,10 +48,10 @@ public class RestaurantDataFetcher {
       };
     }
 
-    public DataFetcher<?> RestaurantBySeq () {
+    public DataFetcher<?> getRestaurant () {
       return environment -> {
         int seq = environment.getArgument("seq");
-        return restaurantRepository.findBySeq(seq); 
+        return restaurantRepository.getRestaurant(seq); 
       };
     }
 

@@ -19,7 +19,7 @@ type Query {
     allRestaurants: [Restaurant]
     #사용자의 위치(시,동)에 배달 가능한 지역 & 오픈된 곳만 카테고리별로 레스토랑 띄우기
     getRestaurants(category: String!, si: String!, dong: String!) : [Restaurant]
-    RestaurantBySeq(seq: Int!) : Restaurant
+    getRestaurant(seq: Int!) : Restaurant
 
     allUserReviews : [UserReview]
     UserReview(seq: Int!) : UserReview
@@ -103,6 +103,7 @@ type RunTime {
     close : String!
 }
 
+
 type SelectedMenu {
     seq : ID!
     count : Int!
@@ -133,7 +134,7 @@ type Restaurant {
     isopen : Int!
     min_order : Int!
     delivery_tip : Int
-    seperatable : Int!
+    seperatable : Boolean
     introduction : String
     thumbnail : String
     rate : Float!
@@ -148,9 +149,16 @@ type Restaurant {
     menu: Menu!
     bestmenus: [Menu]
     reviewcount: Int
+    likescount: Int
+    isLiked: Boolean
     deliveryloc: [Deliveryloc]
 }
 
+type Likes{
+    seq: Int!
+    resseq: Int!
+    userseq: Int!
+}
 type Deliveryloc{
     res_seq: Int!
     si: String!

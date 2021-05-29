@@ -6,6 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.Column;
 
 import lombok.Getter;
@@ -60,5 +65,7 @@ public class UserEntity {
         this.status=status;
         this.rate=rate;
     }
-
+    public int getSeq(){
+        return seq;
+    }
 }
