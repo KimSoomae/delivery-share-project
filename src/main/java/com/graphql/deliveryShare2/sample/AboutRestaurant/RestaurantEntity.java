@@ -7,11 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import java.util.List;
+import java.util.ArrayList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-
+import javax.persistence.OneToMany;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor(access=AccessLevel.PUBLIC)
@@ -86,7 +88,13 @@ public class RestaurantEntity {
 
     @Column(name = "rate5count", nullable=true)
     private int rate5count;
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<MenuEntity> bestmenus = new ArrayList<>();
+  
     
+    private int reviewcount;
+
     public RestaurantEntity(String id, String password, String name, String created_at, String dayoff, int isopen, int min_order, int delivery_tip, int seperatable, String introduction, String thumbnail, float rate, String category
     ,int rate1count, int rate2count, int rate3count, int rate4count, int rate5count){
         this.name=name;
@@ -109,6 +117,9 @@ public class RestaurantEntity {
         this.rate5count = rate5count;
     }
 
+    public List<MenuEntity> getBestmenu(){
+        return bestmenus;
+    }
     public RunTimeEntity getRunTime(){
         return runtime;
     }
@@ -117,6 +128,11 @@ public class RestaurantEntity {
         return menu;
     }
 
+
+
+    public void setBestmenu(List<MenuEntity> bestmenus){
+        this.bestmenus=bestmenus;
+    }
     public void setRate5count(int rate5count) {
         this.rate5count=rate5count;
       }
@@ -133,6 +149,12 @@ public class RestaurantEntity {
         this.rate1count=rate1count;
     }
 
-   
+    public double getReviewcount(){
+        return reviewcount;
+    }
+
+    public void setReviewcount(int reviewcount) {
+        this.reviewcount=reviewcount;
+      }
 
 }

@@ -17,7 +17,8 @@ type Query {
     ResReview(seq: Int!) : ResReview
 
     allRestaurants: [Restaurant]
-    Restaurant(category: String!, si: String!, dong: String!) : [Restaurant]
+    #사용자의 위치(시,동)에 배달 가능한 지역 & 오픈된 곳만 카테고리별로 레스토랑 띄우기
+    getRestaurants(category: String!, si: String!, dong: String!) : [Restaurant]
     RestaurantBySeq(seq: Int!) : Restaurant
 
     allUserReviews : [UserReview]
@@ -145,6 +146,8 @@ type Restaurant {
     rate4count: Int
     rate5count: Int
     menu: Menu!
+    bestmenus: [Menu]
+    reviewcount: Int
     deliveryloc: [Deliveryloc]
 }
 
@@ -239,7 +242,7 @@ type Menu{
     description: String
     price: Int!
     isAvailable: Boolean!
-    bestmenu: String
+    bestmenu: Boolean!
     resseq: Int!
     restaurant: Restaurant
 }

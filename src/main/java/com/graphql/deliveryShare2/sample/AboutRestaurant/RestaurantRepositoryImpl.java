@@ -7,6 +7,7 @@ import com.graphql.deliveryShare2.sample.AboutRestaurant.DeliverylocEntity;
 import com.graphql.deliveryShare2.sample.AboutCall.GeometryUtil;
 import com.graphql.deliveryShare2.sample.AboutRestaurant.RestaurantEntity;
 import com.graphql.deliveryShare2.sample.AboutRestaurant.*;
+import com.graphql.deliveryShare2.sample.AboutResReview.*;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -39,7 +40,7 @@ public class RestaurantRepositoryImpl implements RestaurantCustomRepository{
     
     @Override
     public List<RestaurantEntity> getPossibleRestaurants(@Param("category") String category, @Param("si") String si, @Param("dong") String dong){
-        RestaurantEntity re= new RestaurantEntity();
+        //RestaurantEntity re= new RestaurantEntity();
         
         EntityManager em = emf.createEntityManager();
         
@@ -52,7 +53,27 @@ public class RestaurantRepositoryImpl implements RestaurantCustomRepository{
     //si,dong에 해당하는 것들
     ,RestaurantEntity.class).setParameter("category", category).setParameter("si",si).setParameter("dong",dong).getResultList();
 
-   
+    for (int i=0; i<results.size();i++){
+        RestaurantEntity re= results.get(i);
+        EntityManager em2 = emf.createEntityManager();
+        List<MenuEntity> menus = em2.createQuery("SELECT m"
+        +" FROM MenuEntity AS m"
+        +" WHERE m.resseq = :seq "
+        +" AND m.bestmenu = 1 "
+        ,MenuEntity.class).setParameter("seq", re.getSeq()).getResultList();
+        System.out.println("메뉴들!!");
+        System.out.println(menus);
+        EntityManager em3 = emf.createEntityManager();
+        List<ResReviewEntity> reviews = em3.createQuery("SELECT r"
+        +" FROM ResReviewEntity As r"
+        +" WHERE r.resseq= :seq "
+        ,ResReviewEntity.class).setParameter("seq", re.getSeq()).getResultList();
+        int reviewcnt = reviews.size();
+        System.out.println("리뷰총개수!!"+reviewcnt);
+        re.setReviewcount(reviewcnt);
+        re.setBestmenu(menus);
+        
+    }
     return results;
    
     };

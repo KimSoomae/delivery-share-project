@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import com.graphql.deliveryShare2.sample.AboutRestaurant.RestaurantEntity;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor(access=AccessLevel.PUBLIC)

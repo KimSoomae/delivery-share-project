@@ -112,7 +112,7 @@ public class GraphQLAPI {
       .dataFetcher("allResReviews", dataFetcher4.allResReviews())  
       .dataFetcher("ResReview", dataFetcher4.ResReview())  
       .dataFetcher("allRestaurants", dataFetcher5.allRestaurants())  
-      .dataFetcher("Restaurant", dataFetcher5.Restaurant())   
+      .dataFetcher("getRestaurants", dataFetcher5.getRestaurants())   
       .dataFetcher("allUserReviews", dataFetcher6.allUserReviews())
       .dataFetcher("UserReview", dataFetcher6.UserReview())  
       .dataFetcher("allOptions", optionDataFetcher.allOptions())

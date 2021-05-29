@@ -39,7 +39,7 @@ public class RestaurantDataFetcher {
       };
     }
   
-    public DataFetcher<?> Restaurant () {
+    public DataFetcher<?> getRestaurants () {
       return environment -> {
         String category = environment.getArgument("category");
         String si = environment.getArgument("si");

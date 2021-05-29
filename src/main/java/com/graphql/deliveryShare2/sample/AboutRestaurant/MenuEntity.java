@@ -46,11 +46,11 @@ public class MenuEntity {
     private Boolean isAvailable;
 
     @Column(name = "bestmenu", nullable=true)
-    private String bestmenu;
+    private Boolean bestmenu;
 
     @Column(name = "resseq", nullable=false)
     private int resseq;
-
+ 
     @ManyToOne
     @JoinColumn(name="resseq", nullable=true, insertable=false, updatable=false)
     private RestaurantEntity restaurant;
@@ -58,7 +58,7 @@ public class MenuEntity {
     public MenuEntity(int seq){
         this.seq=seq;
     }
-    public MenuEntity(String name, String thumbnail, String description, int price, Boolean isAvailable, String bestmenu, int resseq){
+    public MenuEntity(String name, String thumbnail, String description, int price, Boolean isAvailable, Boolean bestmenu, int resseq){
         this.name=name;
         this.thumbnail=thumbnail;
         this.description=description;
