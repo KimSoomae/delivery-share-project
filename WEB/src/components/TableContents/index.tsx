@@ -8,7 +8,7 @@ type ReviewProps = {
   data: PropsReview;
 };
 const TableContentReview: VFC<ReviewProps> = ({ data }) => {
-  const { src, alt, content, nickname, stars, comment } = data;
+  const { src, alt, content, nickname, rate, comment } = data;
   const classProperty = comment ? 'checked' : '';
   const cellCount = 5;
   return (
@@ -17,19 +17,19 @@ const TableContentReview: VFC<ReviewProps> = ({ data }) => {
         <BsCheckCircle className={'check-icon ' + classProperty} />
       </TableCell>
       <TableCell cellCount={cellCount}>
-        <img src={src} alt={alt} />
+        <img src={src || '../images/profile-default.png'} alt={alt} />
       </TableCell>
       {/* <TableCell cellCount={cellCount} className="content">
         <p>{content}</p>
       </TableCell> */}
       <TableCell cellCount={cellCount} className="nickname">
-        <p>{nickname}</p>
+        <p>{nickname || 'user nickname'}</p>
       </TableCell>
       <TableCell cellCount={cellCount}>
-        <MakeStars stars={stars} />
+        <MakeStars stars={rate} />
       </TableCell>
       <TableCell cellCount={cellCount}>
-        <span className="score">{stars.toFixed(1)}</span>
+        <span className="score">{rate.toFixed(1)}</span>
       </TableCell>
     </>
   );
@@ -40,28 +40,28 @@ type OrderProps = {
   data: PropsOrder;
 };
 const TableContentOrder: VFC<OrderProps> = ({ data }) => {
-  const { id, location, date, nickname, price, state } = data;
-  const text = state === 'pending' ? '대기중' : state === 'delivered' ? '완료' : '취소';
+  const { seq, status } = data;
+  const text = status === 'pending' ? '대기중' : status === 'completed' ? '완료' : '취소';
   const cellCount = 6;
   return (
     <>
       <TableCell flexStart={true} cellCount={cellCount}>
-        #{id.substr(0, 8)}
+        #{seq}
       </TableCell>
       <TableCell flexStart={true} cellCount={cellCount} className="tw-wd">
-        {location}
+        위치
       </TableCell>
       <TableCell flexStart={true} cellCount={cellCount} className="tw-wd">
-        {date}
+        날짜
       </TableCell>
       <TableCell cellCount={cellCount} className="tn-wd">
-        {nickname}
+        유저
       </TableCell>
       <TableCell cellCount={cellCount} className="tn-wd">
-        {price}
+        가격
       </TableCell>
       <TableCell cellCount={cellCount}>
-        <span className={state}>{text}</span>
+        <span className={status}>{text}</span>
       </TableCell>
     </>
   );
