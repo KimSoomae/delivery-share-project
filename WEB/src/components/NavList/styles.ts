@@ -16,3 +16,10 @@ export const MenuHeader = styled.div`
     margin-right: 1.5rem;
   }
 `;
+
+export const Footer = styled.div`
+  color: #fff;
+  padding: 2rem;
+  padding-top: 4rem;
+  padding-left: calc(2rem + 40px);
+`;
