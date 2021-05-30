@@ -25,15 +25,15 @@ const OrderModal: VFC<Props> = ({ show, data, setShowModal }) => {
   return (
     <Modal>
       <div>
-        <ModalHeader>주문번호 #{data.id.substr(0, 8)}</ModalHeader>
+        <ModalHeader>주문번호 #{data.seq}</ModalHeader>
         <ModalBody>
           <ModalItem>
             <h1>주문메뉴</h1>
             <div>
-              {data.menus.length &&
-                data.menus.map((menu: { id: string; name: string; count: number }) => (
-                  <p key={menu.id}>
-                    {menu.name} x {menu.count}
+              {data.menus?.length &&
+                data.menus.map((menu: { seq: string; name?: string; count?: number }) => (
+                  <p key={menu.seq}>
+                    {menu.name || '메뉴이름'} x {menu.count || 1}
                   </p>
                 ))}
             </div>
@@ -41,7 +41,7 @@ const OrderModal: VFC<Props> = ({ show, data, setShowModal }) => {
           <ModalItem>
             <h1>요청사항</h1>
             <div>
-              {data.requests.length ? (
+              {data.requests?.length ? (
                 data.requests.map(
                   (req: { id: string; content: string; nickname: string }) => (
                     <p key={req.id}>{req.content}</p>

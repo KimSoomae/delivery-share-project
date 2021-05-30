@@ -11,20 +11,22 @@ import { MemoTableContentOrder } from '@components/TableContents';
 import Pagination from '@components/Pagination';
 
 interface Props {
+  orders: [any];
   setShowModal: (flag: boolean) => void;
   setModalInfo: (content: string) => void;
 }
 
 const PER_PAGE = 7;
 
-const Order: VFC<Props> = ({ setShowModal, setModalInfo }) => {
-  const orders = dummyOrder;
+const Order: VFC<Props> = ({ orders, setShowModal, setModalInfo }) => {
   const rest = orders.length % PER_PAGE;
   const pages = ((orders.length / PER_PAGE) >> 0) + (rest ? 1 : 0);
   const [page, setPage] = useState(1);
   const [curOrders, setCurOrders] = useState(
     orders.slice((page - 1) * PER_PAGE, page * PER_PAGE),
   );
+
+  console.log(orders, curOrders);
 
   useEffect(() => {
     setCurOrders(orders.slice((page - 1) * PER_PAGE, page * PER_PAGE));

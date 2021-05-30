@@ -1,8 +1,14 @@
 import React, { VFC } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Content, ListWrapper, MapImage, SubTitle } from './styles';
+import { useQuery } from '@apollo/client';
+import { GET_RESTAURANT } from '@Apollo/quries';
 
 const Info: VFC = () => {
+  // const { loading, data } = useQuery(GET_RESTAURANT);
+
+  // console.log(loading, data);
+
   return (
     <>
       <MapImage>
