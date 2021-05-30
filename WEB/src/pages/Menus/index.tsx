@@ -10,9 +10,9 @@ const Menus: VFC = () => {
 
   return (
     <Container>
-      <SubTitle>치킨</SubTitle>
+      <SubTitle>떡볶이</SubTitle>
       <Grid>
-        {dummyMenu.slice(0, 2).map(data => (
+        {dummyMenu.slice(0, 3).map(data => (
           <Menu
             key={data.id}
             data={data}
@@ -24,7 +24,7 @@ const Menus: VFC = () => {
 
       <SubTitle>사이드</SubTitle>
       <Grid>
-        {dummyMenu.slice(2).map(data => (
+        {dummyMenu.slice(3).map(data => (
           <Menu
             key={data.id}
             data={data}

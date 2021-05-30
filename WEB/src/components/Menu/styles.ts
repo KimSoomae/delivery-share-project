@@ -8,7 +8,7 @@ export const GridItem = styled.div`
   img {
     flex: 1;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .menu-name {
