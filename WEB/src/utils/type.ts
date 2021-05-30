@@ -1,10 +1,10 @@
 export interface PropsReview {
-  id: string;
-  src: string;
-  alt: string;
+  seq: string;
+  src?: string;
+  alt?: string;
   content: string;
-  nickname: string;
-  stars: number;
+  nickname?: string;
+  rate: number;
   comment?: string;
 }
 
@@ -21,14 +21,14 @@ type temporalRequestsType = {
 };
 
 export interface PropsOrder {
-  date: string;
-  location: string;
-  state: string;
-  menus: temporalMenuType[];
+  date?: string;
+  location?: string;
+  status: string;
+  menus?: temporalMenuType[];
   requests?: temporalRequestsType[];
-  price: string;
-  nickname: string;
-  id: string;
+  price?: string;
+  nickname?: string;
+  seq: string;
 }
 
 export interface PropsMenu {
