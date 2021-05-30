@@ -16,5 +16,7 @@ export const Mainboard = styled.div`
   flex: 1;
   height: 100vh;
   display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
   align-items: center;
 `;
