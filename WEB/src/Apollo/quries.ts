@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 export const GET_ORDERS = gql`
   query {
     allOrders {
+      seq
       status
     }
   }
@@ -15,6 +16,7 @@ export const GET_RES_REVIEWS = gql`
       createdAt
       rate
       image
+      seq
     }
   }
 `;
