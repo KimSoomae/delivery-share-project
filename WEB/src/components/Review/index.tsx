@@ -33,6 +33,11 @@ const Review: VFC<Props> = ({ data }) => {
     }
   }, []);
 
+  const handleSubmit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    console.log(e);
+  };
+
   return (
     <>
       <TableRow onClick={onOpenCollapse}>
@@ -51,7 +56,7 @@ const Review: VFC<Props> = ({ data }) => {
               <VscReply />
               <Input />
               <Divider />
-              <SubmitButton>등록</SubmitButton>
+              <SubmitButton onClick={e => handleSubmit(e)}>등록</SubmitButton>
             </>
           )}
         </ReviewForm>

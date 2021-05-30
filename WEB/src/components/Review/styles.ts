@@ -66,6 +66,11 @@ export const SubmitButton = styled.button`
   background-color: #f77204;
   border: none;
   float: right;
+
+  &:hover {
+    opacity: 0.75;
+    cursor: pointer;
+  }
 `;
 
 export const Comment = styled.div`
