@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.graphql.deliveryShare2.sample.AboutResReview.ResReviewEntity;
+
 import javax.persistence.Column;
 import java.util.List;
 import java.util.ArrayList;
@@ -95,12 +98,22 @@ public class RestaurantEntity {
 
     @OneToMany(mappedBy = "restaurant")
     private List<DeliverylocEntity> deliveryloc = new ArrayList<>();
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<MenuEntity> menus = new ArrayList<>();
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<ResReviewEntity> reviews = new ArrayList<>();
     
+    @OneToMany(mappedBy = "restaurant")
+    private List<LikesEntity> likes = new ArrayList<>();
+
     private int reviewcount;
 
     private int likescount;
 
     private Boolean isLiked;
+
 
     public RestaurantEntity(String id, String password, String name, String created_at, String dayoff, int isopen, int min_order, int delivery_tip, String introduction, String thumbnail, float rate, String category
     ,int rate1count, int rate2count, int rate3count, int rate4count, int rate5count, int reviewcount, int likescount, Boolean isLiked){
@@ -135,12 +148,19 @@ public class RestaurantEntity {
     public List<DeliverylocEntity> getDeliveryloc(){
         return deliveryloc;
     }
+    
+    public List<MenuEntity> getMenus(){
+        return menus;
+    }
 
+    public List<ResReviewEntity> getReviews(){
+        return reviews;
+    }
     public MenuEntity getMenu(){
         return menu;
     }
 
-
+  
     public void setDayoff(String dayoff){
         this.dayoff=dayoff;
     }
@@ -150,6 +170,17 @@ public class RestaurantEntity {
     }
     public void setDeliveryloc(List<DeliverylocEntity> deliveryloc){
         this.deliveryloc=deliveryloc;
+    }
+
+    public void setMenu(MenuEntity menu){
+        this.menu=menu;
+    }
+    public void setMenus(List<MenuEntity> menus){
+        this.menus=menus;
+    }
+   
+    public void setReview(List<ResReviewEntity> reviews){
+        this.reviews=reviews;
     }
     public void setRate5count(int rate5count) {
         this.rate5count=rate5count;
@@ -175,8 +206,8 @@ public class RestaurantEntity {
         return likescount;
     }
 
-    public Boolean getIsliked(){
-        return isLiked;
+    public List<LikesEntity> getLikes(){
+        return likes;
     }
     public void setReviewcount(int reviewcount) {
         this.reviewcount=reviewcount;

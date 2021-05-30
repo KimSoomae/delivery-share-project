@@ -58,23 +58,15 @@ public class RestaurantRepositoryImpl implements RestaurantCustomRepository{
 
     for (int i=0; i<results.size();i++){
         RestaurantEntity re= results.get(i);
-        EntityManager em2 = emf.createEntityManager();
-        List<MenuEntity> menus = em2.createQuery("SELECT m"
-        +" FROM MenuEntity AS m"
-        +" WHERE m.resseq = :seq "
-        +" AND m.bestmenu = 1 "
-        ,MenuEntity.class).setParameter("seq", re.getSeq()).getResultList();
-        System.out.println("메뉴들!!");
-        System.out.println(menus);
-        EntityManager em3 = emf.createEntityManager();
-        List<ResReviewEntity> reviews = em3.createQuery("SELECT r"
-        +" FROM ResReviewEntity As r"
-        +" WHERE r.resseq= :seq "
-        ,ResReviewEntity.class).setParameter("seq", re.getSeq()).getResultList();
-        int reviewcnt = reviews.size();
-        System.out.println("리뷰총개수!!"+reviewcnt);
-        re.setReviewcount(reviewcnt);
-        re.setBestmenu(menus);
+        
+        List<MenuEntity> menuss=new ArrayList<MenuEntity>();
+        for (int j=0; j<re.getMenus().size();j++){
+            if (re.getMenus().get(j).getBestmenu()==true){
+                menuss.add(re.getMenus().get(j));
+            }
+        }
+        re.setBestmenu(menuss);
+        re.setReviewcount(re.getReviews().size());
         
     }
     return results;
@@ -95,45 +87,27 @@ public class RestaurantRepositoryImpl implements RestaurantCustomRepository{
 
         
         re.setDayoff(json);
-        
-        EntityManager em6 = emf.createEntityManager();
-        List<LikesEntity> likes = em6.createQuery("SELECT l"
-        +" FROM LikesEntity AS l"
-        +" WHERE l.resseq = :seq "
-        ,LikesEntity.class).setParameter("seq", seq).getResultList();
-        System.out.println("좋아요 "+likes);
-        System.out.println("좋아요개수"+likes.size());
-        int likescnt = likes.size();
-        System.out.println("좋아요개수저장"+likescnt);
-        re.setLikescount(likescnt);
-        System.out.println("저장됐나"+re.getLikescount());
-        re.setIsliked(false);
-        for (int i=0; i<likes.size(); i++){
-            LikesEntity le = likes.get(i);
-            if (le.getUserseq()==10){
-                re.setIsliked(true);
+        re.setSeperatable(false);
+        for (int i=0; i<re.getMenus().size();i++){
+            Boolean flag = re.getMenus().get(i).getIsSeperatable();
+            if (flag==true){
+                re.setSeperatable(true);
+                break;
             }
         }
+        int likecnt = re.getLikes().size();
+        re.setLikescount(likecnt);
+        re.setIsliked(false);
+        for (int i=0; i<likecnt; i++){
+            LikesEntity le = re.getLikes().get(i);
+            if (le.getUserseq()==10){
+                re.setIsliked(true);
+           }
+        }
 
-        EntityManager em7 = emf.createEntityManager();
-        List<DeliverylocEntity> deliverylocs = em7.createQuery("SELECT d"
-        +" FROM DeliverylocEntity AS d"
-        +" WHERE d.resseq=:seq "
-        ,DeliverylocEntity.class).setParameter("seq", seq).getResultList();
-        re.setDeliveryloc(deliverylocs);
+    for (int i=0; i<re.getReviews().size();i++){
         
-        EntityManager em4 = emf.createEntityManager();
-        List<ResReviewEntity> results = em4.createQuery("SELECT v"
-    +" FROM ResReviewEntity AS v"
-    +" LEFT OUTER JOIN RestaurantEntity AS r"
-    +" ON r.seq=v.restaurant"
-    +" WHERE v.resseq = :resseq "
-    ,ResReviewEntity.class).setParameter("resseq", seq).getResultList();
-
-    for (int i=0; i<results.size();i++){
-        
-        ResReviewEntity rre= results.get(i);
-        //re = rre.getRestaurant();
+        ResReviewEntity rre= re.getReviews().get(i);
         
         double rate=rre.getRate();
         if (rate==5.0){
@@ -164,7 +138,6 @@ public class RestaurantRepositoryImpl implements RestaurantCustomRepository{
        
         
     }
-
 
     return re;
     };

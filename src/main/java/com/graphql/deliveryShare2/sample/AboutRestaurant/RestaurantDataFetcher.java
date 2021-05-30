@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import graphql.schema.DataFetcher;
-
+import java.util.List;
 @Component
 public class RestaurantDataFetcher {
     @Autowired
@@ -17,10 +17,14 @@ public class RestaurantDataFetcher {
     private MenuRepository menuRepository;
 
     @Autowired
-    public RestaurantDataFetcher(RestaurantRepository restaurantRepository, RunTimeRepository runTimeRepository, MenuRepository menuRepository){
+    private OptionRepository optionRepository;
+
+    @Autowired
+    public RestaurantDataFetcher(RestaurantRepository restaurantRepository, RunTimeRepository runTimeRepository, MenuRepository menuRepository, OptionRepository optionRepository){
       this.restaurantRepository=restaurantRepository;
       this.runTimeRepository=runTimeRepository;
       this.menuRepository = menuRepository;
+      this.optionRepository=optionRepository;
     }
 
     public RunTimeEntity getRunTime(RestaurantEntity restaurantEntity){
@@ -28,6 +32,12 @@ public class RestaurantDataFetcher {
 
     }
 
+
+    public List<OptionEntity> getOptions(RestaurantEntity restaurantEntity) {
+      return optionRepository.findAll();
+      
+
+    }
     public MenuEntity getMenu(RestaurantEntity restaurantEntity) {
       return menuRepository.findBySeq(restaurantEntity.getMenu().getSeq());
     }

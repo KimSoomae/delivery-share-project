@@ -5,7 +5,7 @@ import com.graphql.deliveryShare2.sample.AboutRestaurant.RestaurantRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import java.util.List;
 import graphql.schema.DataFetcher;
 
 @Component
@@ -17,9 +17,13 @@ public class ResReviewDataFetcher {
     private RestaurantRepository restaurantRepository;
 
     @Autowired
-    public ResReviewDataFetcher(RestaurantRepository restaurantRepository, ResReviewRepository resReviewRepository){
+    private ImageRepository imageRepository;
+
+    @Autowired
+    public ResReviewDataFetcher(RestaurantRepository restaurantRepository, ResReviewRepository resReviewRepository, ImageRepository imageRepository){
       this.restaurantRepository=restaurantRepository;
       this.resReviewRepository=resReviewRepository;
+      this.imageRepository=imageRepository;
     }
     public DataFetcher<?> allResReviews () {
       return environment -> {
@@ -34,6 +38,10 @@ public class ResReviewDataFetcher {
       };
     }
 
+    public List<ImageEntity> getImages(ResReviewEntity resReviewEntity) {
+      return imageRepository.findAll();
+      
+    }
     public RestaurantEntity getRestaurant(ResReviewEntity resReviewEntity){
       return restaurantRepository.findBySeq(resReviewEntity.getRestaurant().getSeq());
     }

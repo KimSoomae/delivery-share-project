@@ -116,13 +116,19 @@ type ResReview {
     updatedAt : String
     rate : Float!
     content : String!
-    image : String
+    images : [Image]
     resseq: Int!
     restaurant: Restaurant!
+    user: User
+    reply: Reply
     
 }
 
-
+type Image{
+    seq: ID!
+    image: String!
+    review_seq: Int!
+}
 
 type Restaurant {
     seq : ID!
@@ -139,14 +145,14 @@ type Restaurant {
     thumbnail : String
     rate : Float!
     category : String!
-    review: ResReview
+    reviews: [ResReview]
     runtime:RunTime
     rate1count: Int
     rate2count: Int
     rate3count: Int
     rate4count: Int
     rate5count: Int
-    menu: Menu!
+    menus: [Menu]
     bestmenus: [Menu]
     reviewcount: Int
     likescount: Int
@@ -167,9 +173,9 @@ type Deliveryloc{
 type Option{
     seq: Int!
     category: String!
-    is_required: Boolean!
-    is_multiple: Boolean!
-    option_item: [OptionItem]
+    isRequired: Boolean!
+    isMultiple: Boolean!
+    optionItems: [OptionItem]
     menuseq: Int!
 }
 
@@ -253,6 +259,8 @@ type Menu{
     bestmenu: Boolean!
     resseq: Int!
     restaurant: Restaurant
+    options:[Option]
+    isSeperatable: Boolean
 }
 
 type Chat{

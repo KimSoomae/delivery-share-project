@@ -6,11 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import com.graphql.deliveryShare2.sample.AboutUser.UserEntity;
 import com.graphql.deliveryShare2.sample.AboutRestaurant.RestaurantEntity;
 
 import javax.persistence.Column;
 import java.util.List;
+import java.util.ArrayList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
@@ -49,13 +50,25 @@ public class ResReviewEntity {
     @JoinColumn(name="res_seq", nullable=true,insertable=false, updatable=false)
     private RestaurantEntity restaurant;
 
-    public ResReviewEntity(String createdAt, String updatedAt, String image, String content, float rate, int resseq){
+    @OneToMany(mappedBy = "review")
+    private List<ImageEntity> images = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name="user_seq", nullable=true, insertable=false, updatable=false)
+    private UserEntity user;
+
+    @OneToOne
+    @JoinColumn(name="reply_seq", nullable=true, insertable=false, updatable=false)
+    private ReplyEntity reply;
+
+    public ResReviewEntity(String createdAt, String updatedAt, String image, String content, float rate, int resseq, List<ImageEntity> images){
         this.createdAt=createdAt;
         this.updatedAt=updatedAt;
         this.image=image;
         this.content=content;
         this.rate = rate;
         this.resseq=resseq;
+        this.images=images;
     }
     public RestaurantEntity getRestaurant(){
         return restaurant;
@@ -65,5 +78,8 @@ public class ResReviewEntity {
         return this.getReviewCount(resseq);
     }
 
+    public List<ImageEntity> getImages(){
+        return images;
+    }
   
 }
