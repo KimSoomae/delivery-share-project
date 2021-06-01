@@ -216,9 +216,11 @@ public class RestaurantEntity {
     public void setLikescount(int likescount){
         this.likescount=likescount;
     }
+    
     public void setIsliked(Boolean isLiked){
         this.isLiked=isLiked;
     }
+
     public void setSeperatable(Boolean seperatable){
         this.seperatable=seperatable;
     }

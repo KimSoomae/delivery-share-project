@@ -16,14 +16,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 @Component
+@RequiredArgsConstructor
 public class LoginUserDataFetcher {
     @Autowired
     LoginUserService service;
 
-    @Autowired
-    AuthenticationProvider authenticationProvider;
+    private final AuthenticationProvider authenticationProvider;
 
-    @PreAuthorize("isAuthenticated()")
+    //@PreAuthorize("isAuthenticated()")
     public String getToken(LoginUser loginUser) {
         return service.getToken(loginUser);
     }
@@ -52,9 +52,12 @@ public class LoginUserDataFetcher {
             String email=environment.getArgument("email");
             String password=environment.getArgument("password");
             UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(email, password);
-            System.out.println("이메일"+email+"패스워드"+password+credentials);
+            System.out.println("이메일"+email+"패스워드"+password+"크레덴셜"+credentials);
             try {
-                System.out.println("여기들어왔나");
+                System.out.println("여기들어왔나1");
+                System.out.println(authenticationProvider.authenticate(credentials));
+                System.out.println("여기들어왔나2");
+                
                 SecurityContextHolder.getContext().setAuthentication(authenticationProvider.authenticate(credentials));
                 System.out.println("여기들어왔나");
                 System.out.println(authenticationProvider.authenticate(credentials));

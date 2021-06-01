@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.net.URL;
 //import com.coxautodev.graphql.tools.SchemaParser;
 import javax.annotation.PostConstruct;
-
+import org.springframework.stereotype.*;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.graphql.deliveryShare2.sample.AboutCall.CallLocationDataFetcher;
@@ -77,6 +77,7 @@ public class GraphQLAPI {
     return graphQL;
   }
 
+  
   // (1)
   @PostConstruct
   public void init() throws IOException {
@@ -148,6 +149,8 @@ public class GraphQLAPI {
       .dataFetcher("getRestaurant", dataFetcher5.getRestaurant())  
       .dataFetcher("OptionByMenu", optionDataFetcher.OptionByMenu()) 
       .dataFetcher("MenuByRes",menuDataFetcher.MenuByRes())
+      .dataFetcher("getUser",dataFetcher1.getUser())
+      .dataFetcher("getLikedRestaurants", dataFetcher5.getLikedRestaurants())  
       
       
       

@@ -22,5 +22,13 @@ public class UserDataFetcher {
         return userRepository.findBySeq(seq);
       };
     }
+
+    public DataFetcher<?> getUser () {
+      return environment -> {
+        Long seq = environment.getArgument("seq");
+        
+        return userRepository.findBySeq(seq);
+      };
+    }
   
 }

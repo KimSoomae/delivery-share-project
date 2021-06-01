@@ -65,6 +65,8 @@ type Query {
 
     #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
     getReviewCount(resseq: Int): Restaurant
+    getUser(seq:Long!): User
+    getLikedRestaurants(userseq:Int): [Restaurant]
 }
 
 type Mutation{
@@ -89,7 +91,7 @@ type LoginUser{
     user: User
 }
 type User {
-    seq: Int!
+    seq: Long!
     ID: String!
     password: String!
     name: String!
@@ -99,6 +101,9 @@ type User {
     token: String
     status: String!
     rate: Float!
+    orderCounts: Int
+    reviews: [UserReview]
+    canWriteReview: Boolean
 
 }
 
@@ -224,6 +229,7 @@ type UserReview{
     content : String
     to_seq : Int
     from_seq : Int
+    user: User
 }
 
 

@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
@@ -37,21 +39,56 @@ public class UserReviewEntity {
     @Column(name = "content", nullable=true)
     private String content;
 
-    @Column(name = "to_seq", nullable=true)
-    private int to_seq;
+    @Column(name = "toseq", nullable=true)
+    private int toseq;
 
-    @Column(name = "from_seq", nullable=true)
-    private int from_seq;
+    @Column(name = "fromseq", nullable=true)
+    private int fromseq;
 
-    
+    @ManyToOne
+    @JoinColumn(name="fromseq", nullable=true, insertable=false, updatable=false )
+    private UserEntity user;
 
-    public UserReviewEntity(String createdAt, String updatedAt, float rate, String content, int to_seq, int from_seq){
+    @ManyToOne
+    @JoinColumn(name="toseq", nullable=true, insertable=false, updatable=false )
+    private UserEntity to;
+
+
+
+    public UserReviewEntity(String createdAt, String updatedAt, float rate, String content, int toseq, int fromseq){
         this.createdAt=createdAt;
         this.updatedAt=updatedAt;
         this.rate=rate;
         this.content=content;
-        this.to_seq=to_seq;
-        this.from_seq=from_seq;
+        this.toseq=toseq;
+        this.fromseq=fromseq;
+    }
+
+    public UserEntity getUser(){
+        return user;
+    }
+
+    public UserEntity getToUser(){
+        return to;
+    }
+
+    public void setContent(String content){
+        this.content=content;
+    }
+
+    public void setRate(float rate){
+        this.rate=rate;
+    }
+
+
+    public void setFromseq(int fromseq){
+        this.fromseq=fromseq;
+    }
+
+    public void setToseq(int toseq){
+        this.toseq=toseq;
     }
 
 }
+
+

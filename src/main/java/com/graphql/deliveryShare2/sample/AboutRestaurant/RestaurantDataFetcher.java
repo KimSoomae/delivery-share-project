@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import graphql.schema.DataFetcher;
 import java.util.List;
+import java.util.ArrayList;
 @Component
 public class RestaurantDataFetcher {
     @Autowired
@@ -18,6 +19,9 @@ public class RestaurantDataFetcher {
 
     @Autowired
     private OptionRepository optionRepository;
+
+    @Autowired
+    private LikesRepository likesRepository;
 
     @Autowired
     public RestaurantDataFetcher(RestaurantRepository restaurantRepository, RunTimeRepository runTimeRepository, MenuRepository menuRepository, OptionRepository optionRepository){
@@ -65,6 +69,23 @@ public class RestaurantDataFetcher {
       };
     }
 
+    public DataFetcher<?> getLikedRestaurants() {
+      return environment -> {
+        int userseq = environment.getArgument("userseq");
+        //RestaurantEntity restaurantEntity = new RestaurantEntity();
+        List<RestaurantEntity> likedR = new ArrayList<RestaurantEntity>();
+        List<LikesEntity> likes = likesRepository.findAllByUserseq(userseq);
+        System.out.println("라이크"+likes);
+        for (int i=0; i<likes.size();i++){
+            int idx = likes.get(i).getResseq();
+            System.out.println("인덱스"+idx);
+            System.out.println("레스"+restaurantRepository.findBySeq(idx));
+            likedR.add(restaurantRepository.findBySeq(idx));
+        }
+  
+        return likedR;
+      };
+    }
    
    
  
