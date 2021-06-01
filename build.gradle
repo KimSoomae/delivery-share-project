@@ -35,7 +35,7 @@ dependencies {
 	implementation 'com.graphql-java:graphql-java-spring-boot-starter-webmvc:1.0'
 	implementation 'com.google.guava:guava:26.0-jre'
 	implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:5.10.0'
-	//compile 'com.graphql-java:graphql-java-extended-scalars:16.0.0'
+	compile('com.graphql-java:graphql-java-extended-scalars:1.0.1')
 	compileOnly 'org.projectlombok:lombok'
 	//developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'

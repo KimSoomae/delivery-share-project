@@ -35,6 +35,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import graphql.GraphQL;
+import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
@@ -101,7 +102,7 @@ public class GraphQLAPI {
     SchemaGenerator schemaGenerator = new SchemaGenerator();
     return schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
   }
-
+  
   private RuntimeWiring buildWiring() {
     return RuntimeWiring.newRuntimeWiring()
     .type(
@@ -154,6 +155,7 @@ public class GraphQLAPI {
       
       
       
+      
     )
     .type(
       TypeRuntimeWiring
@@ -166,7 +168,10 @@ public class GraphQLAPI {
       .dataFetcher("deleteCart", cartDataFetcher.deleteCart())
       .dataFetcher("login",loginUserDataFetcher.login())
       .dataFetcher("toggleLikeRestaurant",likesDataFetcher.toggleLikeRestaurant())
+      .dataFetcher("writeReply", replyDataFetcher.writeReply())
+      .dataFetcher("updateReply", replyDataFetcher.updateReply())
     )
+    .scalar(ExtendedScalars.DateTime)
     .build();
   }
 

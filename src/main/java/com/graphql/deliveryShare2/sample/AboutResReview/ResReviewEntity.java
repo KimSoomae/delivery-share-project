@@ -8,10 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import com.graphql.deliveryShare2.sample.AboutUser.UserEntity;
 import com.graphql.deliveryShare2.sample.AboutRestaurant.RestaurantEntity;
-
+import java.time.OffsetDateTime;
 import javax.persistence.Column;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
@@ -29,10 +31,10 @@ public class ResReviewEntity {
     private int seq;
 
     @Column(name = "createdAt", nullable=false)
-    private String createdAt;
+    private OffsetDateTime createdAt;
 
     @Column(name = "updatedAt", nullable=true)
-    private String updatedAt;
+    private OffsetDateTime updatedAt;
 
     @Column(name = "image", nullable=true)
     private String image;
@@ -61,7 +63,7 @@ public class ResReviewEntity {
     @JoinColumn(name="reply_seq", nullable=true, insertable=false, updatable=false)
     private ReplyEntity reply;
 
-    public ResReviewEntity(String createdAt, String updatedAt, String image, String content, float rate, int resseq, List<ImageEntity> images){
+    public ResReviewEntity(OffsetDateTime createdAt, OffsetDateTime updatedAt, String image, String content, float rate, int resseq, List<ImageEntity> images){
         this.createdAt=createdAt;
         this.updatedAt=updatedAt;
         this.image=image;

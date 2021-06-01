@@ -1,3 +1,4 @@
+scalar DateTime
 schema{
     query: Query
     mutation: Mutation
@@ -84,6 +85,8 @@ type Mutation{
     deleteCart(seq:Int!):Boolean
     login(email:String!, password:String!):LoginUser
     toggleLikeRestaurant(resseq: Int!, isLiked: Boolean, userseq: Int!):Boolean
+    writeReply(resReviewSeq: Int!, content: String!):Boolean 
+    updateReply(replySeq: Int!, content: String!): Reply
 }
 
 type LoginUser{
@@ -123,7 +126,7 @@ type SelectedMenu {
 
 type ResReview {
     seq : ID!
-    createdAt : String!
+    createdAt : DateTime
     updatedAt : String
     rate : Float!
     content : String!
@@ -210,8 +213,8 @@ type Order{
 type Reply{
     seq:Int!
     content:String!
-    createdAt: String!
-    updatedAt: String
+    createdAt: DateTime!
+    updatedAt: DateTime
 }
 
 type Report{
