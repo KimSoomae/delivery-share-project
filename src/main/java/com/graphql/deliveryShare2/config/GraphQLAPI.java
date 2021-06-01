@@ -4,6 +4,7 @@ import java.net.URL;
 //import com.coxautodev.graphql.tools.SchemaParser;
 import javax.annotation.PostConstruct;
 
+import org.springframework.stereotype.*;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.graphql.deliveryShare2.sample.AboutCall.CallLocationDataFetcher;
@@ -11,9 +12,12 @@ import com.graphql.deliveryShare2.sample.AboutCall.CallingDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCall.OrderDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.CartDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedMenuDataFetcher;
+<<<<<<< HEAD
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedMenuRepository;
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedOptionDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedOptionRepository;
+=======
+>>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
 import com.graphql.deliveryShare2.sample.AboutChat.ChatDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutChat.MessageDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutResReview.ReplyDataFetcher;
@@ -27,6 +31,8 @@ import com.graphql.deliveryShare2.sample.AboutRestaurant.RunTimeDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutUser.ReportDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutUser.UserDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutUser.UserReviewDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutRestaurant.LikesDataFetcher;
+import com.graphql.deliveryShare2.sample.LoginUser.LoginUserDataFetcher;
 
 import org.hibernate.jpa.event.internal.CallbackRegistryImplementor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +42,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import graphql.GraphQL;
+import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
@@ -65,7 +72,12 @@ public class GraphQLAPI {
   @Autowired MenuDataFetcher menuDataFetcher;
   @Autowired MessageDataFetcher messageDataFetcher;
   @Autowired CallLocationDataFetcher callLocationDataFetcher;
+<<<<<<< HEAD
   @Autowired SelectedOptionDataFetcher selectedOptionDataFetcher;
+=======
+  @Autowired LikesDataFetcher likesDataFetcher;
+  @Autowired LoginUserDataFetcher loginUserDataFetcher;
+>>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
   private GraphQL graphQL;
 
   @Value("classpath:static/graphql/schema.graphqls") 
@@ -77,6 +89,7 @@ public class GraphQLAPI {
     return graphQL;
   }
 
+  
   // (1)
   @PostConstruct
   public void init() throws IOException {
@@ -101,6 +114,7 @@ public class GraphQLAPI {
     return schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
   }
 
+  
   private RuntimeWiring buildWiring() {
     return RuntimeWiring.newRuntimeWiring()
     .type(
@@ -118,6 +132,7 @@ public class GraphQLAPI {
       .dataFetcher("ResReview", dataFetcher4.ResReview())  
       .dataFetcher("allRestaurants", dataFetcher5.allRestaurants())  
       .dataFetcher("Restaurant", dataFetcher5.Restaurant())   
+      .dataFetcher("getRestaurants", dataFetcher5.getRestaurants())   
       .dataFetcher("allUserReviews", dataFetcher6.allUserReviews())
       .dataFetcher("UserReview", dataFetcher6.UserReview())  
       .dataFetcher("UserReviewBySeq", dataFetcher6.UserReviewBySeq())  
@@ -149,8 +164,12 @@ public class GraphQLAPI {
       .dataFetcher("getResReviews", dataFetcher4.getResReviews())   
       .dataFetcher("getReviewCount", dataFetcher4.getReviewCount())   
       .dataFetcher("RestaurantBySeq", dataFetcher5.RestaurantBySeq())  
+      .dataFetcher("getRestaurant", dataFetcher5.getRestaurant())  
       .dataFetcher("OptionByMenu", optionDataFetcher.OptionByMenu()) 
       .dataFetcher("MenuByRes",menuDataFetcher.MenuByRes())
+      .dataFetcher("getUser",dataFetcher1.getUser())
+      .dataFetcher("getLikedRestaurants", dataFetcher5.getLikedRestaurants())  
+      
       
       
       
@@ -164,9 +183,17 @@ public class GraphQLAPI {
       .dataFetcher("createCart",cartDataFetcher.createCart())
       .dataFetcher("updateCart", cartDataFetcher.updateCart())
       .dataFetcher("deleteCart", cartDataFetcher.deleteCart())
+<<<<<<< HEAD
       .dataFetcher("createUserReview",dataFetcher6.createUserReview())
 
+=======
+      .dataFetcher("login",loginUserDataFetcher.login())
+      .dataFetcher("toggleLikeRestaurant",likesDataFetcher.toggleLikeRestaurant())
+      .dataFetcher("writeReply", replyDataFetcher.writeReply())
+      .dataFetcher("updateReply", replyDataFetcher.updateReply())
+>>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
     )
+    .scalar(ExtendedScalars.DateTime)
     .build();
   }
 

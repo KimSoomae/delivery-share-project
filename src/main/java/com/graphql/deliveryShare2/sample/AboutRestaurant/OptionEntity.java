@@ -37,33 +37,35 @@ public class OptionEntity {
     private String category;
 
     @Column(name = "is_required", nullable=false)
-    private Boolean is_required;
+    private Boolean isRequired;
 
     @Column(name = "is_multiple", nullable=false)
-    private Boolean is_multiple;
+    private Boolean isMultiple;
 
     @Column(name = "menuseq", nullable=false)
     private int menuseq;
 
-    
+    @ManyToOne
+    @JoinColumn(name="menuseq", nullable=true, insertable=false, updatable=false)
+    private MenuEntity menu;
 
     //@ManyToOne
     //@JoinColumn(name="seq", nullable=true, insertable=false, updatable=false)
     //private OptionItemEntity option_item ;
     @OneToMany(mappedBy = "option")
     //private OptionItemEntity option_item;
-    private List<OptionItemEntity> option_item = new ArrayList<>();
+    private List<OptionItemEntity> optionItems = new ArrayList<>();
 
     
 
-    public OptionEntity(String category, Boolean is_required, Boolean is_multiple, int menuseq){
+    public OptionEntity(String category, Boolean isRequired, Boolean isMultiple, int menuseq){
         this.category=category;
-        this.is_required=is_required;
-        this.is_multiple=is_multiple;
+        this.isRequired=isRequired;
+        this.isMultiple=isMultiple;
         this.menuseq = menuseq;
     }
 
     public List<OptionItemEntity> getOptionItem(){
-        return option_item;
+        return optionItems;
     }
 }

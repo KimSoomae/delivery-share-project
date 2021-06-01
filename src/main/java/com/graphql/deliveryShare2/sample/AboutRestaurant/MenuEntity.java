@@ -13,6 +13,9 @@ import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 
 
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
@@ -47,18 +50,30 @@ public class MenuEntity {
 
     @Column(name = "bestmenu", nullable=true)
     private String bestmenu;
+    private Boolean bestmenu;
 
     @Column(name = "resseq", nullable=false)
     private int resseq;
 
+    
+    @Column(name = "is_seperatable", nullable=true)
+    private Boolean isSeperatable;
+    
     @ManyToOne
     @JoinColumn(name="resseq", nullable=true, insertable=false, updatable=false)
     private RestaurantEntity restaurant;
 
     public MenuEntity(int seq){
+    @OneToMany(mappedBy = "menu")
+    private List<OptionEntity> options;
+    
+    
+    public MenuEntity(int seq, List<OptionEntity> options){
         this.seq=seq;
+        this.options=options;
     }
     public MenuEntity(String name, String thumbnail, String description, int price, Boolean isAvailable, String bestmenu, int resseq){
+    public MenuEntity(String name, String thumbnail, String description, int price, Boolean isAvailable, Boolean bestmenu, int resseq, Boolean isSeperatable){
         this.name=name;
         this.thumbnail=thumbnail;
         this.description=description;
@@ -66,15 +81,29 @@ public class MenuEntity {
         this.isAvailable = isAvailable;
         this.bestmenu=bestmenu;
         this.resseq=resseq;
+        this.isSeperatable=isSeperatable;
     }
     public int getSeq(){
         return seq;
     }
 
+<<<<<<< HEAD
     public int getPrice(){
         return price;
+=======
+    public List<OptionEntity> getOptions(){
+        return options;
+    }
+
+    public Boolean getIsSeperatable(){
+        return isSeperatable;
+>>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
     }
     public RestaurantEntity getRestaurant(){
         return restaurant;
+    }
+
+    public void setOptions(List<OptionEntity> options){
+        this.options=options;
     }
 }

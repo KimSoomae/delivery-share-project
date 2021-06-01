@@ -1,17 +1,26 @@
 package com.graphql.deliveryShare2.sample.AboutUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.Column;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor(access=AccessLevel.PUBLIC)
@@ -22,7 +31,7 @@ public class UserEntity {
     @Id
     @Column(name= "seq", nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int seq;
+    private Long seq;
 
     @Column(name = "ID",nullable=false)
     private String ID;
@@ -55,6 +64,11 @@ public class UserEntity {
     @Column(name="rate", nullable=false)
     private Float rate;
 
+    @OneToMany(mappedBy = "to")
+    private List<UserReviewEntity> reviews = new ArrayList<>();
+
+    int orderCounts;
+
     public UserEntity(String ID, String name, String password, String createdAt, String updatedAt, String status, Float rate){
     public UserEntity(String ID, String name, String password, String created_at, String updated_at, String status, Float rate){
         this.ID=ID;
@@ -67,5 +81,17 @@ public class UserEntity {
         this.status=status;
         this.rate=rate;
     }
+    public Long getSeq(){
+        return seq;
+    }
 
+    public void setOrderCounts(int orderCounts){
+        this.orderCounts=orderCounts;
+    }
+
+    public void setReviews(List<UserReviewEntity> reviews){
+        this.reviews=reviews;
+    }
+
+    
 }

@@ -7,6 +7,7 @@ plugins {
 group = 'com.springBoot'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+apply plugin: 'war'
 
 configurations {
 	compileOnly {
@@ -22,7 +23,7 @@ dependencies {
 	//compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2'
     //compile 'org.springframework.boot:spring-boot-starter-jdbc'
     //compile 'mysql:mysql-connector-java'
-	
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
 	
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -34,9 +35,9 @@ dependencies {
 	implementation 'com.graphql-java:graphql-java-spring-boot-starter-webmvc:1.0'
 	implementation 'com.google.guava:guava:26.0-jre'
 	implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:5.10.0'
-	//compile 'com.graphql-java:graphql-java-extended-scalars:16.0.0'
+	compile('com.graphql-java:graphql-java-extended-scalars:1.0.1')
 	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	//developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -52,6 +53,11 @@ dependencies {
 	compile group: 'org.hibernate', name: 'hibernate-validator-annotation-processor', version: '5.2.4.Final'
 	implementation group: 'org.javassist', name: 'javassist', version: '3.25.0-GA'
 	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
+	compile('javax.servlet:jstl:1.2')
+    implementation 'com.google.code.gson:gson:2.8.5'
+	implementation 'com.auth0:java-jwt:3.8.3'
 
 
 

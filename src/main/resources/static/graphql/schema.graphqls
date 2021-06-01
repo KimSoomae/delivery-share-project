@@ -1,3 +1,4 @@
+scalar DateTime
 schema{
     query: Query
     mutation: Mutation
@@ -20,8 +21,9 @@ type Query {
     ResReview(seq: Int!) : ResReview
 
     allRestaurants: [Restaurant]
-    Restaurant(category: String!, isopen: Int!) : [Restaurant]
-    RestaurantBySeq(seq: Int!) : Restaurant
+    #사용자의 위치(시,동)에 배달 가능한 지역 & 오픈된 곳만 카테고리별로 레스토랑 띄우기
+    getRestaurants(category: String!, si: String!, dong: String!) : [Restaurant]
+    getRestaurant(seq: Int!) : Restaurant
 
     allUserReviews : [UserReview]
     UserReview(seq: Int!) : UserReview
@@ -70,8 +72,13 @@ type Query {
 
     #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
     getReviewCount(resseq: Int): Restaurant
+<<<<<<< HEAD
 
     
+=======
+    getUser(seq:Long!): User
+    getLikedRestaurants(userseq:Int): [Restaurant]
+>>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
 }
 
 type Mutation{
@@ -87,12 +94,23 @@ type Mutation{
     updateCart(count: Int!, seq:Int!):Cart!
     #장바구니 삭제
     deleteCart(seq:Int!):Boolean
+<<<<<<< HEAD
 
     createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview!
+=======
+    login(email:String!, password:String!):LoginUser
+    toggleLikeRestaurant(resseq: Int!, isLiked: Boolean, userseq: Int!):Boolean
+    writeReply(resReviewSeq: Int!, content: String!):Boolean 
+    updateReply(replySeq: Int!, content: String!): Reply
+>>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
 }
 
+type LoginUser{
+    token: String
+    user: User
+}
 type User {
-    seq: Int!
+    seq: Long!
     ID: String!
     password: String!
     name: String!
@@ -104,6 +122,9 @@ type User {
     token: String
     status: String!
     rate: Float!
+    orderCounts: Int
+    reviews: [UserReview]
+    canWriteReview: Boolean
 
 }
 
@@ -113,6 +134,7 @@ type RunTime {
     open : String!
     close : String!
 }
+
 
 type SelectedMenu {
     seq : ID!
@@ -132,17 +154,23 @@ type SelectedOption{
 }
 type ResReview {
     seq : ID!
-    createdAt : String!
+    createdAt : DateTime
     updatedAt : String
     rate : Float!
     content : String!
-    image : String
+    images : [Image]
     resseq: Int!
     restaurant: Restaurant!
+    user: User
+    reply: Reply
     
 }
 
-
+type Image{
+    seq: ID!
+    image: String!
+    review_seq: Int!
+}
 
 type Restaurant {
     seq : ID!
@@ -154,28 +182,42 @@ type Restaurant {
     isopen : Int!
     min_order : Int!
     delivery_tip : Int
-    seperatable : Int!
+    seperatable : Boolean
     introduction : String
     thumbnail : String
     rate : Float!
     category : String!
-    review: ResReview
+    reviews: [ResReview]
     runtime:RunTime
     rate1count: Int
     rate2count: Int
     rate3count: Int
     rate4count: Int
     rate5count: Int
-    menu: Menu!
+    menus: [Menu]
+    bestmenus: [Menu]
+    reviewcount: Int
+    likescount: Int
+    isLiked: Boolean
+    deliveryloc: [Deliveryloc]
 }
 
-
+type Likes{
+    seq: Int!
+    resseq: Int!
+    userseq: Int!
+}
+type Deliveryloc{
+    res_seq: Int!
+    si: String!
+    dong: String!
+}
 type Option{
     seq: Int!
     category: String!
-    is_required: Boolean!
-    is_multiple: Boolean!
-    option_item: [OptionItem]
+    isRequired: Boolean!
+    isMultiple: Boolean!
+    optionItems: [OptionItem]
     menuseq: Int!
 }
 
@@ -208,8 +250,8 @@ type Order{
 type Reply{
     seq:Int!
     content:String!
-    createdAt: String!
-    updatedAt: String
+    createdAt: DateTime!
+    updatedAt: DateTime
 }
 
 type Report{
@@ -229,10 +271,14 @@ type UserReview{
     content : String
     to_seq : Int
     from_seq : Int
+<<<<<<< HEAD
     toseq : Int
     fromseq : Int
     from: User
     to:User
+=======
+    user: User
+>>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
 }
 
 
@@ -278,9 +324,11 @@ type Menu{
     description: String
     price: Int!
     isAvailable: Boolean!
-    bestmenu: String
+    bestmenu: Boolean!
     resseq: Int!
     restaurant: Restaurant
+    options:[Option]
+    isSeperatable: Boolean
 }
 
 type Chat{
