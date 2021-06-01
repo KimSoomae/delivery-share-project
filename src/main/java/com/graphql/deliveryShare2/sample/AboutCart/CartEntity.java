@@ -70,13 +70,16 @@ public class CartEntity {
     private List<SelectedMenuEntity> selected_menu = new ArrayList<>();
 
 
-    public CartEntity(String request, UserEntity user, int delivery_tip, CallingEntity call){
+    public CartEntity(String request, UserEntity user, int delivery_tip, CallingEntity call, int callSeq, int selectedmenuSeq, int userSeq, SelectedMenuEntity selectedmenu){
         this.request=request;
+        this.selectedmenuSeq=selectedmenuSeq;
         this.selectedmenu=selectedmenu;
-        //this.selectedmenu=selectedmenu;
         this.user=user;
         this.delivery_tip = delivery_tip;
         this.call=call;
+        this.callSeq=callSeq;
+        this.userSeq =userSeq;
+
     }
 
     public int getSeq(){

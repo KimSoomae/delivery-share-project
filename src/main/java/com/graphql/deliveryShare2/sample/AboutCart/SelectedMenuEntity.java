@@ -48,8 +48,7 @@ public class SelectedMenuEntity {
     @OneToMany(mappedBy = "selected_menu")
     private List<SelectedOptionEntity> selected_option = new ArrayList<>();
 
-   
-    public SelectedMenuEntity(int count, int menuSeq){
+
     public SelectedMenuEntity(int count, int menuSeq, CartEntity cart){
         this.count=count;
         this.menuSeq=menuSeq;

@@ -33,8 +33,7 @@ public class CallingRepositoryImpl implements CallingCustomRepository{
     EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
     
     @Override
-    public List<CallingEntity> getNearCalls(){
-        
+    public List<CallingEntity> getNearCalls(@Param("latitude") Double latitude, @Param("longitude") Double longitude){
         EntityManager em = emf.createEntityManager();
         
         //현재 위치 한국외대 경영대로 가정
@@ -42,8 +41,6 @@ public class CallingRepositoryImpl implements CallingCustomRepository{
     +" FROM CallingEntity AS c"
     +" LEFT OUTER JOIN CallLocationEntity AS l"
     +" ON l.seq=c.callLocation"
-    +" WHERE (((acos(sin((37.59654772753874*pi()/180)) * sin((l.latitude*pi()/180)) + cos((37.59654772753874*pi()/180)) * cos((l.latitude*pi()/180)) * cos(((127.05991033848542- l.longitude) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) <= 0.5"
-    ,CallingEntity.class).getResultList();
     +" WHERE (((acos(sin((:latitude*pi()/180)) * sin((l.latitude*pi()/180)) + cos((:latitude*pi()/180)) * cos((l.latitude*pi()/180)) * cos(((:longitude- l.longitude) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) <= 0.5"
     ,CallingEntity.class).setParameter("latitude", latitude).setParameter("longitude",longitude).getResultList();
 
@@ -53,9 +50,6 @@ public class CallingRepositoryImpl implements CallingCustomRepository{
         double lat=cl.getLatitude();
         double lon=cl.getLongitude();
         double pi=3.141592653589793;
-        double distance = (((Math.acos(Math.sin((37.59654772753874*pi/180)) * 
-        Math.sin((lat*pi/180)) + Math.cos((37.59654772753874*pi/180)) * 
-        Math.cos((lat*pi/180)) * Math.cos(((127.05991033848542- lon) * pi/180)))) 
         double distance = (((Math.acos(Math.sin((latitude*pi/180)) * 
         Math.sin((lat*pi/180)) + Math.cos((latitude*pi/180)) * 
         Math.cos((lat*pi/180)) * Math.cos(((longitude-lon) * pi/180)))) 

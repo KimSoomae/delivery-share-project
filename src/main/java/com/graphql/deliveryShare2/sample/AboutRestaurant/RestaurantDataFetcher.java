@@ -67,7 +67,7 @@ public class RestaurantDataFetcher {
         int seq = environment.getArgument("seq");
         return restaurantRepository.getRestaurant(seq); 
       };
-      }; 
+      
     }
 
     public DataFetcher<?> getLikedRestaurants() {

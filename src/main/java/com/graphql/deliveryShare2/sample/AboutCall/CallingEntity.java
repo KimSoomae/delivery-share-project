@@ -32,16 +32,23 @@ public class CallingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int seq;
 
-    @Column(name = "createdAt", nullable=false)
+
     @Column(name = "created_at", nullable=false)
     @Temporal(TemporalType.DATE)
-    private Date createdAt;
     private Date created_at;
 
-    @Column(name = "expiredAt", nullable=false)
-    private String expiredAt;
+
     @Column(name = "expired_at", nullable=false)
     private String expired_at;
+
+    @Column(name = "request_R", nullable=false)
+    private String request_R;
+
+    @Column(name = "request_call", nullable=false)
+    private String request_call;
+
+    @Column(name = "time_limit", nullable=false)
+    private int time_limit;
 
     @Column(name = "status", nullable=false)
     private String status;
@@ -76,10 +83,7 @@ public class CallingEntity {
 
     private Double distance;
 
-    public CallingEntity(Date createdAt, String expiredAt, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation){
-        this.createdAt=createdAt;
-        this.expiredAt=expiredAt;
-    public CallingEntity(Date created_at, String expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, CartEntity cart1){
+    public CallingEntity(Date created_at, String expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, CartEntity cart1, String request_R, String request_call, int time_limit ){
         
         this.created_at=created_at;
         this.expired_at=expired_at;
@@ -90,6 +94,11 @@ public class CallingEntity {
         this.restaurant=restaurant;
         this.callLocation = callLocation;
         this.cart1 = cart1;
+        this.request_R = request_R;
+        this.request_call = request_call;
+        this.time_limit = time_limit;
+
+
       
     }
 
@@ -108,7 +117,7 @@ public class CallingEntity {
     public void setDistance(Double distance) {
         this.distance=distance;
       }
-    }
+    
 
     public RestaurantEntity getRestaurant(){
         return restaurant;
@@ -126,9 +135,6 @@ public class CallingEntity {
         return cart;
     }
 
-
-    public List<CallingEntity> getNearCalls(){
-        return this.getNearCalls();
     public List<CallingEntity> getNearCalls(Double latitude, Double longitude){
         return this.getNearCalls(latitude, longitude);
     }

@@ -26,7 +26,6 @@ type Query {
     getRestaurant(seq: Int!) : Restaurant
 
     allUserReviews : [UserReview]
-    UserReview(seq: Int!) : UserReview
     UserReview(toseq: Int!) : [UserReview]
     UserReviewBySeq(seq: Int!) : UserReview
 
@@ -62,7 +61,6 @@ type Query {
     allMessages: [Message]
     Message(seq:Int) : Message
 
-    getNearCalls: [Calling]
     getNearCalls(latitude:Float, longitude:Float): [Calling]
     allResLocations: [ResLocation]
     allCallLocations: [CallLocation]
@@ -72,13 +70,10 @@ type Query {
 
     #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
     getReviewCount(resseq: Int): Restaurant
-<<<<<<< HEAD
 
     
-=======
     getUser(seq:Long!): User
     getLikedRestaurants(userseq:Int): [Restaurant]
->>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
 }
 
 type Mutation{
@@ -94,15 +89,12 @@ type Mutation{
     updateCart(count: Int!, seq:Int!):Cart!
     #장바구니 삭제
     deleteCart(seq:Int!):Boolean
-<<<<<<< HEAD
 
     createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview!
-=======
     login(email:String!, password:String!):LoginUser
     toggleLikeRestaurant(resseq: Int!, isLiked: Boolean, userseq: Int!):Boolean
     writeReply(resReviewSeq: Int!, content: String!):Boolean 
     updateReply(replySeq: Int!, content: String!): Reply
->>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
 }
 
 type LoginUser{
@@ -114,8 +106,8 @@ type User {
     ID: String!
     password: String!
     name: String!
-    createdAt: String
-    updatedAt: String
+    #createdAt: String
+    #updatedAt: String
     created_at: String
     updated_at: String
     thumbnail: String
@@ -264,28 +256,19 @@ type Report{
 type UserReview{
     seq : Int!
     createdAt: String!
-    createdAt: String
     updatedAt: String
     rate : Float!
-    rate: Float
     content : String
-    to_seq : Int
-    from_seq : Int
-<<<<<<< HEAD
     toseq : Int
     fromseq : Int
     from: User
     to:User
-=======
     user: User
->>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
 }
 
 
 type Calling{
     seq: Int!
-    createdAt: String
-    expiredAt: String
     created_at: String
     expired_at: String
     status: String!
@@ -295,7 +278,13 @@ type Calling{
     restaurant: Restaurant
     callLocation: CallLocation
     distance: Float
+    cart1: Cart
     cart: [Cart]
+    request_R: String
+    request_call:String
+    time_limit: Int
+
+
     
 }
 
@@ -308,6 +297,8 @@ type Cart{
     user: User
     call:Calling
     total_cost: Int
+    callSeq: Int
+    
 }
 
 type Location{

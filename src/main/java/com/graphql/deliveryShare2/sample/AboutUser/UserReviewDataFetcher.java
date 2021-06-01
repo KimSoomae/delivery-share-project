@@ -30,7 +30,6 @@ public class UserReviewDataFetcher {
   
     public DataFetcher<?> allUserReviews () {
       return environment -> {
-        return userreviewRepository.findAll();
         return userReviewRepository.findAll();
       };
     }
@@ -46,7 +45,6 @@ public class UserReviewDataFetcher {
     public DataFetcher<?> UserReviewBySeq () {
       return environment -> {
         int seq = environment.getArgument("seq");
-        return userreviewRepository.findBySeq(seq);
         return userReviewRepository.findBySeq(seq);
       };
     }
@@ -61,24 +59,24 @@ public class UserReviewDataFetcher {
     }
 
 
-    public DataFetcher<?> createUserReview(){
-      return environment -> {
-        UserReviewEntity userReviewEntity = new UserReviewEntity();
-        String content=environment.getArgument("content");
-        double rate = environment.getArgument("rate");
-        int fromseq = environment.getArgument("fromseq");
-        int toseq = environment.getArgument("toseq");
+    //public DataFetcher<?> createUserReview(){
+    //  return environment -> {
+    //    UserReviewEntity userReviewEntity = new UserReviewEntity();
+    //    String content=environment.getArgument("content");
+    //    float rate = environment.getArgument("rate");
+    //    int fromseq = environment.getArgument("fromseq");
+    //    int toseq = environment.getArgument("toseq");
 
         
-        userReviewEntity.setContent(content);
-        userReviewEntity.setRate(rate);
-        userReviewEntity.setFromseq(fromseq);
-        userReviewEntity.setToseq(toseq);
+      //  userReviewEntity.setContent(content);
+      //  userReviewEntity.setRate(rate);
+      //  userReviewEntity.setFromseq(fromseq);
+      //  userReviewEntity.setToseq(toseq);
 
-        userReviewRepository.save(userReviewEntity);
+       // userReviewRepository.save(userReviewEntity);
 
-        return userReviewEntity;
-      };
-    }
+        //return userReviewEntity;
+      //};
+    //}
 
 }

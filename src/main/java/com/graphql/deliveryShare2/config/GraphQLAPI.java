@@ -12,12 +12,9 @@ import com.graphql.deliveryShare2.sample.AboutCall.CallingDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCall.OrderDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.CartDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedMenuDataFetcher;
-<<<<<<< HEAD
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedMenuRepository;
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedOptionDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedOptionRepository;
-=======
->>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
 import com.graphql.deliveryShare2.sample.AboutChat.ChatDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutChat.MessageDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutResReview.ReplyDataFetcher;
@@ -72,12 +69,9 @@ public class GraphQLAPI {
   @Autowired MenuDataFetcher menuDataFetcher;
   @Autowired MessageDataFetcher messageDataFetcher;
   @Autowired CallLocationDataFetcher callLocationDataFetcher;
-<<<<<<< HEAD
   @Autowired SelectedOptionDataFetcher selectedOptionDataFetcher;
-=======
   @Autowired LikesDataFetcher likesDataFetcher;
   @Autowired LoginUserDataFetcher loginUserDataFetcher;
->>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
   private GraphQL graphQL;
 
   @Value("classpath:static/graphql/schema.graphqls") 
@@ -130,8 +124,7 @@ public class GraphQLAPI {
       .dataFetcher("SelectedOption", selectedOptionDataFetcher.SelectedOption())  
       .dataFetcher("allResReviews", dataFetcher4.allResReviews())  
       .dataFetcher("ResReview", dataFetcher4.ResReview())  
-      .dataFetcher("allRestaurants", dataFetcher5.allRestaurants())  
-      .dataFetcher("Restaurant", dataFetcher5.Restaurant())   
+      .dataFetcher("allRestaurants", dataFetcher5.allRestaurants())   
       .dataFetcher("getRestaurants", dataFetcher5.getRestaurants())   
       .dataFetcher("allUserReviews", dataFetcher6.allUserReviews())
       .dataFetcher("UserReview", dataFetcher6.UserReview())  
@@ -163,7 +156,6 @@ public class GraphQLAPI {
       .dataFetcher("CallLocation",callLocationDataFetcher.CallLocation())
       .dataFetcher("getResReviews", dataFetcher4.getResReviews())   
       .dataFetcher("getReviewCount", dataFetcher4.getReviewCount())   
-      .dataFetcher("RestaurantBySeq", dataFetcher5.RestaurantBySeq())  
       .dataFetcher("getRestaurant", dataFetcher5.getRestaurant())  
       .dataFetcher("OptionByMenu", optionDataFetcher.OptionByMenu()) 
       .dataFetcher("MenuByRes",menuDataFetcher.MenuByRes())
@@ -183,15 +175,11 @@ public class GraphQLAPI {
       .dataFetcher("createCart",cartDataFetcher.createCart())
       .dataFetcher("updateCart", cartDataFetcher.updateCart())
       .dataFetcher("deleteCart", cartDataFetcher.deleteCart())
-<<<<<<< HEAD
-      .dataFetcher("createUserReview",dataFetcher6.createUserReview())
-
-=======
+      //.dataFetcher("createUserReview",dataFetcher6.createUserReview())
       .dataFetcher("login",loginUserDataFetcher.login())
       .dataFetcher("toggleLikeRestaurant",likesDataFetcher.toggleLikeRestaurant())
       .dataFetcher("writeReply", replyDataFetcher.writeReply())
       .dataFetcher("updateReply", replyDataFetcher.updateReply())
->>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
     )
     .scalar(ExtendedScalars.DateTime)
     .build();

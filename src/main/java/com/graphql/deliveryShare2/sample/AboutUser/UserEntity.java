@@ -42,13 +42,14 @@ public class UserEntity {
     @Column(name = "name", nullable=false)
     private String name;
 
-    @Column(name = "createdAt", nullable=false)
-    private String createdAt;
+    //@Column(name = "createdAt", nullable=false)
+    //private String createdAt;
+
     @Column(name = "created_at", nullable=false)
     private String created_at;
 
-    @Column(name = "updatedAt", nullable=true)
-    private String updatedAt;
+    //@Column(name = "updatedAt", nullable=true)
+    //private String updatedAt;
     @Column(name = "updated_at", nullable=true)
     private String updated_at;
 
@@ -69,13 +70,13 @@ public class UserEntity {
 
     int orderCounts;
 
-    public UserEntity(String ID, String name, String password, String createdAt, String updatedAt, String status, Float rate){
+   
     public UserEntity(String ID, String name, String password, String created_at, String updated_at, String status, Float rate){
         this.ID=ID;
         this.name=name;
         this.password=password;
-        this.createdAt=createdAt;
-        this.updatedAt=updatedAt;
+        //this.createdAt=createdAt;
+        //this.updatedAt=updatedAt;
         this.created_at=created_at;
         this.updated_at=updated_at;
         this.status=status;

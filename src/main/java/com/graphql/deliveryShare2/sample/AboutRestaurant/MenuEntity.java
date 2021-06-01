@@ -49,7 +49,6 @@ public class MenuEntity {
     private Boolean isAvailable;
 
     @Column(name = "bestmenu", nullable=true)
-    private String bestmenu;
     private Boolean bestmenu;
 
     @Column(name = "resseq", nullable=false)
@@ -63,7 +62,6 @@ public class MenuEntity {
     @JoinColumn(name="resseq", nullable=true, insertable=false, updatable=false)
     private RestaurantEntity restaurant;
 
-    public MenuEntity(int seq){
     @OneToMany(mappedBy = "menu")
     private List<OptionEntity> options;
     
@@ -72,7 +70,7 @@ public class MenuEntity {
         this.seq=seq;
         this.options=options;
     }
-    public MenuEntity(String name, String thumbnail, String description, int price, Boolean isAvailable, String bestmenu, int resseq){
+
     public MenuEntity(String name, String thumbnail, String description, int price, Boolean isAvailable, Boolean bestmenu, int resseq, Boolean isSeperatable){
         this.name=name;
         this.thumbnail=thumbnail;
@@ -87,17 +85,15 @@ public class MenuEntity {
         return seq;
     }
 
-<<<<<<< HEAD
     public int getPrice(){
         return price;
-=======
+    }
     public List<OptionEntity> getOptions(){
         return options;
     }
 
     public Boolean getIsSeperatable(){
         return isSeperatable;
->>>>>>> be98061299c2c7c0b88d22403b95aa2413d752ee
     }
     public RestaurantEntity getRestaurant(){
         return restaurant;
