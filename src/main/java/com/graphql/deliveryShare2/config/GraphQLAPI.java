@@ -11,7 +11,6 @@ import com.graphql.deliveryShare2.sample.AboutCall.CallingDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCall.OrderDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.CartDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedMenuDataFetcher;
-import com.graphql.deliveryShare2.sample.AboutCart.SelectedMenuRepository;
 import com.graphql.deliveryShare2.sample.AboutChat.ChatDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutChat.MessageDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutResReview.ReplyDataFetcher;
@@ -25,6 +24,8 @@ import com.graphql.deliveryShare2.sample.AboutRestaurant.RunTimeDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutUser.ReportDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutUser.UserDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutUser.UserReviewDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutRestaurant.LikesDataFetcher;
+import com.graphql.deliveryShare2.sample.LoginUser.LoginUserDataFetcher;
 
 import org.hibernate.jpa.event.internal.CallbackRegistryImplementor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,8 @@ public class GraphQLAPI {
   @Autowired MenuDataFetcher menuDataFetcher;
   @Autowired MessageDataFetcher messageDataFetcher;
   @Autowired CallLocationDataFetcher callLocationDataFetcher;
+  @Autowired LikesDataFetcher likesDataFetcher;
+  @Autowired LoginUserDataFetcher loginUserDataFetcher;
   private GraphQL graphQL;
 
   @Value("classpath:static/graphql/schema.graphqls") 
@@ -158,6 +161,8 @@ public class GraphQLAPI {
       .dataFetcher("createCart",cartDataFetcher.createCart())
       .dataFetcher("updateCart", cartDataFetcher.updateCart())
       .dataFetcher("deleteCart", cartDataFetcher.deleteCart())
+      .dataFetcher("login",loginUserDataFetcher.login())
+      .dataFetcher("toggleLikeRestaurant",likesDataFetcher.toggleLikeRestaurant())
     )
     .build();
   }

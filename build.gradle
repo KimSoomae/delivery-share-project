@@ -57,6 +57,7 @@ dependencies {
 	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
 	compile('javax.servlet:jstl:1.2')
     implementation 'com.google.code.gson:gson:2.8.5'
+	implementation 'com.auth0:java-jwt:3.8.3'
 
 
 

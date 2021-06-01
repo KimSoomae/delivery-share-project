@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor(access=AccessLevel.PUBLIC)
@@ -27,7 +28,7 @@ public class UserEntity {
     @Id
     @Column(name= "seq", nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int seq;
+    private Long seq;
 
     @Column(name = "ID",nullable=false)
     private String ID;
@@ -65,7 +66,9 @@ public class UserEntity {
         this.status=status;
         this.rate=rate;
     }
-    public int getSeq(){
+    public Long getSeq(){
         return seq;
     }
+
+    
 }

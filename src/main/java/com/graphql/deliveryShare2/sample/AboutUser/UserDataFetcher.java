@@ -18,7 +18,7 @@ public class UserDataFetcher {
   
     public DataFetcher<?> User () {
       return environment -> {
-        int seq = environment.getArgument("seq");
+        Long seq = environment.getArgument("seq");
         return userRepository.findBySeq(seq);
       };
     }

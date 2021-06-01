@@ -40,7 +40,14 @@ public class LikesEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name="user_seq", nullable=true, insertable=false, updatable=false)
     private UserEntity user;
-   
+
+    public void setResseq(int resseq){
+        this.resseq=resseq;
+    }
+    
+    public void setUserseq(int userseq){
+        this.userseq=userseq;
+    }
    
 
 }

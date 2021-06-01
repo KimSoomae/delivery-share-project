@@ -80,8 +80,14 @@ type Mutation{
     updateCart(count: Int!, seq:Int!):Cart!
     #장바구니 삭제
     deleteCart(seq:Int!):Boolean
+    login(email:String!, password:String!):LoginUser
+    toggleLikeRestaurant(resseq: Int!, isLiked: Boolean, userseq: Int!):Boolean
 }
 
+type LoginUser{
+    token: String
+    user: User
+}
 type User {
     seq: Int!
     ID: String!
