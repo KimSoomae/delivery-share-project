@@ -44,6 +44,8 @@ public class CallingRepositoryImpl implements CallingCustomRepository{
     +" ON l.seq=c.callLocation"
     +" WHERE (((acos(sin((37.59654772753874*pi()/180)) * sin((l.latitude*pi()/180)) + cos((37.59654772753874*pi()/180)) * cos((l.latitude*pi()/180)) * cos(((127.05991033848542- l.longitude) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) <= 0.5"
     ,CallingEntity.class).getResultList();
+    +" WHERE (((acos(sin((:latitude*pi()/180)) * sin((l.latitude*pi()/180)) + cos((:latitude*pi()/180)) * cos((l.latitude*pi()/180)) * cos(((:longitude- l.longitude) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) <= 0.5"
+    ,CallingEntity.class).setParameter("latitude", latitude).setParameter("longitude",longitude).getResultList();
 
     for (int i=0; i<results.size();i++){
         CallingEntity ce= results.get(i);
@@ -54,6 +56,9 @@ public class CallingRepositoryImpl implements CallingCustomRepository{
         double distance = (((Math.acos(Math.sin((37.59654772753874*pi/180)) * 
         Math.sin((lat*pi/180)) + Math.cos((37.59654772753874*pi/180)) * 
         Math.cos((lat*pi/180)) * Math.cos(((127.05991033848542- lon) * pi/180)))) 
+        double distance = (((Math.acos(Math.sin((latitude*pi/180)) * 
+        Math.sin((lat*pi/180)) + Math.cos((latitude*pi/180)) * 
+        Math.cos((lat*pi/180)) * Math.cos(((longitude-lon) * pi/180)))) 
         * 180/pi * 60 * 1.1515 * 1.609344));
         ce.setDistance(distance*1000);
         

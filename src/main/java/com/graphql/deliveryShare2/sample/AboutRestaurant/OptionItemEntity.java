@@ -49,4 +49,8 @@ public class OptionItemEntity {
         this.price=price;
         this.option_seq = option_seq;
     }
+
+    public int getPrice(){
+        return price;
+    }
 }

@@ -13,6 +13,9 @@ type Query {
     allSelectedMenus: [SelectedMenu]
     SelectedMenu(seq: Int!) : SelectedMenu
 
+    allSelectedOptions: [SelectedOption]
+    SelectedOption(seq: Int) : SelectedOption
+
     allResReviews : [ResReview]
     ResReview(seq: Int!) : ResReview
 
@@ -22,6 +25,8 @@ type Query {
 
     allUserReviews : [UserReview]
     UserReview(seq: Int!) : UserReview
+    UserReview(toseq: Int!) : [UserReview]
+    UserReviewBySeq(seq: Int!) : UserReview
 
     allOptions: [Option]
     Option(seq: Int): Option
@@ -56,6 +61,7 @@ type Query {
     Message(seq:Int) : Message
 
     getNearCalls: [Calling]
+    getNearCalls(latitude:Float, longitude:Float): [Calling]
     allResLocations: [ResLocation]
     allCallLocations: [CallLocation]
     CallLocation: CallLocation
@@ -64,6 +70,8 @@ type Query {
 
     #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
     getReviewCount(resseq: Int): Restaurant
+
+    
 }
 
 type Mutation{
@@ -79,6 +87,8 @@ type Mutation{
     updateCart(count: Int!, seq:Int!):Cart!
     #장바구니 삭제
     deleteCart(seq:Int!):Boolean
+
+    createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview!
 }
 
 type User {
@@ -88,6 +98,8 @@ type User {
     name: String!
     createdAt: String
     updatedAt: String
+    created_at: String
+    updated_at: String
     thumbnail: String
     token: String
     status: String!
@@ -106,8 +118,18 @@ type SelectedMenu {
     seq : ID!
     count : Int!
     menu: Menu
+    cart: Cart
+    selected_option: [SelectedOption]
 }
 
+type SelectedOption{
+    seq: ID!
+    optionitem_seq: Int
+    selectedmenu_seq: Int
+    option_item: OptionItem
+    selected_menu: [SelectedMenu]
+
+}
 type ResReview {
     seq : ID!
     createdAt : String!
@@ -167,11 +189,20 @@ type OptionItem{
 }
 
 type Order{
+
     seq:Int!
     createdAt: String!
     updatedAt: String
     deliveryTime: String!
+    created_at: String
+    delivery_time: Int!
+    call_seq: Int
+    sum: Int
+    canWriteRestaurantReview: Boolean
+    canWriteUserReview: Boolean
     status: String!
+    call: Calling
+
 }
 
 type Reply{
@@ -191,11 +222,17 @@ type Report{
 type UserReview{
     seq : Int!
     createdAt: String!
+    createdAt: String
     updatedAt: String
     rate : Float!
+    rate: Float
     content : String
     to_seq : Int
     from_seq : Int
+    toseq : Int
+    fromseq : Int
+    from: User
+    to:User
 }
 
 
@@ -203,6 +240,8 @@ type Calling{
     seq: Int!
     createdAt: String
     expiredAt: String
+    created_at: String
+    expired_at: String
     status: String!
     calltext: String
     price: Int!
@@ -210,14 +249,19 @@ type Calling{
     restaurant: Restaurant
     callLocation: CallLocation
     distance: Float
+    cart: [Cart]
     
 }
 
 type Cart{
     seq: Int!
     request: String
+    delivery_tip: Int
     selectedmenu: SelectedMenu
+    selected_menu: [SelectedMenu]
     user: User
+    call:Calling
+    total_cost: Int
 }
 
 type Location{

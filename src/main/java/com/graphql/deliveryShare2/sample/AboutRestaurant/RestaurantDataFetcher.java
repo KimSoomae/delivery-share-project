@@ -52,6 +52,7 @@ public class RestaurantDataFetcher {
         int seq = environment.getArgument("seq");
         return restaurantRepository.findBySeq(seq); 
       };
+      }; 
     }
 
    

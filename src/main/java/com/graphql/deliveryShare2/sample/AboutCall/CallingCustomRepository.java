@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface CallingCustomRepository {
     List<CallingEntity> getNearCalls();
+    List<CallingEntity> getNearCalls(Double latitude, Double logitude);
 }

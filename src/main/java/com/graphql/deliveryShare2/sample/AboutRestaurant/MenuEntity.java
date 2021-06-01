@@ -71,6 +71,9 @@ public class MenuEntity {
         return seq;
     }
 
+    public int getPrice(){
+        return price;
+    }
     public RestaurantEntity getRestaurant(){
         return restaurant;
     }

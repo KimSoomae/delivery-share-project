@@ -6,8 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import java.util.ArrayList;
+
 import com.graphql.deliveryShare2.sample.AboutRestaurant.RestaurantEntity;
 import com.graphql.deliveryShare2.sample.AboutUser.UserEntity;
+import com.fasterxml.jackson.module.kotlin.ReflectionCache.BooleanTriState.True;
+import com.graphql.deliveryShare2.sample.AboutCart.CartEntity;
 
 import javax.persistence.Column;
 import java.util.List;
@@ -29,11 +33,15 @@ public class CallingEntity {
     private int seq;
 
     @Column(name = "createdAt", nullable=false)
+    @Column(name = "created_at", nullable=false)
     @Temporal(TemporalType.DATE)
     private Date createdAt;
+    private Date created_at;
 
     @Column(name = "expiredAt", nullable=false)
     private String expiredAt;
+    @Column(name = "expired_at", nullable=false)
+    private String expired_at;
 
     @Column(name = "status", nullable=false)
     private String status;
@@ -56,18 +64,32 @@ public class CallingEntity {
     @JoinColumn(name="callLocation_seq_fk_idx", nullable=false)
     private CallLocationEntity callLocation;
 
+    @ManyToOne
+    @JoinColumn(name="cart_seq", nullable=false)
+    private CartEntity cart1;
+
+    @OneToMany(mappedBy = "call")
+    private List<CartEntity> cart = new ArrayList<>();
+
+    
+
 
     private Double distance;
 
     public CallingEntity(Date createdAt, String expiredAt, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation){
         this.createdAt=createdAt;
         this.expiredAt=expiredAt;
+    public CallingEntity(Date created_at, String expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, CartEntity cart1){
+        
+        this.created_at=created_at;
+        this.expired_at=expired_at;
         this.status=status;
         this.calltext=calltext;
         this.price = price;
         this.user=user;
         this.restaurant=restaurant;
         this.callLocation = callLocation;
+        this.cart1 = cart1;
       
     }
 
@@ -78,6 +100,7 @@ public class CallingEntity {
     public UserEntity getUser(){
         return user;
     }
+
     public double getDistance(){
         return distance;
     }
@@ -85,6 +108,8 @@ public class CallingEntity {
     public void setDistance(Double distance) {
         this.distance=distance;
       }
+    }
+
     public RestaurantEntity getRestaurant(){
         return restaurant;
     }
@@ -93,9 +118,19 @@ public class CallingEntity {
         return callLocation;
     }
 
+    public CartEntity getCart1(){
+        return cart1;
+    }
+
+    public List<CartEntity> getCart(){
+        return cart;
+    }
+
 
     public List<CallingEntity> getNearCalls(){
         return this.getNearCalls();
+    public List<CallingEntity> getNearCalls(Double latitude, Double longitude){
+        return this.getNearCalls(latitude, longitude);
     }
  
 }

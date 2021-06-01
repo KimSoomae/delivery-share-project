@@ -1,4 +1,7 @@
 package com.graphql.deliveryShare2.sample.AboutCart;
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.graphql.deliveryShare2.sample.AboutUser.UserEntity;
+import com.graphql.deliveryShare2.sample.AboutCall.CallingEntity;
 
 import javax.persistence.Column;
 
@@ -31,6 +35,11 @@ public class CartEntity {
 
     @Column(name = "selectedmenu_seq",nullable=true)
     private int selectedmenuSeq;
+    //@Column(name = "selectedmenu_seq",nullable=true)
+    //private int selectedmenuSeq;
+
+    @Column(name = "delivery_tip",nullable=true)
+    private int delivery_tip;
 
     @Column(name = "user_seq",nullable=true)
     private int userSeq;
@@ -38,16 +47,36 @@ public class CartEntity {
     @ManyToOne
     @JoinColumn(name="selectedmenu_seq", nullable=false, insertable=false, updatable=false)
     private SelectedMenuEntity selectedmenu;
+    //@ManyToOne
+    //@JoinColumn(name="selectedmenu_seq", nullable=false, insertable=false, updatable=false)
+    //private SelectedMenuEntity selectedmenu;
 
     @ManyToOne
     @JoinColumn(name="user_seq", nullable=false, insertable=false, updatable=false)
     private UserEntity user;
 
 
-    public CartEntity(String request, SelectedMenuEntity selectedmenu, UserEntity user){
+    @Column(name = "call_seq",nullable=true)
+    private int callSeq;
+
+    private int total_cost;
+
+    @ManyToOne
+    @JoinColumn(name="call_seq", nullable=false, insertable=false, updatable=false)
+    private CallingEntity call;
+
+    @OneToMany(mappedBy = "cart") 
+    //private OptionItemEntity option_item;
+    private List<SelectedMenuEntity> selected_menu = new ArrayList<>();
+
+
+    public CartEntity(String request, UserEntity user, int delivery_tip, CallingEntity call){
         this.request=request;
         this.selectedmenu=selectedmenu;
+        //this.selectedmenu=selectedmenu;
         this.user=user;
+        this.delivery_tip = delivery_tip;
+        this.call=call;
     }
 
     public int getSeq(){
@@ -58,15 +87,26 @@ public class CartEntity {
         return user;
     }
 
-    public SelectedMenuEntity getSelectedmenu(){
-        return selectedmenu;
+    public CallingEntity getCall(){
+        return call;
     }
+
+    //public SelectedMenuEntity getSelectedmenu(){
+     //   return selectedmenu;
+    //}
 
     public void setUserSeq(int userSeq){
         this.userSeq=userSeq;
     }
 
-    public void setSelectedmenuSeq(int selectedmenuSeq){
-        this.selectedmenuSeq=selectedmenuSeq;
+    public void setTotalCost(int total_cost){
+        this.total_cost+=total_cost;
+    }
+    //public void setSelectedmenuSeq(int selectedmenuSeq){
+    //    this.selectedmenuSeq=selectedmenuSeq;
+    //}
+
+    public List<SelectedMenuEntity> getSelectedMenu(){
+        return selected_menu;
     }
 }

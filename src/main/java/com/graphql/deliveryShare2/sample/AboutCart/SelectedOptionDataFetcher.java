@@ -1,12 +1,12 @@
 package com.graphql.deliveryShare2.sample.AboutCart;
-import java.util.List;
-import java.util.ArrayList;
 
 import javax.transaction.Transactional;
 
-import com.graphql.deliveryShare2.sample.AboutCall.CallingRepository;
-import com.graphql.deliveryShare2.sample.AboutRestaurant.MenuEntity;
+
+import com.graphql.deliveryShare2.sample.AboutRestaurant.OptionItemEntity;
+import com.graphql.deliveryShare2.sample.AboutRestaurant.OptionItemRepository;
 import com.graphql.deliveryShare2.sample.AboutRestaurant.MenuRepository;
+import com.graphql.deliveryShare2.sample.AboutRestaurant.MenuEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,47 +16,48 @@ import graphql.schema.DataFetcher;
 
 
 @Component
-public class SelectedMenuDataFetcher{
-    @Autowired
-    private SelectedMenuRepository selectedMenuRepository;
-
-    @Autowired
-    private MenuRepository menuRepository;
-
-    @Autowired
-    private CallingRepository callingRepository;
-
-    @Autowired
-    private CartRepository cartRepository;
-
+public class SelectedOptionDataFetcher{
     @Autowired
     private SelectedOptionRepository selectedOptionRepository;
 
     @Autowired
-    public SelectedMenuDataFetcher(SelectedMenuRepository selectedMenuRepository, MenuRepository menuRepository, CallingRepository callingRepository, CartRepository cartRepository, SelectedOptionRepository selectedOptionRepository){
+    private SelectedMenuRepository selectedMenuRepository;
+
+    @Autowired
+    private OptionItemRepository optionItemRepository;
+
+    @Autowired
+    private MenuRepository menuRepository;
+
+
+    @Autowired
+    public SelectedOptionDataFetcher(SelectedOptionRepository selectedOptionRepository, SelectedMenuRepository selectedMenuRepository, OptionItemRepository optionItemRepository, MenuRepository menuRepository){
+      this.selectedOptionRepository=selectedOptionRepository;
       this.selectedMenuRepository=selectedMenuRepository;
+      this.optionItemRepository=optionItemRepository;
       this.menuRepository=menuRepository;
-      this.callingRepository=callingRepository;
-      this.cartRepository = cartRepository;
-      this.selectedOptionRepository = selectedOptionRepository;
      }
 
-    public DataFetcher<?> allSelectedMenus () {
+    public DataFetcher<?> allSelectedOptions () {
       return environment -> {
-        return selectedMenuRepository.findAll();
+        return selectedOptionRepository.findAll();
       };
     }
   
-    public DataFetcher<?> SelectedMenu () {
+    public DataFetcher<?> SelectedOption () {
       return environment -> {
         int seq = environment.getArgument("seq");
-        return selectedMenuRepository.findBySeq(seq);
+        return selectedOptionRepository.findBySeq(seq);
       };
     }
 
-     public CartEntity getCart(SelectedMenuEntity selectedMenuEntity){
-      return cartRepository.findBySeq(selectedMenuEntity.getCart().getSeq());
+     public SelectedMenuEntity getSelectedMenu(SelectedOptionEntity selectedOptionEntity){
+      return selectedMenuRepository.findBySeq(selectedOptionEntity.getSelectedMenu().getSeq());
      }
+
+     public OptionItemEntity getOptionItem(SelectedOptionEntity selectedOptionEntity){
+        return optionItemRepository.findBySeq(selectedOptionEntity.getOptionItem().getSeq());
+       }
 
     
 
@@ -110,12 +111,6 @@ public class SelectedMenuDataFetcher{
 
      //   return selectedMenuEntity;
    // }
-
-   public List<SelectedOptionEntity> getSelectedOption(SelectedMenuEntity selectedMenuEntity) {
-    return selectedOptionRepository.findAll();
-    
-
-  }
     
   
 }

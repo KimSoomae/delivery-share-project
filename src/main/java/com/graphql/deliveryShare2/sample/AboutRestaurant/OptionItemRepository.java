@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OptionItemRepository extends JpaRepository<OptionItemEntity, Long> {
     OptionItemEntity findBySeq(int seq);
+    //OptionItemEntity findByOptionItemSeq(int optionitemseq);
 }

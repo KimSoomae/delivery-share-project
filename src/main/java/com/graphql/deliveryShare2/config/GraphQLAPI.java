@@ -12,6 +12,8 @@ import com.graphql.deliveryShare2.sample.AboutCall.OrderDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.CartDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedMenuDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutCart.SelectedMenuRepository;
+import com.graphql.deliveryShare2.sample.AboutCart.SelectedOptionDataFetcher;
+import com.graphql.deliveryShare2.sample.AboutCart.SelectedOptionRepository;
 import com.graphql.deliveryShare2.sample.AboutChat.ChatDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutChat.MessageDataFetcher;
 import com.graphql.deliveryShare2.sample.AboutResReview.ReplyDataFetcher;
@@ -63,6 +65,7 @@ public class GraphQLAPI {
   @Autowired MenuDataFetcher menuDataFetcher;
   @Autowired MessageDataFetcher messageDataFetcher;
   @Autowired CallLocationDataFetcher callLocationDataFetcher;
+  @Autowired SelectedOptionDataFetcher selectedOptionDataFetcher;
   private GraphQL graphQL;
 
   @Value("classpath:static/graphql/schema.graphqls") 
@@ -109,12 +112,15 @@ public class GraphQLAPI {
       .dataFetcher("RunTime", dataFetcher2.RunTime())  
       .dataFetcher("allSelectedMenus", dataFetcher3.allSelectedMenus())  
       .dataFetcher("SelectedMenu", dataFetcher3.SelectedMenu())  
+      .dataFetcher("allSelectedOptions", selectedOptionDataFetcher.allSelectedOptions())  
+      .dataFetcher("SelectedOption", selectedOptionDataFetcher.SelectedOption())  
       .dataFetcher("allResReviews", dataFetcher4.allResReviews())  
       .dataFetcher("ResReview", dataFetcher4.ResReview())  
       .dataFetcher("allRestaurants", dataFetcher5.allRestaurants())  
       .dataFetcher("Restaurant", dataFetcher5.Restaurant())   
       .dataFetcher("allUserReviews", dataFetcher6.allUserReviews())
       .dataFetcher("UserReview", dataFetcher6.UserReview())  
+      .dataFetcher("UserReviewBySeq", dataFetcher6.UserReviewBySeq())  
       .dataFetcher("allOptions", optionDataFetcher.allOptions())
       .dataFetcher("Option", optionDataFetcher.Option()) 
       .dataFetcher("allOptionItems",optionItemDataFetcher.allOptionItems())
@@ -158,6 +164,8 @@ public class GraphQLAPI {
       .dataFetcher("createCart",cartDataFetcher.createCart())
       .dataFetcher("updateCart", cartDataFetcher.updateCart())
       .dataFetcher("deleteCart", cartDataFetcher.deleteCart())
+      .dataFetcher("createUserReview",dataFetcher6.createUserReview())
+
     )
     .build();
   }

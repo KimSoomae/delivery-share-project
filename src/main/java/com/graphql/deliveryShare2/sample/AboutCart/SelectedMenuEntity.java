@@ -1,4 +1,6 @@
 package com.graphql.deliveryShare2.sample.AboutCart;
+import java.util.List;
+import java.util.ArrayList;
 
 import java.util.Date;
 import java.util.Map;
@@ -39,19 +41,36 @@ public class SelectedMenuEntity {
     @JoinColumn(name="menu_seq", nullable=true, insertable=false, updatable=false)
     private MenuEntity menu;
 
+    @ManyToOne
+    @JoinColumn(name="cart_seq", nullable=true, insertable=false, updatable=false)
+    private CartEntity cart;
+
+    @OneToMany(mappedBy = "selected_menu")
+    private List<SelectedOptionEntity> selected_option = new ArrayList<>();
+
    
     public SelectedMenuEntity(int count, int menuSeq){
+    public SelectedMenuEntity(int count, int menuSeq, CartEntity cart){
         this.count=count;
         this.menuSeq=menuSeq;
+        this.cart = cart;
     }
 
     public int getMenuSeq(){
         return menuSeq;
     }
 
+    public int getCount(){
+        return count;
+    }
     public MenuEntity getMenu(){
         return menu;
  }
+
+ public CartEntity getCart(){
+    return cart;
+}
+
 
     public int getSeq(){
         return seq;
@@ -66,6 +85,10 @@ public class SelectedMenuEntity {
 
     public void setCount(int count){
         this.count=count;
+    }
+
+    public List<SelectedOptionEntity> getSelectedOption(){
+        return selected_option;
     }
 
     
