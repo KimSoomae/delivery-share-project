@@ -38,7 +38,7 @@ type OrderProps = {
   data: PropsOrder;
 };
 const TableContentOrder: VFC<OrderProps> = ({ data }) => {
-  const { seq, status } = data;
+  const { seq, status, sum, call } = data;
   const text = status === 'pending' ? '대기중' : status === 'completed' ? '완료' : '취소';
   const cellCount = 6;
   return (
@@ -47,16 +47,16 @@ const TableContentOrder: VFC<OrderProps> = ({ data }) => {
         #{seq}
       </TableCell>
       <TableCell flexStart={true} cellCount={cellCount} className="tw-wd">
-        위치
+        {call?.callLocation?.place || '외대 머나먼 곳 어딘가..'}
       </TableCell>
       <TableCell flexStart={true} cellCount={cellCount} className="tw-wd">
-        날짜
+        {call?.created_at || '2021-05-21'}
       </TableCell>
       <TableCell cellCount={cellCount} className="tn-wd">
-        유저
+        {call?.user?.ID || '익명'}
       </TableCell>
       <TableCell cellCount={cellCount} className="tn-wd">
-        가격
+        {sum || 90000}
       </TableCell>
       <TableCell cellCount={cellCount}>
         <span className={status}>{text}</span>
