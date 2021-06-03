@@ -33,16 +33,35 @@ export interface PropsOrder {
 
 type Call = {
   __typename: string;
+  request_R: string;
+  request_call: string;
   callLocation: CallLocation;
   price: number;
   user: User;
   calltext: string;
   created_at: string;
+  cart: Cart;
 };
 
 type CallLocation = {
   __typename: string;
   place: string;
+};
+
+type Cart = {
+  __typename: string;
+  selected_menu: SelectedMenu;
+};
+
+type SelectedMenu = {
+  __typename: string;
+  menu: Menu;
+};
+
+type Menu = {
+  __typename: string;
+  name: string;
+  price: number;
 };
 
 export interface PropsMenu {
