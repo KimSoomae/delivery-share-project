@@ -13,10 +13,19 @@ export const GET_RES_REVIEWS = gql`
   query {
     allResReviews {
       content
-      createdAt
+      user {
+        ID
+      }
       rate
-      image
+      createdAt
       seq
+      reply {
+        content
+      }
+      images {
+        image
+      }
+      resseq
     }
   }
 `;
