@@ -9,7 +9,7 @@ type ReviewProps = {
 };
 
 const TableContentReview: VFC<ReviewProps> = ({ data }) => {
-  const { images, user, content, createdAt, seq, resseq, rate, reply } = data;
+  const { user, rate, reply } = data;
   const classProperty = reply ? 'checked' : '';
   const cellCount = 5;
   return (
