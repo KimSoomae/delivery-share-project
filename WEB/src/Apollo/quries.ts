@@ -5,6 +5,18 @@ export const GET_ORDERS = gql`
     allOrders {
       seq
       status
+      sum
+      call {
+        callLocation {
+          place
+        }
+        price
+        user {
+          ID
+        }
+        calltext
+        created_at
+      }
     }
   }
 `;
@@ -26,20 +38,6 @@ export const GET_RES_REVIEWS = gql`
         image
       }
       resseq
-    }
-  }
-`;
-
-export const GET_RESTAURANT = gql`
-  query {
-    getRestaurant(seq: 1) {
-      dayoff
-      name
-      category
-      isopen
-      delivery_tip
-      introduction
-      min_order
     }
   }
 `;

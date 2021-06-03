@@ -24,28 +24,26 @@ type User = {
   ID: string;
 };
 
-type temporalMenuType = {
-  id: string;
-  name: string;
-  count: number;
-};
-
-type temporalRequestsType = {
-  id: string;
-  nickname: string;
-  content: string;
-};
-
 export interface PropsOrder {
-  date?: string;
-  location?: string;
+  seq: number;
   status: string;
-  menus?: temporalMenuType[];
-  requests?: temporalRequestsType[];
-  price?: string;
-  nickname?: string;
-  seq: string;
+  sum: number;
+  call: Call;
 }
+
+type Call = {
+  __typename: string;
+  callLocation: CallLocation;
+  price: number;
+  user: User;
+  calltext: string;
+  created_at: string;
+};
+
+type CallLocation = {
+  __typename: string;
+  place: string;
+};
 
 export interface PropsMenu {
   id: string;
