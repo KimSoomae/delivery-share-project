@@ -20,10 +20,14 @@ public class ResReviewDataFetcher {
     private ImageRepository imageRepository;
 
     @Autowired
-    public ResReviewDataFetcher(RestaurantRepository restaurantRepository, ResReviewRepository resReviewRepository, ImageRepository imageRepository){
+    private ReplyRepository replyRepository;
+
+    @Autowired
+    public ResReviewDataFetcher(RestaurantRepository restaurantRepository, ResReviewRepository resReviewRepository, ImageRepository imageRepository, ReplyRepository replyRepository){
       this.restaurantRepository=restaurantRepository;
       this.resReviewRepository=resReviewRepository;
       this.imageRepository=imageRepository;
+      this.replyRepository=replyRepository;
     }
     public DataFetcher<?> allResReviews () {
       return environment -> {

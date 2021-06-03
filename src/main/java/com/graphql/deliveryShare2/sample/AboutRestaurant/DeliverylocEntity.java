@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor(access=AccessLevel.PUBLIC)
 @Table(name = "delivery_loc")
 @Getter
+@IdClass(DeliverylocId.class)
 public class DeliverylocEntity implements Serializable {
     
     @Id

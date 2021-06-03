@@ -2,10 +2,13 @@ package com.graphql.deliveryShare2.sample.AboutRestaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import com.graphql.deliveryShare2.sample.AboutResReview.ResReviewEntity;
 import graphql.schema.DataFetcher;
 import java.util.List;
+import java.util.Objects;
 import java.util.ArrayList;
+import com.google.gson.Gson;
+import java.util.Arrays;
 @Component
 public class RestaurantDataFetcher {
     @Autowired
@@ -24,11 +27,15 @@ public class RestaurantDataFetcher {
     private LikesRepository likesRepository;
 
     @Autowired
-    public RestaurantDataFetcher(RestaurantRepository restaurantRepository, RunTimeRepository runTimeRepository, MenuRepository menuRepository, OptionRepository optionRepository){
+    private DeliverylocRepository deliverylocRepository;
+
+    @Autowired
+    public RestaurantDataFetcher(RestaurantRepository restaurantRepository, RunTimeRepository runTimeRepository, MenuRepository menuRepository, OptionRepository optionRepository, DeliverylocRepository deliverylocRepository){
       this.restaurantRepository=restaurantRepository;
       this.runTimeRepository=runTimeRepository;
       this.menuRepository = menuRepository;
       this.optionRepository=optionRepository;
+      this.deliverylocRepository=deliverylocRepository;
     }
 
     public RunTimeEntity getRunTime(RestaurantEntity restaurantEntity){
@@ -58,14 +65,101 @@ public class RestaurantDataFetcher {
         String category = environment.getArgument("category");
         String si = environment.getArgument("si");
         String dong = environment.getArgument("dong");
-        return restaurantRepository.getPossibleRestaurants(category,si,dong); 
+        List<RestaurantEntity> res =new ArrayList<RestaurantEntity>();
+        List<DeliverylocEntity> de = deliverylocRepository.findAllBySiAndDong(si,dong);
+        System.out.println("여기 주목!!"+de);
+        for (int i=0; i<de.size();i++){
+          int idx = de.get(i).getResseq();
+          RestaurantEntity re = restaurantRepository.findBySeq(idx);
+          System.out.println("여기 주목3!!"+re.getCategory());
+          System.out.println("카테고리는!!"+category);
+          System.out.println("이스오픈은!!"+re.getIsopen());
+          System.out.println(re.getCategory()==category);
+          System.out.println(re.getIsopen()==1);
+          if((Objects.equals(re.getCategory(),category))&&(re.getIsopen()==1)){
+            System.out.println("여기 들어왔따");
+            res.add(re);
+            //res.set(i,re);
+          }
+        }
+        System.out.println("여기 주목2!!"+res);
+        for (int i=0; i<res.size();i++){
+          RestaurantEntity re= res.get(i);
+          
+          List<MenuEntity> menus=new ArrayList<MenuEntity>();
+          for (int j=0; j<re.getMenus().size();j++){
+              if (re.getMenus().get(j).getBestmenu()==true){
+                  menus.add(re.getMenus().get(j));
+              }
+          }
+          re.setBestmenu(menus);
+          re.setReviewcount(re.getReviews().size());
+          
+      }
+        return res;
       };
     }
 
     public DataFetcher<?> getRestaurant () {
       return environment -> {
         int seq = environment.getArgument("seq");
-        return restaurantRepository.getRestaurant(seq); 
+        RestaurantEntity re = restaurantRepository.findBySeq(seq);
+        List<String> obj=Arrays.asList(re.getDayoff().split(","));
+        String json = new Gson().toJson(obj);
+        
+        re.setDayoff(json);
+        re.setSeperatable(false);
+        for (int i=0; i<re.getMenus().size();i++){
+            Boolean flag = re.getMenus().get(i).getIsSeperatable();
+            if (flag==true){
+                re.setSeperatable(true);
+                break;
+            }
+        }
+        int likecnt = re.getLikes().size();
+        re.setLikescount(likecnt);
+        re.setIsliked(false);
+        for (int i=0; i<likecnt; i++){
+            LikesEntity le = re.getLikes().get(i);
+            if (le.getUserseq()==10){
+                re.setIsliked(true);
+           }
+        }
+
+        for (int i=0; i<re.getReviews().size();i++){
+        
+          ResReviewEntity rre= re.getReviews().get(i);
+          
+          double rate=rre.getRate();
+          if (rate==5.0){
+              int cnt = re.getRate5count();
+              cnt++;
+              re.setRate5count(cnt);
+          }
+          else if ((rate<5.0)&&(rate>=4.0)){
+              int cnt = re.getRate4count();
+              cnt++;
+              re.setRate4count(cnt);
+          }
+          else if ((rate<4.0)&&(rate>=3.0)){
+              int cnt = re.getRate3count();
+              cnt++;
+              re.setRate3count(cnt);
+          }
+          else if ((rate<3.0)&&(rate>=2.0)){
+              int cnt = re.getRate2count();
+              cnt++;
+              re.setRate2count(cnt);
+          }
+          else if ((rate<2.0)&&(rate>=1.0)){
+              int cnt = re.getRate1count();
+              cnt++;
+              re.setRate1count(cnt);
+          }
+         
+          
+      }
+        return re; 
       };
       
     }
@@ -73,7 +167,6 @@ public class RestaurantDataFetcher {
     public DataFetcher<?> getLikedRestaurants() {
       return environment -> {
         int userseq = environment.getArgument("userseq");
-        //RestaurantEntity restaurantEntity = new RestaurantEntity();
         List<RestaurantEntity> likedR = new ArrayList<RestaurantEntity>();
         List<LikesEntity> likes = likesRepository.findAllByUserseq(userseq);
         System.out.println("라이크"+likes);

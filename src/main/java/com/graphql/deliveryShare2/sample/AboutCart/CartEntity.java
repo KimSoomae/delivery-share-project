@@ -33,8 +33,6 @@ public class CartEntity {
     @Column(name = "request",nullable=true)
     private String request;
 
-    @Column(name = "selectedmenu_seq",nullable=true)
-    private int selectedmenuSeq;
     //@Column(name = "selectedmenu_seq",nullable=true)
     //private int selectedmenuSeq;
 
@@ -44,9 +42,7 @@ public class CartEntity {
     @Column(name = "user_seq",nullable=true)
     private int userSeq;
 
-    @ManyToOne
-    @JoinColumn(name="selectedmenu_seq", nullable=false, insertable=false, updatable=false)
-    private SelectedMenuEntity selectedmenu;
+    
     //@ManyToOne
     //@JoinColumn(name="selectedmenu_seq", nullable=false, insertable=false, updatable=false)
     //private SelectedMenuEntity selectedmenu;
@@ -57,7 +53,7 @@ public class CartEntity {
 
 
     @Column(name = "call_seq",nullable=true)
-    private int callSeq;
+    private int call_seq;
 
     private int total_cost;
 
@@ -70,14 +66,14 @@ public class CartEntity {
     private List<SelectedMenuEntity> selected_menu = new ArrayList<>();
 
 
-    public CartEntity(String request, UserEntity user, int delivery_tip, CallingEntity call, int callSeq, int selectedmenuSeq, int userSeq, SelectedMenuEntity selectedmenu){
+    public CartEntity(String request, UserEntity user, int delivery_tip, CallingEntity call, int call_seq, int userSeq){
         this.request=request;
-        this.selectedmenuSeq=selectedmenuSeq;
-        this.selectedmenu=selectedmenu;
+        //this.selectedmenuSeq=selectedmenuSeq;
+        //this.selectedmenu=selectedmenu;
         this.user=user;
         this.delivery_tip = delivery_tip;
-        this.call=call;
-        this.callSeq=callSeq;
+        this.call=call; 
+        this.call_seq=call_seq;
         this.userSeq =userSeq;
 
     }
@@ -90,9 +86,9 @@ public class CartEntity {
         return user;
     }
 
-    public CallingEntity getCall(){
-        return call;
-    }
+    //public CallingEntity getCall(){
+    //    return call;
+    //}
 
     //public SelectedMenuEntity getSelectedmenu(){
      //   return selectedmenu;

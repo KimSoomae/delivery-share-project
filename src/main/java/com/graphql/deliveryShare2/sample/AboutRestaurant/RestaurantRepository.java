@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RestaurantRepository extends JpaRepository<RestaurantEntity, Long>, RestaurantCustomRepository {
     
-    List<RestaurantEntity> findByCategoryAndIsopen(String category, int isopen);
+    RestaurantEntity findByCategory(String category);
     RestaurantEntity findBySeq(int seq);
 
 }

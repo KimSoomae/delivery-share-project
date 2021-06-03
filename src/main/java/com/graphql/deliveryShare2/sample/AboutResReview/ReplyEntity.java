@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -44,7 +45,8 @@ public class ReplyEntity {
     @Column(name = "review_seq", nullable=false)
     private int reviewSeq;
 
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name="review_seq", nullable=true, insertable=false, updatable=false)
     private ResReviewEntity review;
 

@@ -50,14 +50,14 @@ public class CartDataFetcher {
 
     //}
 
-    public CallingEntity getCall(CartEntity cartEntity){
-      return callingRepository.findBySeq(cartEntity.getCall().getSeq());
-    }
+    //public CallingEntity getCall(CartEntity cartEntity){
+    //  return callingRepository.findBySeq(cartEntity.getCall().getSeq());
+    //}
 
     public DataFetcher<?> createCart(){
       return environment -> {
         CartEntity cartEntity = new CartEntity();
-        int selectedmenuSeq = environment.getArgument("selectedmenuSeq");
+        //int selectedmenuSeq = environment.getArgument("selectedmenuSeq");
         int userSeq = environment.getArgument("userSeq");
         
         cartEntity.setUserSeq(userSeq);

@@ -154,7 +154,7 @@ type ResReview {
     resseq: Int!
     restaurant: Restaurant!
     user: User
-    reply: Reply
+    reply: [Reply]
     
 }
 
@@ -244,6 +244,7 @@ type Reply{
     content:String!
     createdAt: DateTime!
     updatedAt: DateTime
+    #reviewSeq: Int!
 }
 
 type Report{
@@ -278,7 +279,7 @@ type Calling{
     restaurant: Restaurant
     callLocation: CallLocation
     distance: Float
-    cart1: Cart
+    #cart1: Cart
     cart: [Cart]
     request_R: String
     request_call:String
@@ -292,7 +293,7 @@ type Cart{
     seq: Int!
     request: String
     delivery_tip: Int
-    selectedmenu: SelectedMenu
+    #selectedmenu: SelectedMenu
     selected_menu: [SelectedMenu]
     user: User
     call:Calling

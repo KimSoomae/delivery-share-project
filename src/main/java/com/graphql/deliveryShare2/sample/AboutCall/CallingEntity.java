@@ -71,19 +71,26 @@ public class CallingEntity {
     @JoinColumn(name="callLocation_seq_fk_idx", nullable=false)
     private CallLocationEntity callLocation;
 
-    @ManyToOne
-    @JoinColumn(name="cart_seq", nullable=false)
-    private CartEntity cart1;
+    //@Column(name = "cart_seq", nullable=false)
+    //private int cart1;
+    //@ManyToOne
+    //@JoinColumn(name="cart_seq", nullable=false)
+    //private CartEntity cart1;
 
     @OneToMany(mappedBy = "call")
-    private List<CartEntity> cart = new ArrayList<>();
+    private List<CartEntity> cart= new ArrayList<>();
 
     
 
 
     private Double distance;
 
-    public CallingEntity(Date created_at, String expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, CartEntity cart1, String request_R, String request_call, int time_limit ){
+    
+//CartEntity cart1
+    public CallingEntity(List<CartEntity> cart){
+        this.cart=cart;
+    }
+    public CallingEntity(Date created_at, String expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, String request_R, String request_call, int time_limit ){
         
         this.created_at=created_at;
         this.expired_at=expired_at;
@@ -93,7 +100,7 @@ public class CallingEntity {
         this.user=user;
         this.restaurant=restaurant;
         this.callLocation = callLocation;
-        this.cart1 = cart1;
+        //this.cart1 = cart1;
         this.request_R = request_R;
         this.request_call = request_call;
         this.time_limit = time_limit;
@@ -127,9 +134,9 @@ public class CallingEntity {
         return callLocation;
     }
 
-    public CartEntity getCart1(){
-        return cart1;
-    }
+   // public CartEntity getCart1(){
+    //    return cart1;
+    //}
 
     public List<CartEntity> getCart(){
         return cart;
