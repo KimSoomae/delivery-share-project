@@ -5,7 +5,7 @@ import { PropsMenu } from '@utils/type';
 
 interface Props {
   setShowModal: (flag: boolean) => void;
-  setModalInfo: (content: string) => void;
+  setModalInfo: (content: PropsMenu) => void;
   data: PropsMenu;
 }
 

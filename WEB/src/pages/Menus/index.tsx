@@ -3,10 +3,11 @@ import MenuModal from '@components/MenuModal';
 import React, { useState, VFC } from 'react';
 import { Container, Grid, SubTitle } from './styles';
 import { dummyMenu } from './../../utils/dummyDB';
+import { PropsMenu } from '@utils/type';
 
 const Menus: VFC = () => {
   const [showMenuModal, setShowMenuModal] = useState(false);
-  const [menuInfo, setMenuInfo] = useState('');
+  const [menuInfo, setMenuInfo] = useState<PropsMenu>();
 
   return (
     <Container>

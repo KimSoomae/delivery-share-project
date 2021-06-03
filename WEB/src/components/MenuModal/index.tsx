@@ -9,10 +9,11 @@ import {
   SubmitButton,
 } from './styles';
 import { ModalBody } from './../OrderModal/styles';
+import { PropsMenu } from '@utils/type';
 
 interface Props {
   show: boolean;
-  data: any;
+  data: PropsMenu | undefined;
   setShowModal: (flag: boolean) => void;
 }
 
@@ -27,22 +28,22 @@ const MenuModal: VFC<Props> = ({ show, data, setShowModal }) => {
     <Modal>
       <div>
         <ModalHeader>
-          {data.category} {'>'} {data.name}
+          {data?.category} {'>'} {data?.name}
         </ModalHeader>
         <ModalBody>
           <ModalContent>
             <ModalItem>
-              <img src={data.src} alt={data.alt} width={300} />
+              <img src={data?.src} alt={data?.alt} width={300} />
             </ModalItem>
 
             <ModalDescription>
               <ModalItem>
                 <h2>메뉴소개</h2>
-                <p>{data.desc}</p>
+                <p>{data?.desc}</p>
               </ModalItem>
               <ModalItem>
                 <h2>메뉴가격</h2>
-                <p>{data.price}</p>
+                <p>{data?.price}</p>
               </ModalItem>
             </ModalDescription>
           </ModalContent>
