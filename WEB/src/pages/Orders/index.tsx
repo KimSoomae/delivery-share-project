@@ -5,10 +5,11 @@ import { Container } from './styles';
 import { useQuery } from '@apollo/client';
 import { GET_ORDERS } from '@Apollo/quries';
 import Spinner from '@utils/Spinner';
+import { PropsOrder } from '@utils/type';
 
 const Orders: VFC = () => {
   const [showOrderModal, setShowOrderModal] = useState(false);
-  const [orderData, setOrderInfo] = useState('');
+  const [orderData, setOrderInfo] = useState<PropsOrder>();
   const { loading, data } = useQuery(GET_ORDERS);
 
   return (

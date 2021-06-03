@@ -1,3 +1,4 @@
+import { PropsOrder } from '@utils/type';
 import React, { useCallback, VFC } from 'react';
 import {
   ButtonWrapper,
@@ -11,7 +12,7 @@ import {
 
 interface Props {
   show: boolean;
-  data: any;
+  data: PropsOrder | undefined;
   setShowModal: (flag: boolean) => void;
 }
 
@@ -25,28 +26,17 @@ const OrderModal: VFC<Props> = ({ show, data, setShowModal }) => {
   return (
     <Modal>
       <div>
-        <ModalHeader>주문번호 #{data.seq}</ModalHeader>
+        <ModalHeader>주문번호 #{data?.seq}</ModalHeader>
         <ModalBody>
           <ModalItem>
             <h1>주문메뉴</h1>
-            <div>
-              {data.menus?.length &&
-                data.menus.map((menu: { seq: string; name?: string; count?: number }) => (
-                  <p key={menu.seq}>
-                    {menu.name || '메뉴이름'} x {menu.count || 1}
-                  </p>
-                ))}
-            </div>
+            <div>{data?.call?.cart && <p>1</p>}</div>
           </ModalItem>
           <ModalItem>
             <h1>요청사항</h1>
             <div>
-              {data.requests?.length ? (
-                data.requests.map(
-                  (req: { id: string; content: string; nickname: string }) => (
-                    <p key={req.id}>{req.content}</p>
-                  ),
-                )
+              {data?.call?.request_R ? (
+                <p>{data?.call.request_R}</p>
               ) : (
                 <p>요청사항이 없습니다.</p>
               )}
@@ -55,13 +45,13 @@ const OrderModal: VFC<Props> = ({ show, data, setShowModal }) => {
           <ModalItem>
             <h1>시간</h1>
             <div>
-              <p>{data.date}</p>
+              <p>{data?.call?.created_at}</p>
             </div>
           </ModalItem>
           <ModalItem>
             <h1>장소</h1>
             <div>
-              <p>{data.location}</p>
+              <p>{data?.call?.callLocation?.place}</p>
             </div>
           </ModalItem>
           <ButtonWrapper>

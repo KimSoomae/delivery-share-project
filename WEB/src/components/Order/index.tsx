@@ -6,30 +6,30 @@ import {
   TableRow,
   TableWrapper,
 } from '@components/TableContents/styles';
-import { dummyOrder } from '@utils/dummyDB';
 import { MemoTableContentOrder } from '@components/TableContents';
 import Pagination from '@components/Pagination';
+import { v4 as uuid } from 'uuid';
+import { PropsOrder } from '@utils/type';
 
 interface Props {
-  orders: [any];
+  orders: PropsOrder[];
   setShowModal: (flag: boolean) => void;
-  setModalInfo: (content: string) => void;
+  setModalInfo: (content: PropsOrder) => void;
 }
 
 const PER_PAGE = 7;
 
 const Order: VFC<Props> = ({ orders, setShowModal, setModalInfo }) => {
+  const reversed = orders.slice().reverse();
   const rest = orders.length % PER_PAGE;
   const pages = ((orders.length / PER_PAGE) >> 0) + (rest ? 1 : 0);
   const [page, setPage] = useState(1);
   const [curOrders, setCurOrders] = useState(
-    orders.slice((page - 1) * PER_PAGE, page * PER_PAGE),
+    reversed.slice((page - 1) * PER_PAGE, page * PER_PAGE),
   );
 
-  console.log(orders, curOrders);
-
   useEffect(() => {
-    setCurOrders(orders.slice((page - 1) * PER_PAGE, page * PER_PAGE));
+    setCurOrders(reversed.slice((page - 1) * PER_PAGE, page * PER_PAGE));
   }, [page]);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const Order: VFC<Props> = ({ orders, setShowModal, setModalInfo }) => {
 
       <TableBody>
         {curOrders.map(data => (
-          <TableRow key={data.id} onClick={() => onOpenModal(data)}>
+          <TableRow key={uuid()} onClick={() => onOpenModal(data)}>
             <MemoTableContentOrder data={data} />
           </TableRow>
         ))}
