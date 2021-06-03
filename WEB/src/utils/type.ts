@@ -1,12 +1,28 @@
 export interface PropsReview {
   seq: string;
-  src?: string;
-  alt?: string;
+  createdAt: string;
+  images?: Image[];
   content: string;
-  nickname?: string;
   rate: number;
-  comment?: string;
+  reply?: Reply;
+  resseq: number;
+  user?: User;
 }
+
+type Image = {
+  __typename: string;
+  image: string;
+};
+
+type Reply = {
+  __typename: string;
+  content: string;
+};
+
+type User = {
+  __typename: string;
+  ID: string;
+};
 
 type temporalMenuType = {
   id: string;
