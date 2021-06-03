@@ -40,7 +40,7 @@ const ReviewWrapper: VFC<Props> = ({ reviews }) => {
     <TableWrapper>
       <TableBody>
         {curReviews.map((data: PropsReview) => (
-          <Review key={data.seq} data={data} />
+          <Review key={data.seq} info={data} />
         ))}
       </TableBody>
       <Pagination pages={pages} onClickPage={onClickPage} />

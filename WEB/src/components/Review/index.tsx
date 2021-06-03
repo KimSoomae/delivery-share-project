@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, VFC } from 'react';
+import React, { useCallback, useRef, useState, VFC } from 'react';
 import {
   Input,
   FormWrapper,
@@ -7,21 +7,29 @@ import {
   Comment,
   Divider,
   UserReview,
+  ReviewImage,
 } from '../Review/styles';
 import { TableRow } from '@components/TableContents/styles';
 import { MemoTableContentReview } from '@components/TableContents';
 import { PropsReview } from '@utils/type';
 import { VscReply } from 'react-icons/vsc';
+import { useMutation } from '@apollo/client';
+import { POST_REPLY } from '@Apollo/mutations';
+import { v4 as uuid } from 'uuid';
 
 type Props = {
-  data: PropsReview;
+  info: PropsReview;
 };
 
-const Review: VFC<Props> = ({ data }) => {
+const Review: VFC<Props> = ({ info }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const childRef = useRef<HTMLFormElement>(null);
-  const comment = data?.reply;
-  const commentSeq = data.seq;
+  const comment = info?.reply;
+  const commentSeq = info.seq;
+  const images = info?.images;
+
+  const [writeReply, { data }] = useMutation(POST_REPLY);
+  const [reply, setReply] = useState('');
 
   const onOpenCollapse = useCallback(() => {
     if (parentRef.current === null || childRef.current === null) return;
@@ -35,19 +43,34 @@ const Review: VFC<Props> = ({ data }) => {
     }
   }, []);
 
-  const handleSubmit = (e: React.MouseEvent) => {
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setReply(e.target.value);
+  };
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    console.log(commentSeq);
+
+    writeReply({
+      variables: {
+        content: reply,
+        resReviewSeq: +commentSeq,
+      },
+    });
+
+    console.log(POST_REPLY, commentSeq, data);
   };
 
   return (
     <>
       <TableRow onClick={onOpenCollapse}>
-        <MemoTableContentReview data={data} />
+        <MemoTableContentReview data={info} />
       </TableRow>
       <FormWrapper ref={parentRef}>
         <ReviewForm ref={childRef}>
-          <UserReview>{data.content}</UserReview>
+          {images?.map(image => (
+            <ReviewImage key={uuid()} src={image.image} />
+          ))}
+          <UserReview>{info.content}</UserReview>
           {comment ? (
             <>
               <VscReply />
@@ -56,7 +79,7 @@ const Review: VFC<Props> = ({ data }) => {
           ) : (
             <>
               <VscReply />
-              <Input />
+              <Input onChange={e => handleInput(e)} />
               <Divider />
               <SubmitButton onClick={e => handleSubmit(e)}>등록</SubmitButton>
             </>

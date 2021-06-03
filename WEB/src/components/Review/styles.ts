@@ -27,6 +27,13 @@ export const UserReview = styled.div`
   }
 `;
 
+export const ReviewImage = styled.img`
+  object-fit: cover;
+  border-radius: 10px;
+  width: 200px;
+  margin-right: 10px;
+`;
+
 export const ReviewForm = styled.form`
   /* display: flex;
   flex-direction: column; */
