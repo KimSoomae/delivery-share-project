@@ -7,9 +7,10 @@ import { BsCheckCircle } from 'react-icons/bs';
 type ReviewProps = {
   data: PropsReview;
 };
+
 const TableContentReview: VFC<ReviewProps> = ({ data }) => {
-  const { src, alt, content, nickname, rate, comment } = data;
-  const classProperty = comment ? 'checked' : '';
+  const { images, user, content, createdAt, seq, resseq, rate, reply } = data;
+  const classProperty = reply ? 'checked' : '';
   const cellCount = 5;
   return (
     <>
@@ -17,13 +18,10 @@ const TableContentReview: VFC<ReviewProps> = ({ data }) => {
         <BsCheckCircle className={'check-icon ' + classProperty} />
       </TableCell>
       <TableCell cellCount={cellCount}>
-        <img src={src || '../images/profile-default.png'} alt={alt} />
+        <img src={'../images/profile-default.png'} alt="유저 리뷰 이미지" />
       </TableCell>
-      {/* <TableCell cellCount={cellCount} className="content">
-        <p>{content}</p>
-      </TableCell> */}
       <TableCell cellCount={cellCount} className="nickname">
-        <p>{nickname || 'user nickname'}</p>
+        <p>{user?.ID || '익명'}</p>
       </TableCell>
       <TableCell cellCount={cellCount}>
         <MakeStars stars={rate} />

@@ -16,10 +16,12 @@ import { VscReply } from 'react-icons/vsc';
 type Props = {
   data: PropsReview;
 };
+
 const Review: VFC<Props> = ({ data }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const childRef = useRef<HTMLFormElement>(null);
-  const comment = data?.comment;
+  const comment = data?.reply;
+  const commentSeq = data.seq;
 
   const onOpenCollapse = useCallback(() => {
     if (parentRef.current === null || childRef.current === null) return;
@@ -35,7 +37,7 @@ const Review: VFC<Props> = ({ data }) => {
 
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log(e);
+    console.log(commentSeq);
   };
 
   return (
@@ -49,7 +51,7 @@ const Review: VFC<Props> = ({ data }) => {
           {comment ? (
             <>
               <VscReply />
-              <Comment>{comment}</Comment>
+              <Comment>{comment.content}</Comment>
             </>
           ) : (
             <>
