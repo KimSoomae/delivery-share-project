@@ -180,6 +180,13 @@ public class GraphQLAPI {
       .dataFetcher("toggleLikeRestaurant",likesDataFetcher.toggleLikeRestaurant())
       .dataFetcher("writeReply", replyDataFetcher.writeReply())
       .dataFetcher("updateReply", replyDataFetcher.updateReply())
+      .dataFetcher("createUserReview",dataFetcher6.createUserReview())
+      .dataFetcher("updateUserReview",dataFetcher6.updateUserReview())
+      .dataFetcher("deleteUserReview",dataFetcher6.deleteUserReview())
+      .dataFetcher("sendMessage", messageDataFetcher.sendMessage())
+      .dataFetcher("quitChat", chatDataFetcher.quitChat())
+      .dataFetcher("createCall", callingDataFetcher.createCall())
+      .dataFetcher("deleteCall",callingDataFetcher.deleteCall())
     )
     .scalar(ExtendedScalars.DateTime)
     .build();

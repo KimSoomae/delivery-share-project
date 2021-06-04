@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface OptionRepository extends JpaRepository<OptionEntity, Long> {
     List<OptionEntity> findByMenuseq(int menuseq);
     OptionEntity findBySeq(int seq);
+    OptionEntity findByMenuSeqAndCategory(int menuId, String category);
 }

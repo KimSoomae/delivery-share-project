@@ -2,6 +2,12 @@ package com.graphql.deliveryShare2.sample.AboutUser;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,14 +36,14 @@ public class UserReviewEntity {
 
     
 
-    @Column(name = "createdAt", nullable=false)
-    private String createdAt;
+    @Column(name = "created_at", nullable=false)
+    private OffsetDateTime created_at;
 
-    @Column(name = "updatedAt", nullable=true)
-    private String updatedAt;
+    @Column(name = "updated_at", nullable=true)
+    private OffsetDateTime updated_at;
 
     @Column(name = "rate", nullable=true)
-    private float rate;
+    private double rate;
 
     @Column(name = "content", nullable=true)
     private String content;
@@ -57,9 +63,9 @@ public class UserReviewEntity {
     @JoinColumn(name="toseq", nullable=true, insertable=false, updatable=false )
     private UserEntity to;
 
-    public UserReviewEntity(String createdAt, String updatedAt, float rate, String content, int toseq, int fromseq){
-        this.createdAt=createdAt;
-        this.updatedAt=updatedAt;
+    public UserReviewEntity(OffsetDateTime created_at, OffsetDateTime updated_at, double rate, String content, int toseq, int fromseq){
+        this.created_at=created_at;
+        this.updated_at=updated_at;
         this.rate=rate;
         this.content=content;
         this.toseq=toseq;
@@ -78,9 +84,9 @@ public class UserReviewEntity {
         this.content=content;
     }
 
-    public void setRate(float rate){
+    public void setRate(double rate){
         this.rate=rate;
-    }
+    } 
 
 
     public void setFromseq(int fromseq){
@@ -91,6 +97,15 @@ public class UserReviewEntity {
         this.toseq=toseq;
     }
 
+    public void setCreatedAt(){
+        LocalDateTime dateTime = LocalDateTime.now();
+        ZoneOffset offset = ZoneOffset.UTC;
+        this.created_at = dateTime.atOffset(offset);
+    }
+    public void setUpdatedAt(){
+        LocalDateTime dateTime = LocalDateTime.now();
+        ZoneOffset offset = ZoneOffset.UTC;
+        this.updated_at = dateTime.atOffset(offset);
+    }
+
 }
-
-

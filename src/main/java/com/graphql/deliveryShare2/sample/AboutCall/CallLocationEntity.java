@@ -42,5 +42,18 @@ public class CallLocationEntity {
         return seq;
     }
 
+    public void setPlace(String place){
+            this.place = place;
+    }
+
+    public void setLatitude(Double latitude){
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude){
+        this.longitude = longitude;
+    }
+
+
 }
 
