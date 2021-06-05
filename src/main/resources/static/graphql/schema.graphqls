@@ -24,6 +24,9 @@ type Query {
     #사용자의 위치(시,동)에 배달 가능한 지역 & 오픈된 곳만 카테고리별로 레스토랑 띄우기
     getRestaurants(category: String!, si: String!, dong: String!) : [Restaurant]
     getRestaurant(seq: Int!) : Restaurant
+    
+    #키워드 검색
+    searchRestaurant(si: String!, dong: String!, keyword: String!) : [Restaurant]
 
     allUserReviews : [UserReview]
     UserReview(toseq: Int!) : [UserReview]
@@ -95,6 +98,8 @@ type Mutation{
     toggleLikeRestaurant(resseq: Int!, isLiked: Boolean!):Boolean
     writeReply(resReviewSeq: Int!, content: String!):Boolean 
     updateReply(replySeq: Int!, content: String!): Reply
+
+    reportUser(chatId: Int!, userId: Int!, content:String, reason: String!): Report!
     createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview
     updateUserReview(content:String, rate:Float, seq: Int!): UserReview
     deleteUserReview(seq:Int!): Boolean
@@ -265,8 +270,10 @@ type Reply{
 type Report{
     seq: Int!
     reason: String!
-    createdAt: String!
-    updatedAt: String
+    content: String
+    createdAt: DateTime!
+    updatedAt: DateTime
+    isSolved: Boolean!
 }
 
 type UserReview{

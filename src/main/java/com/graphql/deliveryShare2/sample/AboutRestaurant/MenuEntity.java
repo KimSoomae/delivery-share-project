@@ -102,4 +102,8 @@ public class MenuEntity {
     public void setOptions(List<OptionEntity> options){
         this.options=options;
     }
+
+    public int getResseq(){
+        return resseq;
+    }
 }
