@@ -40,7 +40,7 @@ type Call = {
   user: User;
   calltext: string;
   created_at: string;
-  cart: Cart;
+  cart: Cart[];
 };
 
 type CallLocation = {
@@ -50,7 +50,7 @@ type CallLocation = {
 
 type Cart = {
   __typename: string;
-  selected_menu: SelectedMenu;
+  selected_menu: SelectedMenu[];
 };
 
 type SelectedMenu = {
