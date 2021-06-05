@@ -21,6 +21,7 @@ export const Modal = styled.div`
     width: 80%;
     height: 80%;
     max-width: 1200px;
+    overflow-y: auto;
   }
 `;
 
@@ -36,15 +37,23 @@ export const ModalBody = styled.div`
   flex: 1;
   padding: 2rem;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const ModalItem = styled.div`
+  h1 {
+    margin: 0 0 10px 0;
+  }
+
   & > div {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
 
     & > p {
-      width: 45%;
+      width: 85%;
       padding: 1rem;
       border-radius: 1rem;
       background-color: #fff6e0;
@@ -53,10 +62,6 @@ export const ModalItem = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  position: absolute;
-  left: 0;
-  bottom: 2rem;
-  padding: 0 2rem;
   display: flex;
   width: 100%;
   justify-content: space-between;
