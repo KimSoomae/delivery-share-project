@@ -52,13 +52,16 @@ public class ChatEntity {
     private List<MessageEntity> messages = new ArrayList<>();
 
     @Column(name = "participant1", nullable=true)
-    private int participant1;
+    private Integer participant1seq;
 
     @Column(name = "participant2", nullable=true)
-    private int participant2;
+    private Integer participant2seq;
 
     @Column(name = "last_message", nullable=true)
     private Integer last_message;
+
+    @Column(name = "is_active", nullable=true)
+    private Boolean is_active;
 
 
     @OneToOne
@@ -67,22 +70,23 @@ public class ChatEntity {
 
     @ManyToOne
     @JoinColumn(name="participant1", nullable=true,insertable=false, updatable=false)
-    private UserEntity participants1;
+    private UserEntity participant1;
 
     @ManyToOne
     @JoinColumn(name="participant2", nullable=true,insertable=false, updatable=false)
-    private UserEntity participants2;
+    private UserEntity participant2;
 
 
 
-    public ChatEntity(OffsetDateTime created_at, OffsetDateTime updated_at,int participant1, int participant2, Integer last_message, UserEntity participants1, UserEntity participants2){
+    public ChatEntity(OffsetDateTime created_at, OffsetDateTime updated_at,Integer participant1seq, Integer participant2seq, Integer last_message, UserEntity participant1, UserEntity participant2, Boolean is_active){
         this.created_at=created_at;
         this.updated_at=updated_at;
-        this.participant1 = participant1;
-        this.participant2 = participant2;
+        this.participant1seq = participant1seq;
+        this.participant2seq = participant2seq;
         this.last_message=last_message;
-        this.participants1=participants1;
-        this.participants2 = participants2;
+        this.participant1=participant1;
+        this.participant2 = participant2;
+        this.is_active = is_active;
     }
 
     public List<MessageEntity> getMessage(){
@@ -94,25 +98,45 @@ public class ChatEntity {
     }
 
     public UserEntity getParticipants1(){
-        return participants1;
+        return participant1;
     }
 
     public UserEntity getParticipants2(){
-        return participants2;
+        return participant2;
+    }
+
+    public Integer getParticipant2seq(){
+        return participant2seq;
+    }
+
+    public boolean getIsActive(){
+        return is_active;
     }
 
    
 
-    public void setParticipant1(int participant1){
-        this.participant1=participant1;
+    public void setParticipant1(int participant1seq){
+        this.participant1seq=participant1seq;
     }
 
-    public void setParticipant2(int participant2){
-        this.participant2=participant2;
+    public void setParticipant2(int participant2seq){
+        this.participant2seq=participant2seq;
     }
 
     public void setLastMessage(Integer last_message){
         this.last_message=last_message;
+    }
+
+    public void setParticipant1Null(){
+        this.participant1seq = (Integer)null; 
+    }
+
+    public void setIsActive(){
+        this.is_active = false; 
+    }
+
+    public void setIsActive1(){
+        this.is_active = true; 
     }
 
     public void setCreatedAt(){
