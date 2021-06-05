@@ -38,9 +38,20 @@ type OrderProps = {
   data: PropsOrder;
 };
 const TableContentOrder: VFC<OrderProps> = ({ data }) => {
-  const { seq, status, sum, call } = data;
+  const { seq, status, call } = data;
   const text = status === 'pending' ? '대기중' : status === 'completed' ? '완료' : '취소';
   const cellCount = 6;
+
+  const menus = call?.cart;
+  const selectedMenu = menus?.map(menu => menu.selected_menu);
+
+  const [menuA, menuB] = selectedMenu || [null, null];
+  const myMenu1 = menuA?.map(menu => menu.menu);
+  const myMenu2 = menuB?.map(menu => menu.menu);
+
+  const price =
+    myMenu1?.reduce((a, b) => a + b.price, 0) + myMenu2?.reduce((a, b) => a + b.price, 0);
+
   return (
     <>
       <TableCell flexStart={true} cellCount={cellCount}>
@@ -50,13 +61,13 @@ const TableContentOrder: VFC<OrderProps> = ({ data }) => {
         {call?.callLocation?.place || '외대 머나먼 곳 어딘가..'}
       </TableCell>
       <TableCell flexStart={true} cellCount={cellCount} className="tw-wd">
-        {call?.created_at || '2021-05-21'}
+        {call?.created_at.substr(0, 10) || '2021-05-21'}
       </TableCell>
       <TableCell cellCount={cellCount} className="tn-wd">
         {call?.user?.ID || '익명'}
       </TableCell>
       <TableCell cellCount={cellCount} className="tn-wd">
-        {sum || 90000}
+        {price.toLocaleString('ko-KR')}
       </TableCell>
       <TableCell cellCount={cellCount}>
         <span className={status}>{text}</span>
