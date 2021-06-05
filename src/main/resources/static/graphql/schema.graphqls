@@ -110,6 +110,8 @@ type Mutation{
     createChat(participant2:Int!): Chat
     createOrder(callSeq: Int!, cart: String!, requestToRestaurant: String):Boolean
     WriteRestaurantReview(order_seq: Int, content:String, rate:Float): ResReview
+    checkOrder(seq:Int!, isApproved: Boolean, deliveryTime: Int! ): Order
+    updateCall(seq:Int!):Calling
     
 }
 
@@ -302,7 +304,7 @@ type Calling{
     distance: Float
     #cart1: Cart
     cart: [Cart]
-    request_R: String
+    request: String
     request_call:String
     time_limit: Int
     user_seq: Long

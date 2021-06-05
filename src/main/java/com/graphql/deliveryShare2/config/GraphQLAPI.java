@@ -190,6 +190,8 @@ public class GraphQLAPI {
       .dataFetcher("createChat", chatDataFetcher.createChat())
       .dataFetcher("createOrder", orderDataFetcher.createOrder())
       .dataFetcher("WriteRestaurantReview", dataFetcher4.WriteRestaurantReview())
+      .dataFetcher("checkOrder", orderDataFetcher.checkOrder())
+      .dataFetcher("updateCall", callingDataFetcher.updateCall())
     )
     .scalar(ExtendedScalars.DateTime)
     .build();

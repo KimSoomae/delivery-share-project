@@ -75,6 +75,11 @@ public class OrderEntity {
         this.call_seq=callseq;
     }
 
+    public void setDelivery_time(int delivery_time){
+        this.delivery_time=delivery_time;
+    }
+
+
     public int getCallSeq(){
         return call_seq;
     }
