@@ -77,6 +77,8 @@ type Query {
     
     getUser(seq:Long!): User
     getLikedRestaurants: [Restaurant]
+    getMyCall:Calling
+
 }
 
 type Mutation{

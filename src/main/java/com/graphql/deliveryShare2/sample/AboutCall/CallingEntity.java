@@ -128,6 +128,13 @@ public class CallingEntity {
     public int getResSeq(){
         return res_seq;
     }
+    public String getStatus(){
+        return status;
+    }
+
+    public Long getUserSeq(){
+        return user_seq;
+    }
 
     public UserEntity getUser(){
         return user;

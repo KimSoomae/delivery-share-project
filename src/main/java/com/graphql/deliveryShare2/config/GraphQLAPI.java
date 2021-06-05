@@ -162,6 +162,8 @@ public class GraphQLAPI {
       .dataFetcher("getUser",dataFetcher1.getUser())
       .dataFetcher("getLikedRestaurants", dataFetcher5.getLikedRestaurants())  
       .dataFetcher("searchRestaurant", dataFetcher5.searchRestaurant())
+      .dataFetcher("getMyCall",callingDataFetcher.getMyCall())
+
       
       
       
