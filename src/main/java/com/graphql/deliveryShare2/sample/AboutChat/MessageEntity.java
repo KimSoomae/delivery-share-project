@@ -44,13 +44,13 @@ public class MessageEntity {
     @Column(name = "is_read", nullable=true)
     private Boolean is_read;
 
-    @Column(name = "created_at", nullable=false)
+    @Column(name = "created_at", nullable=true)
     private OffsetDateTime created_at;
 
     @Column(name = "updated_at", nullable=true)
     private OffsetDateTime updated_at;
 
-    @Column(name = "text",nullable=false)
+    @Column(name = "text",nullable=true)
     private String text;
  
     @Column(name = "toseq", nullable=true)
@@ -59,6 +59,9 @@ public class MessageEntity {
 
     @Column(name = "fromseq", nullable=true)
     private int fromseq;
+
+    @Column(name = "chat_seq", nullable=true)
+    private int chat_seq;
 
     
 
@@ -71,12 +74,11 @@ public class MessageEntity {
     private UserEntity to;
 
     @ManyToOne
-    @JoinColumn(name="chat_seq", nullable=true, insertable=false, updatable=false )
+    @JoinColumn(name="chat_seq", nullable=true, insertable=false, updatable=false)
     private ChatEntity chat;
 
 
-
-    public MessageEntity(Boolean is_read, OffsetDateTime created_at, OffsetDateTime updated_at, String text, int fromseq, int toseq, UserEntity from,  UserEntity to){
+    public MessageEntity(Boolean is_read, OffsetDateTime created_at, OffsetDateTime updated_at, String text, int fromseq, int toseq, UserEntity from,  UserEntity to, int chat_seq){
         this.is_read=is_read;
         this.created_at=created_at;
         this.updated_at=updated_at;
@@ -85,6 +87,7 @@ public class MessageEntity {
         this.toseq = toseq;
         this.from = from;
         this.to = to;
+        this.chat_seq=chat_seq;
     }
 
     public UserEntity getFromUser(){
@@ -101,6 +104,10 @@ public class MessageEntity {
 
     public void setToseq(int toseq){
         this.toseq=toseq;
+    }
+
+    public void setChatSeq(int chat_seq){
+        this.chat_seq=chat_seq;
     }
 
     public void setFromseq(int fromseq){

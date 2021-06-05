@@ -1,5 +1,7 @@
 package com.graphql.deliveryShare2.sample.AboutUser;
 
+import com.graphql.deliveryShare2.sample.AboutChat.ChatEntity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import com.graphql.deliveryShare2.sample.AboutChat.*;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -69,10 +71,6 @@ public class UserEntity {
     private List<UserReviewEntity> reviews = new ArrayList<>();
 
     int orderCounts;
-
-    @ManyToOne
-    @JoinColumn(name="chat_seq", nullable=true, insertable=false, updatable=false )
-    private ChatEntity chat;
 
    
     public UserEntity(String ID, String name, String password, String created_at, String updated_at, String status, Float rate){

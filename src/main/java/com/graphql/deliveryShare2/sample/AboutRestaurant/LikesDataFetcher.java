@@ -14,7 +14,7 @@ public class LikesDataFetcher {
         return environment -> {
           int resseq = environment.getArgument("resseq");
           Boolean isLiked = environment.getArgument("isLiked");
-          int userseq = environment.getArgument("userseq");
+          int userseq = 10;
           Long likes = likesRepository.countByResseqAndUserseq(resseq,userseq);
           System.out.println("라이크개수"+likes);
 

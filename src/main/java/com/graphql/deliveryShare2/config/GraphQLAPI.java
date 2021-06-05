@@ -154,7 +154,7 @@ public class GraphQLAPI {
       .dataFetcher("getNearCalls",callingDataFetcher.getNearCalls())
       .dataFetcher("allCallLocations",callLocationDataFetcher.allCallLocations())
       .dataFetcher("CallLocation",callLocationDataFetcher.CallLocation())
-      .dataFetcher("getResReviews", dataFetcher4.getResReviews())   
+      .dataFetcher("getResReviews", dataFetcher5.getResReviews())   
       .dataFetcher("getReviewCount", dataFetcher4.getReviewCount())   
       .dataFetcher("getRestaurant", dataFetcher5.getRestaurant())  
       .dataFetcher("OptionByMenu", optionDataFetcher.OptionByMenu()) 
@@ -187,6 +187,7 @@ public class GraphQLAPI {
       .dataFetcher("quitChat", chatDataFetcher.quitChat())
       .dataFetcher("createCall", callingDataFetcher.createCall())
       .dataFetcher("deleteCall",callingDataFetcher.deleteCall())
+      .dataFetcher("createChat", chatDataFetcher.createChat())
     )
     .scalar(ExtendedScalars.DateTime)
     .build();

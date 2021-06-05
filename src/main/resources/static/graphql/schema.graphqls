@@ -66,14 +66,14 @@ type Query {
     allCallLocations: [CallLocation]
     CallLocation: CallLocation
     #식당마다 모든 리뷰들 보여주기
-    getResReviews(resseq:Int):[ResReview]
+    getResReviews(resseq:Int): Restaurant
 
     #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
     getReviewCount(resseq: Int): Restaurant
 
     
     getUser(seq:Long!): User
-    getLikedRestaurants(userseq:Int): [Restaurant]
+    getLikedRestaurants: [Restaurant]
 }
 
 type Mutation{
@@ -92,16 +92,18 @@ type Mutation{
 
     
     login(email:String!, password:String!):LoginUser
-    toggleLikeRestaurant(resseq: Int!, isLiked: Boolean, userseq: Int!):Boolean
+    toggleLikeRestaurant(resseq: Int!, isLiked: Boolean!):Boolean
     writeReply(resReviewSeq: Int!, content: String!):Boolean 
     updateReply(replySeq: Int!, content: String!): Reply
     createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview
     updateUserReview(content:String, rate:Float, seq: Int!): UserReview
     deleteUserReview(seq:Int!): Boolean
-    sendMessage(text:String, toseq:Int!, fromseq:Int!, chat_seq:Int): Message
-    quitChat(seq:Int!):Boolean
     createCall(cart: String!, location: String!, requestToUser: String, requestToRes: String, timeLimit: Int ):Boolean
     deleteCall:Boolean
+    sendMessage(text:String, toseq:Int!, fromseq:Int!, chat_seq:Int): Message
+    quitChat(seq:Int!):Boolean
+    createChat(participant2:Int!): Chat
+    
 }
 
 
@@ -152,7 +154,9 @@ type SelectedOption{
     selected_menu: [SelectedMenu]
 
 }
+
 type ResReview {
+    
     seq : ID!
     createdAt : DateTime
     updatedAt : String
@@ -162,7 +166,7 @@ type ResReview {
     resseq: Int!
     restaurant: Restaurant!
     user: User
-    reply: [Reply]
+    reply: Reply
     
 }
 
@@ -324,7 +328,7 @@ type Menu{
     description: String
     price: Int!
     isAvailable: Boolean!
-    bestmenu: Boolean!
+    isBestmenu: Boolean!
     resseq: Int!
     restaurant: Restaurant
     options:[Option]
@@ -336,9 +340,14 @@ type Chat{
     created_at: String
     updated_at: String
     last_message: Int
+    participant1: Int
+    participant2:Int
+ 
     messages: [Message]
     lastMessage: Message
-    participants: [User]
+    participants1: User
+    participants2: User
+    
 }
 
 type Message{
