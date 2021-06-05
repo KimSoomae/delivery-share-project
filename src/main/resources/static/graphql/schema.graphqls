@@ -98,11 +98,13 @@ type Mutation{
     createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview
     updateUserReview(content:String, rate:Float, seq: Int!): UserReview
     deleteUserReview(seq:Int!): Boolean
-    createCall(cart: String!, location: String!, requestToUser: String, requestToRes: String, timeLimit: Int ):Boolean
+    createCall(cart: String!, address: String!, latitude: Float!, longitude: Float!, requestToUser: String, requestToRes: String, timeLimit: Int ):Calling
     deleteCall:Boolean
     sendMessage(text:String, toseq:Int!, fromseq:Int!, chat_seq:Int): Message
     quitChat(seq:Int!):Boolean
     createChat(participant2:Int!): Chat
+    createOrder(callSeq: Int!, cart: String!, requestToRestaurant: String):Boolean
+    WriteRestaurantReview(order_seq: Int, content:String, rate:Float): ResReview
     
 }
 
@@ -167,6 +169,7 @@ type ResReview {
     restaurant: Restaurant!
     user: User
     reply: Reply
+    user_seq:Int
     
 }
 
@@ -239,9 +242,9 @@ type Order{
     seq:Int!
     createdAt: String!
     updatedAt: String
-    deliveryTime: String!
+    #deliveryTime: String!
     created_at: String
-    delivery_time: Int!
+    delivery_time: Int
     call_seq: Int
     sum: Int
     canWriteRestaurantReview: Boolean
@@ -280,9 +283,9 @@ type UserReview{
 }
 
 type Calling{
-    seq: Int!
-    created_at: String
-    expired_at: String
+    seq: Int
+    created_at: DateTime
+    expired_at: DateTime
     status: String!
     calltext: String
     price: Int!

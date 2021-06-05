@@ -122,6 +122,10 @@ public class CallingEntity {
         return seq;
     }
 
+    public int getResSeq(){
+        return res_seq;
+    }
+
     public UserEntity getUser(){
         return user;
     }
