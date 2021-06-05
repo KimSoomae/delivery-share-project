@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState, VFC } from 'react';
+import React, { useCallback, useEffect, useRef, useState, VFC } from 'react';
 import {
   Input,
   FormWrapper,
@@ -24,12 +24,17 @@ type Props = {
 const Review: VFC<Props> = ({ info }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const childRef = useRef<HTMLFormElement>(null);
-  const comment = info?.reply;
   const commentSeq = info.seq;
   const images = info?.images;
 
   const [writeReply, { data }] = useMutation(POST_REPLY);
-  const [reply, setReply] = useState('');
+  const [comment, setComment] = useState(info.reply?.content);
+  const [input, setInput] = useState('');
+  const [refresh, setRefresh] = useState(comment ? true : false);
+
+  useEffect(() => {
+    if (input) setComment(input);
+  }, [refresh]);
 
   const onOpenCollapse = useCallback(() => {
     if (parentRef.current === null || childRef.current === null) return;
@@ -44,7 +49,7 @@ const Review: VFC<Props> = ({ info }) => {
   }, []);
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setReply(e.target.value);
+    setInput(e.target.value);
   };
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -52,18 +57,18 @@ const Review: VFC<Props> = ({ info }) => {
 
     writeReply({
       variables: {
-        content: reply,
+        content: input,
         resReviewSeq: +commentSeq,
       },
     });
 
-    console.log(POST_REPLY, commentSeq, data);
+    setRefresh(prev => !prev);
   };
 
   return (
     <>
       <TableRow onClick={onOpenCollapse}>
-        <MemoTableContentReview data={info} />
+        <MemoTableContentReview data={info} refresh={refresh} />
       </TableRow>
       <FormWrapper ref={parentRef}>
         <ReviewForm ref={childRef}>
@@ -74,7 +79,7 @@ const Review: VFC<Props> = ({ info }) => {
           {comment ? (
             <>
               <VscReply />
-              <Comment>{comment.content}</Comment>
+              <Comment>{comment}</Comment>
             </>
           ) : (
             <>

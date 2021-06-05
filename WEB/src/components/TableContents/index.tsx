@@ -6,11 +6,12 @@ import { BsCheckCircle } from 'react-icons/bs';
 
 type ReviewProps = {
   data: PropsReview;
+  refresh: boolean;
 };
 
-const TableContentReview: VFC<ReviewProps> = ({ data }) => {
+const TableContentReview: VFC<ReviewProps> = ({ data, refresh }) => {
   const { user, rate, reply } = data;
-  const classProperty = reply ? 'checked' : '';
+  const classProperty = reply || refresh ? 'checked' : '';
   const cellCount = 5;
   return (
     <>
