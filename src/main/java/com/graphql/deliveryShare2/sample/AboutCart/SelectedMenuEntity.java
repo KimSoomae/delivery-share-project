@@ -41,6 +41,9 @@ public class SelectedMenuEntity {
     @JoinColumn(name="menu_seq", nullable=true, insertable=false, updatable=false)
     private MenuEntity menu;
 
+    @Column(name="cart_seq",nullable=true)
+    private int cartSeq;
+
     @ManyToOne
     @JoinColumn(name="cart_seq", nullable=true, insertable=false, updatable=false)
     private CartEntity cart;
@@ -84,6 +87,10 @@ public class SelectedMenuEntity {
 
     public void setCount(int count){
         this.count=count;
+    }
+
+    public void setCartseq(int cartseq){
+        this.cartSeq=cartseq;
     }
 
     public List<SelectedOptionEntity> getSelectedOption(){

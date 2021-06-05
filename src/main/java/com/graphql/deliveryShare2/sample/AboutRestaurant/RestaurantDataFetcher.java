@@ -3,6 +3,8 @@ package com.graphql.deliveryShare2.sample.AboutRestaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.graphql.deliveryShare2.sample.AboutResReview.ResReviewEntity;
+import com.graphql.deliveryShare2.sample.AboutResReview.ResReviewRepository;
+
 import graphql.schema.DataFetcher;
 import java.util.List;
 import java.util.Objects;
@@ -31,12 +33,16 @@ public class RestaurantDataFetcher {
     private DeliverylocRepository deliverylocRepository;
 
     @Autowired
-    public RestaurantDataFetcher(RestaurantRepository restaurantRepository, RunTimeRepository runTimeRepository, MenuRepository menuRepository, OptionRepository optionRepository, DeliverylocRepository deliverylocRepository){
+    private ResReviewRepository resReviewRepository;
+
+    @Autowired
+    public RestaurantDataFetcher(RestaurantRepository restaurantRepository, RunTimeRepository runTimeRepository, MenuRepository menuRepository, OptionRepository optionRepository, DeliverylocRepository deliverylocRepository, ResReviewRepository resReviewRepository){
       this.restaurantRepository=restaurantRepository;
       this.runTimeRepository=runTimeRepository;
       this.menuRepository = menuRepository;
       this.optionRepository=optionRepository;
       this.deliverylocRepository=deliverylocRepository;
+      this.resReviewRepository=resReviewRepository;
     }
 
     public RunTimeEntity getRunTime(RestaurantEntity restaurantEntity){
@@ -89,7 +95,7 @@ public class RestaurantDataFetcher {
           
           List<MenuEntity> menus=new ArrayList<MenuEntity>();
           for (int j=0; j<re.getMenus().size();j++){
-              if (re.getMenus().get(j).getBestmenu()==true){
+              if (re.getMenus().get(j).getIsBestmenu()==true){
                   menus.add(re.getMenus().get(j));
               }
           }
@@ -126,7 +132,13 @@ public class RestaurantDataFetcher {
                 re.setIsliked(true);
            }
         }
-
+        List<MenuEntity> menus=new ArrayList<MenuEntity>();
+          for (int j=0; j<re.getMenus().size();j++){
+              if (re.getMenus().get(j).getIsBestmenu()==true){
+                  menus.add(re.getMenus().get(j));
+              }
+          }
+        re.setBestmenu(menus);
         for (int i=0; i<re.getReviews().size();i++){
         
           ResReviewEntity rre= re.getReviews().get(i);
@@ -167,7 +179,7 @@ public class RestaurantDataFetcher {
 
     public DataFetcher<?> getLikedRestaurants() {
       return environment -> {
-        int userseq = environment.getArgument("userseq");
+        int userseq =10;
         List<RestaurantEntity> likedR = new ArrayList<RestaurantEntity>();
         List<LikesEntity> likes = likesRepository.findAllByUserseq(userseq);
         System.out.println("라이크"+likes);
@@ -226,6 +238,13 @@ public class RestaurantDataFetcher {
       };
     }
    
+
+    public DataFetcher<?> getResReviews () {
+      return environment -> {
+        int resseq = environment.getArgument("resseq");
+        return restaurantRepository.findBySeq(resseq);
+      };
+    }
    
  
 }

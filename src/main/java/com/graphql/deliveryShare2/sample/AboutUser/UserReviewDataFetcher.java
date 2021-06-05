@@ -2,6 +2,7 @@ package com.graphql.deliveryShare2.sample.AboutUser;
 
 import javax.transaction.Transactional;
 
+
 import com.graphql.deliveryShare2.sample.AboutUser.UserRepository;
 import com.graphql.deliveryShare2.sample.AboutUser.UserEntity;
 
@@ -55,28 +56,54 @@ public class UserReviewDataFetcher {
     }
 
     public UserEntity getToUser(UserReviewEntity userreviewEntity) {
-      return userRepository.findBySeq(userreviewEntity.getUser().getSeq());
+      return userRepository.findBySeq(userreviewEntity.getToUser().getSeq());
     }
 
 
-    //public DataFetcher<?> createUserReview(){
-    //  return environment -> {
-    //    UserReviewEntity userReviewEntity = new UserReviewEntity();
-    //    String content=environment.getArgument("content");
-    //    float rate = environment.getArgument("rate");
-    //    int fromseq = environment.getArgument("fromseq");
-    //    int toseq = environment.getArgument("toseq");
+    public DataFetcher<?> createUserReview(){
+      return environment -> {
+        UserReviewEntity userReviewEntity = new UserReviewEntity();
+        String content=environment.getArgument("content");
+        double rate = environment.getArgument("rate");
+        int fromseq = environment.getArgument("fromseq");
+        int toseq = environment.getArgument("toseq"); 
 
         
-      //  userReviewEntity.setContent(content);
-      //  userReviewEntity.setRate(rate);
-      //  userReviewEntity.setFromseq(fromseq);
-      //  userReviewEntity.setToseq(toseq);
+        userReviewEntity.setContent(content);
+        userReviewEntity.setRate(rate);
+        userReviewEntity.setFromseq(fromseq);
+        userReviewEntity.setToseq(toseq);
+        userReviewEntity.setCreatedAt();
 
-       // userReviewRepository.save(userReviewEntity);
+        userReviewRepository.save(userReviewEntity);
 
-        //return userReviewEntity;
-      //};
-    //}
+        return userReviewEntity;
+      };
+    }
+
+    public DataFetcher<?> updateUserReview(){
+      return environment -> {
+        int seq=environment.getArgument("seq");
+        UserReviewEntity userReviewEntity= userReviewRepository.findBySeq(seq);
+        String content = environment.getArgument("content");
+        double rate = environment.getArgument("rate");
+      
+        userReviewEntity.setContent(content);
+        userReviewEntity.setRate(rate);
+        userReviewEntity.setUpdatedAt();
+
+        userReviewRepository.save(userReviewEntity);
+
+        return userReviewEntity;
+      };
+    }
+
+    public DataFetcher<?> deleteUserReview(){
+      return environment -> {
+        int seq=environment.getArgument("seq");
+        userReviewRepository.deleteBySeq(seq);
+        return true;
+      };
+    }
 
 }

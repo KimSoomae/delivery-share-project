@@ -108,4 +108,12 @@ public class CartEntity {
     public List<SelectedMenuEntity> getSelectedMenu(){
         return selected_menu;
     }
+
+    public void setDeliverytip(int deliverytip){
+        this.delivery_tip=deliverytip;
+    }
+
+    public void setCallseq(int callseq){
+        this.call_seq=callseq;
+    }
 }

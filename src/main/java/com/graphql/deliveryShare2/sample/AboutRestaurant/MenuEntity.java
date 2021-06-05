@@ -49,7 +49,7 @@ public class MenuEntity {
     private Boolean isAvailable;
 
     @Column(name = "bestmenu", nullable=true)
-    private Boolean bestmenu;
+    private Boolean isBestmenu;
 
     @Column(name = "resseq", nullable=false)
     private int resseq;
@@ -71,13 +71,13 @@ public class MenuEntity {
         this.options=options;
     }
 
-    public MenuEntity(String name, String thumbnail, String description, int price, Boolean isAvailable, Boolean bestmenu, int resseq, Boolean isSeperatable){
+    public MenuEntity(String name, String thumbnail, String description, int price, Boolean isAvailable, Boolean isBestmenu, int resseq, Boolean isSeperatable){
         this.name=name;
         this.thumbnail=thumbnail;
         this.description=description;
         this.price=price;
         this.isAvailable = isAvailable;
-        this.bestmenu=bestmenu;
+        this.isBestmenu=isBestmenu;
         this.resseq=resseq;
         this.isSeperatable=isSeperatable;
     }

@@ -45,13 +45,14 @@ public class ReplyEntity {
     @Column(name = "review_seq", nullable=false)
     private int reviewSeq;
 
-
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="review_seq", nullable=true, insertable=false, updatable=false)
     private ResReviewEntity review;
 
-    public ReplyEntity(String content){
+    public ReplyEntity(String content, ResReviewEntity review, int reviewSeq){
         this.content=content;
+        this.review=review;
+        this.reviewSeq = reviewSeq;
     }
 
     public void setContent(String content){

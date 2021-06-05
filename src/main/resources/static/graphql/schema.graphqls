@@ -69,14 +69,14 @@ type Query {
     allCallLocations: [CallLocation]
     CallLocation: CallLocation
     #식당마다 모든 리뷰들 보여주기
-    getResReviews(resseq:Int):[ResReview]
+    getResReviews(resseq:Int): Restaurant
 
     #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
     getReviewCount(resseq: Int): Restaurant
 
     
     getUser(seq:Long!): User
-    getLikedRestaurants(userseq:Int): [Restaurant]
+    getLikedRestaurants: [Restaurant]
 }
 
 type Mutation{
@@ -93,14 +93,24 @@ type Mutation{
     #장바구니 삭제
     deleteCart(seq:Int!):Boolean
 
-    createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview!
+    
     login(email:String!, password:String!):LoginUser
-    toggleLikeRestaurant(resseq: Int!, isLiked: Boolean, userseq: Int!):Boolean
+    toggleLikeRestaurant(resseq: Int!, isLiked: Boolean!):Boolean
     writeReply(resReviewSeq: Int!, content: String!):Boolean 
     updateReply(replySeq: Int!, content: String!): Reply
 
     reportUser(chatId: Int!, userId: Int!, content:String, reason: String!): Report!
+    createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview
+    updateUserReview(content:String, rate:Float, seq: Int!): UserReview
+    deleteUserReview(seq:Int!): Boolean
+    createCall(cart: String!, location: String!, requestToUser: String, requestToRes: String, timeLimit: Int ):Boolean
+    deleteCall:Boolean
+    sendMessage(text:String, toseq:Int!, fromseq:Int!, chat_seq:Int): Message
+    quitChat(seq:Int!):Boolean
+    createChat(participant2:Int!): Chat
+    
 }
+
 
 type LoginUser{
     token: String
@@ -149,7 +159,9 @@ type SelectedOption{
     selected_menu: [SelectedMenu]
 
 }
+
 type ResReview {
+    
     seq : ID!
     createdAt : DateTime
     updatedAt : String
@@ -159,7 +171,7 @@ type ResReview {
     resseq: Int!
     restaurant: Restaurant!
     user: User
-    reply: [Reply]
+    reply: Reply
     
 }
 
@@ -263,8 +275,8 @@ type Report{
 
 type UserReview{
     seq : Int!
-    createdAt: String!
-    updatedAt: String
+    created_at: String
+    updated_at: String
     rate : Float!
     content : String
     toseq : Int
@@ -273,7 +285,6 @@ type UserReview{
     to:User
     user: User
 }
-
 
 type Calling{
     seq: Int!
@@ -291,6 +302,7 @@ type Calling{
     request_R: String
     request_call:String
     time_limit: Int
+    user_seq: Long
 
 
     
@@ -323,7 +335,7 @@ type Menu{
     description: String
     price: Int!
     isAvailable: Boolean!
-    bestmenu: Boolean!
+    isBestmenu: Boolean!
     resseq: Int!
     restaurant: Restaurant
     options:[Option]
@@ -332,15 +344,30 @@ type Menu{
 
 type Chat{
     seq: Int!
-    createdAt: String!
-    updatedAt: String!
+    created_at: String
+    updated_at: String
+    last_message: Int
+    participant1: Int
+    participant2:Int
+ 
+    messages: [Message]
+    lastMessage: Message
+    participants1: User
+    participants2: User
+    
 }
 
 type Message{
     seq: Int!
-    isRead: Boolean!
-    createdAt: String!
-    updatedAt: String!
+    is_read: Boolean
+    created_at: String
+    updated_at: String
+    text: String
+    toseq: Int
+    fromseq: Int
+    chat_seq: Int
+    to: User
+    from: User
 }
 
 type ResLocation{

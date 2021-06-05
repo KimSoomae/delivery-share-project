@@ -62,6 +62,14 @@ public class SelectedOptionEntity {
        return optionitem_seq;
     }
 
+    public void setSelectedmenuSeq(int seq){
+        this.selectedmenu_seq = seq;
+    }
+
+    public void setOptionItemSeq(int seq){
+        this.optionitem_seq = seq;
+    }
+
     
 
 }

@@ -1,5 +1,7 @@
 package com.graphql.deliveryShare2.sample.AboutUser;
 
+import com.graphql.deliveryShare2.sample.AboutChat.ChatEntity;
+
 import java.util.ArrayList;
 import java.util.List;
 

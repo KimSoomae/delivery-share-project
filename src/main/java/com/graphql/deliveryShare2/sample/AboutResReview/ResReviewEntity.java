@@ -63,10 +63,11 @@ public class ResReviewEntity {
     //@JoinColumn(name="reply_seq", nullable=true, insertable=false, updatable=false)
     //private ReplyEntity reply;
 
-    @OneToMany(mappedBy = "review")
-    private List<ReplyEntity> reply = new ArrayList<>();
+     @OneToOne(mappedBy = "review")
+    private ReplyEntity reply;
 
-    public ResReviewEntity(OffsetDateTime createdAt, OffsetDateTime updatedAt, String image, String content, float rate, int resseq, List<ImageEntity> images, List<ReplyEntity> reply){
+
+    public ResReviewEntity(OffsetDateTime createdAt, OffsetDateTime updatedAt, String image, String content, float rate, int resseq, List<ImageEntity> images, ReplyEntity reply){
         this.createdAt=createdAt;
         this.updatedAt=updatedAt;
         this.image=image;
@@ -75,6 +76,7 @@ public class ResReviewEntity {
         this.resseq=resseq;
         this.images=images;
         this.reply=reply;
+       
     }
     public RestaurantEntity getRestaurant(){
         return restaurant;
@@ -88,8 +90,8 @@ public class ResReviewEntity {
         return images;
     }
 
-    public List<ReplyEntity> getReplies(){
-        return reply;
-    }
+    //public ReplyEntity getReply(){
+    //    return reply;
+   // }
   
 }

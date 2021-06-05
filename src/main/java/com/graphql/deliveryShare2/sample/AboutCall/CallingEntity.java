@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 
 import com.graphql.deliveryShare2.sample.AboutRestaurant.RestaurantEntity;
@@ -34,12 +37,11 @@ public class CallingEntity {
 
 
     @Column(name = "created_at", nullable=false)
-    @Temporal(TemporalType.DATE)
-    private Date created_at;
+    private OffsetDateTime created_at;
 
 
     @Column(name = "expired_at", nullable=false)
-    private String expired_at;
+    private OffsetDateTime expired_at;
 
     @Column(name = "request_R", nullable=false)
     private String request_R;
@@ -59,16 +61,25 @@ public class CallingEntity {
     @Column(name = "price", nullable=false)
     private int price;
 
+    @Column(name="user_seq_fk_idx",nullable=true)
+    private Long user_seq;
+
+    @Column(name="restaurant_seq_fk_idx",nullable=true)
+    private int res_seq;
+
+    @Column(name="callLocation_seq_fk_idx",nullable=true)
+    private int location_seq;
+
     @ManyToOne
-    @JoinColumn(name="user_seq_fk_idx", nullable=false)
+    @JoinColumn(name="user_seq_fk_idx", nullable=false, insertable=false, updatable = false)
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name="restaurant_seq_fk_idx", nullable=false)
+    @JoinColumn(name="restaurant_seq_fk_idx", nullable=false, insertable=false, updatable = false)
     private RestaurantEntity restaurant;
 
     @ManyToOne
-    @JoinColumn(name="callLocation_seq_fk_idx", nullable=false)
+    @JoinColumn(name="callLocation_seq_fk_idx", nullable=false, insertable=false, updatable = false)
     private CallLocationEntity callLocation;
 
     //@Column(name = "cart_seq", nullable=false)
@@ -90,7 +101,7 @@ public class CallingEntity {
     public CallingEntity(List<CartEntity> cart){
         this.cart=cart;
     }
-    public CallingEntity(Date created_at, String expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, String request_R, String request_call, int time_limit ){
+    public CallingEntity(OffsetDateTime created_at, OffsetDateTime expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, String request_R, String request_call, int time_limit, Long user_seq ){
         
         this.created_at=created_at;
         this.expired_at=expired_at;
@@ -104,9 +115,7 @@ public class CallingEntity {
         this.request_R = request_R;
         this.request_call = request_call;
         this.time_limit = time_limit;
-
-
-      
+        this.user_seq=user_seq;
     }
 
     public int getSeq(){
@@ -144,6 +153,46 @@ public class CallingEntity {
 
     public List<CallingEntity> getNearCalls(Double latitude, Double longitude){
         return this.getNearCalls(latitude, longitude);
+    }
+
+    public void setCreatedAt(){
+        LocalDateTime dateTime = LocalDateTime.now();
+        ZoneOffset offset = ZoneOffset.UTC;
+        this.created_at = dateTime.atOffset(offset);
+    }
+
+    public void setExpiredAt(int time){
+        LocalDateTime dateTime = LocalDateTime.now();
+        ZoneOffset offset = ZoneOffset.UTC;
+        this.expired_at = dateTime.atOffset(offset).plusMinutes(time);
+    }
+
+    public void setStatus(String status){
+        this.status=status;
+    }
+
+    public void setRequestR(String request){
+        this.request_R=request;
+    }
+    
+    public void setRequestCall(String request){
+        this.request_call=request;
+    }
+
+    public void setTimelimit(int timelimit){
+        this.time_limit=timelimit;
+    }
+
+    public void setUserseq(Long userseq){
+        this.user_seq = userseq;
+    }
+
+    public void setResseq(int resseq){
+        this.res_seq=resseq;
+    }
+
+    public void setLocationseq(int locationseq){
+        this.location_seq=locationseq;
     }
  
 }
