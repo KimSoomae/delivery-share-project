@@ -6,6 +6,7 @@ import com.graphql.deliveryShare2.sample.AboutResReview.ResReviewEntity;
 import graphql.schema.DataFetcher;
 import java.util.List;
 import java.util.Objects;
+import java.util.zip.DataFormatException;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import java.util.Arrays;
@@ -178,6 +179,50 @@ public class RestaurantDataFetcher {
         }
   
         return likedR;
+      };
+    }
+
+    public DataFetcher<?> searchRestaurant(){
+      return environment -> {
+        String keyword = environment.getArgument("keyword");
+        System.out.println("키워드" + keyword);
+        //식당이름에 키워드 포함 레스토랑들
+        List<RestaurantEntity> resBymenu = restaurantRepository.findAllByNameContaining(keyword);
+        List<MenuEntity> menuBykey = menuRepository.findAllByNameContaining(keyword);
+        //결과 리스트
+        List<RestaurantEntity> resultRes = new ArrayList<RestaurantEntity>();
+
+        //위치(si, dong)에 맞는 레스토랑 리스트들
+        String si = environment.getArgument("si");
+        String dong = environment.getArgument("dong");
+        List<DeliverylocEntity> deloc = deliverylocRepository.findAllBySiAndDong(si,dong);
+        List<RestaurantEntity> resByloc = new ArrayList<RestaurantEntity>(); 
+        
+        for(int i = 0; i< deloc.size();i++){
+          int idx = deloc.get(i).getResseq();
+          RestaurantEntity reloc = restaurantRepository.findBySeq(idx);
+          if(reloc.getIsopen() == 1){
+            resByloc.add(reloc);
+          }
+        }
+
+        //메뉴에 keyword 포함 레스토랑들
+        for(int i = 0; i< menuBykey.size(); i++){
+          int idx = menuBykey.get(i).getResseq();
+
+          System.out.println("레스"+restaurantRepository.findBySeq(idx));
+          RestaurantEntity resbb = restaurantRepository.findBySeq(idx);
+          
+          if (resultRes.contains(resbb)){
+            i++;
+            continue;
+          }
+          else if((resbb.getIsopen() == 1) && resByloc.contains(resbb)){
+            resultRes.add(resbb);
+          }
+        }
+        
+        return resultRes;
       };
     }
    

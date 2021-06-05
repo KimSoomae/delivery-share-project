@@ -161,7 +161,7 @@ public class GraphQLAPI {
       .dataFetcher("MenuByRes",menuDataFetcher.MenuByRes())
       .dataFetcher("getUser",dataFetcher1.getUser())
       .dataFetcher("getLikedRestaurants", dataFetcher5.getLikedRestaurants())  
-      
+      .dataFetcher("searchRestaurant", dataFetcher5.searchRestaurant())
       
       
       
