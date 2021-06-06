@@ -63,11 +63,11 @@ public class ReportEntity {
     private ChatEntity chat;
     
     @ManyToOne
-    @JoinColumn(name="reporter", nullable=true,insertable=false, updatable=false)
+    @JoinColumn(name="reporter_seq", nullable=true,insertable=false, updatable=false)
     private UserEntity reporter;
 
     @ManyToOne
-    @JoinColumn(name="reported", nullable=true,insertable=false, updatable=false)
+    @JoinColumn(name="reported_seq", nullable=true,insertable=false, updatable=false)
     private UserEntity reported;
     
     public ReportEntity(String reason, String content, Boolean isSolved, OffsetDateTime created_at, OffsetDateTime updated_at, int chatseq, UserEntity reporter, UserEntity reported){
