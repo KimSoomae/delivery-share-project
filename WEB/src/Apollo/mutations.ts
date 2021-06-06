@@ -5,3 +5,11 @@ export const POST_REPLY = gql`
     writeReply(content: $content, resReviewSeq: $resReviewSeq)
   }
 `;
+
+export const UPDATE_ORDER = gql`
+  mutation checkOrder($deliveryTime: Int!, $isApproved: Boolean!, $seq: Int!) {
+    checkOrder(deliveryTime: $deliveryTime, isApproved: $isApproved, seq: $seq) {
+      status
+    }
+  }
+`;

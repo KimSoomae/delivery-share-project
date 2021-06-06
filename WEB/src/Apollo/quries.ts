@@ -7,8 +7,6 @@ export const GET_ORDERS = gql`
       status
       sum
       call {
-        request_R
-        request_call
         callLocation {
           place
         }
@@ -19,6 +17,7 @@ export const GET_ORDERS = gql`
         calltext
         created_at
         cart {
+          request
           selected_menu {
             menu {
               name
