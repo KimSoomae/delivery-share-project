@@ -69,7 +69,9 @@ type Query {
     allCallLocations: [CallLocation]
     CallLocation: CallLocation
     #식당마다 모든 리뷰들 보여주기
-    getResReviews(resseq:Int): Restaurant
+    getResReviews(resseq:Int, sortingmethod:String): [ResReview]
+
+    #getResReviews(resseq:Int): Restaurant
 
     #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
     getReviewCount(resseq: Int): Restaurant
@@ -77,6 +79,8 @@ type Query {
     
     getUser(seq:Long!): User
     getLikedRestaurants: [Restaurant]
+    getMyCall:Calling
+
 }
 
 type Mutation{
@@ -104,11 +108,15 @@ type Mutation{
     createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview
     updateUserReview(content:String, rate:Float, seq: Int!): UserReview
     deleteUserReview(seq:Int!): Boolean
-    createCall(cart: String!, location: String!, requestToUser: String, requestToRes: String, timeLimit: Int ):Boolean
+    createCall(cart: String!, address: String!, latitude: Float!, longitude: Float!, requestToUser: String, requestToRes: String, timeLimit: Int ):Calling
     deleteCall:Boolean
     sendMessage(text:String, toseq:Int!, fromseq:Int!, chat_seq:Int): Message
-    quitChat(seq:Int!):Boolean
-    createChat(participant2:Int!): Chat
+    quitChat(seq:Int):Boolean
+    createChat(participant2seq:Int): Chat
+    createOrder(callSeq: Int!, cart: String!, requestToRestaurant: String):Boolean
+    WriteRestaurantReview(order_seq: Int, content:String, rate:Float): ResReview
+    checkOrder(seq:Int!, isApproved: Boolean, deliveryTime: Int! ): Order
+    updateCall(seq:Int!):Calling
     
 }
 
@@ -173,6 +181,7 @@ type ResReview {
     restaurant: Restaurant!
     user: User
     reply: Reply
+    user_seq:Int
     
 }
 
@@ -245,9 +254,9 @@ type Order{
     seq:Int!
     createdAt: String!
     updatedAt: String
-    deliveryTime: String!
+    #deliveryTime: String!
     created_at: String
-    delivery_time: Int!
+    delivery_time: Int
     call_seq: Int
     sum: Int
     canWriteRestaurantReview: Boolean
@@ -291,9 +300,9 @@ type UserReview{
 }
 
 type Calling{
-    seq: Int!
-    created_at: String
-    expired_at: String
+    seq: Int
+    created_at: DateTime
+    expired_at: DateTime
     status: String!
     calltext: String
     price: Int!
@@ -303,7 +312,7 @@ type Calling{
     distance: Float
     #cart1: Cart
     cart: [Cart]
-    request_R: String
+    request: String
     request_call:String
     time_limit: Int
     user_seq: Long
@@ -351,21 +360,22 @@ type Chat{
     created_at: String
     updated_at: String
     last_message: Int
-    participant1: Int
-    participant2:Int
+    participant1seq: Int
+    participant2seq:Int
  
     messages: [Message]
     lastMessage: Message
-    participants1: User
-    participants2: User
+    participant1: User
+    participant2: User
+    is_active: Boolean
     
 }
 
 type Message{
     seq: Int!
     is_read: Boolean
-    created_at: String
-    updated_at: String
+    created_at: DateTime
+    updated_at: DateTime
     text: String
     toseq: Int
     fromseq: Int

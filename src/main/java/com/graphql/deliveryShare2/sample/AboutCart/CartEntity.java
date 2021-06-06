@@ -116,4 +116,9 @@ public class CartEntity {
     public void setCallseq(int callseq){
         this.call_seq=callseq;
     }
+
+    public void setRequest(String request){
+        this.request=request;
+    }
+
 }

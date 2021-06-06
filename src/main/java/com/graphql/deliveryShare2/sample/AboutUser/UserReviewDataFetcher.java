@@ -39,6 +39,7 @@ public class UserReviewDataFetcher {
       return environment -> {
         int toseq = environment.getArgument("toseq");
         return userReviewRepository.findByToseq(toseq);
+        //return userReviewRepository.findByToseqOrderByRateDesc(toseq);
       };
     }
 

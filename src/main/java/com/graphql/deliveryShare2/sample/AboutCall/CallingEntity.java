@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 import com.graphql.deliveryShare2.sample.AboutRestaurant.RestaurantEntity;
 import com.graphql.deliveryShare2.sample.AboutUser.UserEntity;
+
+import org.springframework.scheduling.annotation.Scheduled;
+
 import com.fasterxml.jackson.module.kotlin.ReflectionCache.BooleanTriState.True;
 import com.graphql.deliveryShare2.sample.AboutCart.CartEntity;
 
@@ -43,8 +46,8 @@ public class CallingEntity {
     @Column(name = "expired_at", nullable=false)
     private OffsetDateTime expired_at;
 
-    @Column(name = "request_R", nullable=false)
-    private String request_R;
+    @Column(name = "request_R", nullable=true)
+    private String request;
 
     @Column(name = "request_call", nullable=false)
     private String request_call;
@@ -101,7 +104,7 @@ public class CallingEntity {
     public CallingEntity(List<CartEntity> cart){
         this.cart=cart;
     }
-    public CallingEntity(OffsetDateTime created_at, OffsetDateTime expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, String request_R, String request_call, int time_limit, Long user_seq ){
+    public CallingEntity(OffsetDateTime created_at, OffsetDateTime expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, String request, String request_call, int time_limit, Long user_seq ){
         
         this.created_at=created_at;
         this.expired_at=expired_at;
@@ -112,7 +115,7 @@ public class CallingEntity {
         this.restaurant=restaurant;
         this.callLocation = callLocation;
         //this.cart1 = cart1;
-        this.request_R = request_R;
+        this.request = request;
         this.request_call = request_call;
         this.time_limit = time_limit;
         this.user_seq=user_seq;
@@ -122,10 +125,24 @@ public class CallingEntity {
         return seq;
     }
 
+    public int getResSeq(){
+        return res_seq;
+    }
+    public String getStatus(){
+        return status;
+    }
+
+    public Long getUserSeq(){
+        return user_seq;
+    }
+
     public UserEntity getUser(){
         return user;
     }
 
+    public OffsetDateTime getExpired_at(){
+        return expired_at;
+    }
     public double getDistance(){
         return distance;
     }
@@ -171,8 +188,8 @@ public class CallingEntity {
         this.status=status;
     }
 
-    public void setRequestR(String request){
-        this.request_R=request;
+    public void setRequest(String request){
+        this.request=request;
     }
     
     public void setRequestCall(String request){
@@ -194,6 +211,7 @@ public class CallingEntity {
     public void setLocationseq(int locationseq){
         this.location_seq=locationseq;
     }
+    
  
 }
 
