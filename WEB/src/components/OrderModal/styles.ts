@@ -26,11 +26,26 @@ export const Modal = styled.div`
 `;
 
 export const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 3rem;
   font-weight: bold;
   background-color: #f77204;
   color: #fff;
   padding: 2rem;
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  svg {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
 `;
 
 export const ModalBody = styled.div`
@@ -40,6 +55,7 @@ export const ModalBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 20px;
 `;
 
 export const ModalItem = styled.div`
@@ -63,6 +79,7 @@ export const ModalItem = styled.div`
 
 export const ButtonWrapper = styled.div`
   display: flex;
+  gap: 15px;
   width: 100%;
   justify-content: space-between;
 
@@ -81,7 +98,7 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
-export const CloseButton = styled.button`
+export const CancelButton = styled.button`
   background-color: #dedede;
 `;
 
