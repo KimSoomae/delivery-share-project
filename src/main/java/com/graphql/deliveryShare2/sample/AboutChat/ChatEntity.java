@@ -133,6 +133,10 @@ public class ChatEntity {
         this.participant1seq = (Integer)null; 
     }
 
+    public void setParticipant2Null(){
+        this.participant2seq = (Integer)null; 
+    }
+
     public void setIsActive(){
         this.is_active = false; 
     }
