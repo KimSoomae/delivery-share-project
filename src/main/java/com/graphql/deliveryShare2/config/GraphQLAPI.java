@@ -191,6 +191,7 @@ public class GraphQLAPI {
       .dataFetcher("createCall", callingDataFetcher.createCall())
       .dataFetcher("deleteCall",callingDataFetcher.deleteCall())
       .dataFetcher("createChat", chatDataFetcher.createChat())
+      .dataFetcher("reportUser", reportDataFetcher.reportUser())
       .dataFetcher("createOrder", orderDataFetcher.createOrder())
       .dataFetcher("WriteRestaurantReview", dataFetcher4.WriteRestaurantReview())
       .dataFetcher("checkOrder", orderDataFetcher.checkOrder())
