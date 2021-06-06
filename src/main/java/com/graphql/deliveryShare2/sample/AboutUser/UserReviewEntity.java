@@ -57,7 +57,7 @@ public class UserReviewEntity {
 
     @ManyToOne
     @JoinColumn(name="fromseq", nullable=true, insertable=false, updatable=false )
-    private UserEntity user;
+    private UserEntity from;
 
     @ManyToOne
     @JoinColumn(name="toseq", nullable=true, insertable=false, updatable=false )
@@ -73,7 +73,7 @@ public class UserReviewEntity {
     }
 
     public UserEntity getUser(){
-        return user;
+        return from;
     }
 
     public UserEntity getToUser(){
