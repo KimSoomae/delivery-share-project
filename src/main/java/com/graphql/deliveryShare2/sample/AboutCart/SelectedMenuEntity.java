@@ -47,7 +47,7 @@ public class SelectedMenuEntity {
     @Column(name="price", nullable=true)
     private int price;
 
-    @Column(name="isSeperated", nullable=true)
+    @Column(name="is_seperated", nullable=true)
     private Boolean isSeperated;
 
     @ManyToOne

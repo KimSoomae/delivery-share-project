@@ -189,7 +189,9 @@ public class CallingEntity {
     }
 
     
-    
+    public void setPrice(int price){
+        this.price=price;
+    }
     public void setRequestCall(String request){
         this.request_call=request;
     }

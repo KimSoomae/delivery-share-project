@@ -63,7 +63,7 @@ public class RestaurantEntity {
     private String thumbnail;
 
     @Column(name = "rate", nullable=true)
-    private float rate;
+    private Double rate;
 
     @Column(name = "category", nullable=true)
     private String category;
@@ -115,7 +115,7 @@ public class RestaurantEntity {
     private Boolean isLiked;
 
 
-    public RestaurantEntity(String id, String password, String name, String created_at, String dayoff, int isopen, int min_order, int delivery_tip, String introduction, String thumbnail, float rate, String category
+    public RestaurantEntity(String id, String password, String name, String created_at, String dayoff, int isopen, int min_order, int delivery_tip, String introduction, String thumbnail, Double rate, String category
     ,int rate1count, int rate2count, int rate3count, int rate4count, int rate5count, int reviewcount, int likescount, Boolean isLiked){
         this.name=name;
         this.id=id;
@@ -198,6 +198,9 @@ public class RestaurantEntity {
         this.rate1count=rate1count;
     }
 
+    public void setRate(Double rate){
+        this.rate=rate;
+    }
     public double getReviewcount(){
         return reviewcount;
     }

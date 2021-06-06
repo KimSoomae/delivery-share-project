@@ -74,22 +74,15 @@ public class RestaurantDataFetcher {
         String dong = environment.getArgument("dong");
         List<RestaurantEntity> res =new ArrayList<RestaurantEntity>();
         List<DeliverylocEntity> de = deliverylocRepository.findAllBySiAndDong(si,dong);
-        System.out.println("여기 주목!!"+de);
         for (int i=0; i<de.size();i++){
           int idx = de.get(i).getResseq();
           RestaurantEntity re = restaurantRepository.findBySeq(idx);
-          System.out.println("여기 주목3!!"+re.getCategory());
-          System.out.println("카테고리는!!"+category);
-          System.out.println("이스오픈은!!"+re.getIsopen());
           System.out.println(re.getCategory()==category);
           System.out.println(re.getIsopen()==1);
           if((Objects.equals(re.getCategory(),category))&&(re.getIsopen()==1)){
-            System.out.println("여기 들어왔따");
             res.add(re);
-            //res.set(i,re);
           }
         }
-        System.out.println("여기 주목2!!"+res);
         for (int i=0; i<res.size();i++){
           RestaurantEntity re= res.get(i);
           
@@ -99,6 +92,14 @@ public class RestaurantDataFetcher {
                   menus.add(re.getMenus().get(j));
               }
           }
+          Double totalrate = 0.0;
+          for (int j=0; j<re.getReviews().size();j++){
+            Double rate = re.getReviews().get(j).getRate();
+            totalrate +=rate;
+          }
+          totalrate /= re.getReviews().size();
+          totalrate = Math.round(totalrate*10)/10.0;
+          re.setRate(totalrate);
           re.setBestmenu(menus);
           re.setReviewcount(re.getReviews().size());
           
@@ -139,11 +140,13 @@ public class RestaurantDataFetcher {
               }
           }
         re.setBestmenu(menus);
+        Double totalrate=0.0;
         for (int i=0; i<re.getReviews().size();i++){
         
           ResReviewEntity rre= re.getReviews().get(i);
           
           double rate=rre.getRate();
+          totalrate+=rate;
           if (rate==5.0){
               int cnt = re.getRate5count();
               cnt++;
@@ -171,7 +174,10 @@ public class RestaurantDataFetcher {
           }
          
           
-      }
+      } 
+      totalrate = totalrate/re.getReviews().size();
+      totalrate = Math.round(totalrate*10)/10.0;
+      re.setRate(totalrate);
         return re; 
       };
       
@@ -188,6 +194,17 @@ public class RestaurantDataFetcher {
             System.out.println("인덱스"+idx);
             System.out.println("레스"+restaurantRepository.findBySeq(idx));
             likedR.add(restaurantRepository.findBySeq(idx));
+        }
+        for (int j=0; j<likedR.size();j++){
+          double totalrate=0.0;
+          for (int k=0; k<likedR.get(j).getReviews().size();k++){
+              double rate = likedR.get(j).getReviews().get(k).getRate();
+              totalrate+=rate;
+          }
+          
+          totalrate /= likedR.get(j).getReviews().size();
+          totalrate = Math.round(totalrate*10)/10.0;
+          likedR.get(j).setRate(totalrate);
         }
   
         return likedR;
@@ -247,6 +264,23 @@ public class RestaurantDataFetcher {
             resultRes.add(resbb);
           }
         }
+        for (int i=0; i<resultRes.size();i++){
+          RestaurantEntity re= resultRes.get(i);
+          List<MenuEntity> menus=new ArrayList<MenuEntity>();
+          for (int j=0; j<re.getMenus().size();j++){
+              if (re.getMenus().get(j).getIsBestmenu()==true){
+                  menus.add(re.getMenus().get(j));
+              }
+          }
+          Double totalrate = 0.0;
+          for (int j=0; j<re.getReviews().size();j++){
+            Double rate = re.getReviews().get(j).getRate();
+            totalrate +=rate;
+          }
+          totalrate /= re.getReviews().size();
+          totalrate = Math.round(totalrate*10)/10.0;
+          re.setRate(totalrate);
+      }
         
         return resultRes;
       };

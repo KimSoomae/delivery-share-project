@@ -11,4 +11,5 @@ public interface UserReviewRepository extends JpaRepository<UserReviewEntity, In
     UserReviewEntity findBySeq(int seq);
     List<UserReviewEntity> findByToseq(int toseq);
     Integer deleteBySeq(int seq);
+    List<UserReviewEntity> findAllByToseq(Long toseq);
 }

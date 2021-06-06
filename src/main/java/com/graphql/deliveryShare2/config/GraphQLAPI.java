@@ -199,6 +199,7 @@ public class GraphQLAPI {
       .dataFetcher("checkOrder", orderDataFetcher.checkOrder())
       .dataFetcher("updateCall", callingDataFetcher.updateCall())
       .dataFetcher("readMessage",messageDataFetcher.readMessage()) 
+      .dataFetcher("cancelCall", callingDataFetcher.cancelCall())
     )
     .scalar(ExtendedScalars.DateTime)
     .build();

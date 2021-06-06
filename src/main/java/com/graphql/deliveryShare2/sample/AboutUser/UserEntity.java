@@ -65,7 +65,7 @@ public class UserEntity {
     private String status;
 
     @Column(name="rate", nullable=false)
-    private Float rate;
+    private Double rate;
 
     @OneToMany(mappedBy = "to")
     private List<UserReviewEntity> reviews = new ArrayList<>();
@@ -73,7 +73,8 @@ public class UserEntity {
     int orderCounts;
 
    
-    public UserEntity(String ID, String name, String password, String created_at, String updated_at, String status, Float rate){
+    public UserEntity(Long seq, String ID, String name, String password, String created_at, String updated_at, String status, Double rate){
+        this.seq=seq;
         this.ID=ID;
         this.name=name;
         this.password=password;
@@ -94,6 +95,10 @@ public class UserEntity {
 
     public void setReviews(List<UserReviewEntity> reviews){
         this.reviews=reviews;
+    }
+
+    public void setRate(double rate){
+        this.rate=rate;
     }
 
     

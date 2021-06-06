@@ -6,7 +6,7 @@ schema{
 
 type Query {
     allUsers: [User]
-    User(seq: Int!) : User
+    User(seq: Long!) : User
 
     allRunTimes: [RunTime]
     RunTime(seq : Int!) : RunTime
@@ -120,6 +120,7 @@ type Mutation{
     WriteRestaurantReview(order_seq: Int, content:String, rate:Float): ResReview
     checkOrder(seq:Int!, isApproved: Boolean, deliveryTime: Int! ): Order
     updateCall(seq:Int!):Calling
+    cancelCall(seq:Int!):Boolean
     
 }
 
