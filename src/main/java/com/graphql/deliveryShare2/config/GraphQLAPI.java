@@ -164,6 +164,8 @@ public class GraphQLAPI {
       .dataFetcher("getLikedRestaurants", dataFetcher5.getLikedRestaurants())  
       .dataFetcher("searchRestaurant", dataFetcher5.searchRestaurant())
       .dataFetcher("getMyCall",callingDataFetcher.getMyCall())
+       
+
 
       
       
@@ -196,6 +198,7 @@ public class GraphQLAPI {
       .dataFetcher("WriteRestaurantReview", dataFetcher4.WriteRestaurantReview())
       .dataFetcher("checkOrder", orderDataFetcher.checkOrder())
       .dataFetcher("updateCall", callingDataFetcher.updateCall())
+      .dataFetcher("readMessage",messageDataFetcher.readMessage()) 
     )
     .scalar(ExtendedScalars.DateTime)
     .build();
