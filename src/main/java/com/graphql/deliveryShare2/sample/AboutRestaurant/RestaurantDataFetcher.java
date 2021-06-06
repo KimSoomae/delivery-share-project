@@ -254,7 +254,7 @@ public class RestaurantDataFetcher {
     public DataFetcher<?> getResReviews () {
       return environment -> {
         int resseq = environment.getArgument("resseq");
-        return restaurantRepository.findBySeq(resseq);
+        return restaurantRepository.findBySeqOrderByRateAsc(resseq);
       };
     }
    

@@ -155,6 +155,7 @@ public class GraphQLAPI {
       .dataFetcher("allCallLocations",callLocationDataFetcher.allCallLocations())
       .dataFetcher("CallLocation",callLocationDataFetcher.CallLocation())
       .dataFetcher("getResReviews", dataFetcher5.getResReviews())   
+      .dataFetcher("getResReviews", dataFetcher4.getResReviews())   
       .dataFetcher("getReviewCount", dataFetcher4.getReviewCount())   
       .dataFetcher("getRestaurant", dataFetcher5.getRestaurant())  
       .dataFetcher("OptionByMenu", optionDataFetcher.OptionByMenu()) 

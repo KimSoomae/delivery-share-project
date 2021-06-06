@@ -69,7 +69,9 @@ type Query {
     allCallLocations: [CallLocation]
     CallLocation: CallLocation
     #식당마다 모든 리뷰들 보여주기
-    getResReviews(resseq:Int): Restaurant
+    getResReviews(resseq:Int, sortingmethod:String): [ResReview]
+
+    #getResReviews(resseq:Int): Restaurant
 
     #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
     getReviewCount(resseq: Int): Restaurant

@@ -36,8 +36,8 @@ public class ResReviewEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int seq;
 
-    @Column(name = "created_at", nullable=true)
-    private OffsetDateTime created_at;
+    @Column(name = "createdAt", nullable=true)
+    private OffsetDateTime createdAt;
 
     @Column(name = "updated_at", nullable=true)
     private OffsetDateTime updated_at;
@@ -78,8 +78,8 @@ public class ResReviewEntity {
     private ReplyEntity reply;
 
 
-    public ResReviewEntity(OffsetDateTime created_at, OffsetDateTime updated_at, String image, String content, Double rate, int resseq, List<ImageEntity> images, ReplyEntity reply){
-        this.created_at=created_at;
+    public ResReviewEntity(OffsetDateTime createdAt, OffsetDateTime updated_at, String image, String content, Double rate, int resseq, List<ImageEntity> images, ReplyEntity reply){
+        this.createdAt=createdAt;
         this.updated_at=updated_at;
         this.image=image;
         this.content=content;
@@ -108,7 +108,7 @@ public class ResReviewEntity {
    public void setCreatedAt(){
     LocalDateTime dateTime = LocalDateTime.now();
     ZoneOffset offset = ZoneOffset.UTC;
-    this.created_at = dateTime.atOffset(offset);
+    this.createdAt = dateTime.atOffset(offset);
 }
 
     public void setUpdatedAt(){
