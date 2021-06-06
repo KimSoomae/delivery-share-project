@@ -101,7 +101,9 @@ public class ChatEntity {
         return participants2;
     }
 
-   
+    public int getSeq(){
+        return seq;
+    }
 
     public void setParticipant1(int participant1){
         this.participant1=participant1;

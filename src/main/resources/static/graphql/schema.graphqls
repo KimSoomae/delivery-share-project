@@ -99,7 +99,8 @@ type Mutation{
     writeReply(resReviewSeq: Int!, content: String!):Boolean 
     updateReply(replySeq: Int!, content: String!): Reply
 
-    reportUser(chatId: Int!, userId: Int!, content:String, reason: String!): Report!
+    reportUser(chatSeq: Int!, userId: String!, content:String, reason: String!): Report!
+
     createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview
     updateUserReview(content:String, rate:Float, seq: Int!): UserReview
     deleteUserReview(seq:Int!): Boolean
@@ -268,9 +269,12 @@ type Report{
     seq: Int!
     reason: String!
     content: String
-    createdAt: DateTime!
-    updatedAt: DateTime
+    created_at: DateTime!
+    updated_at: DateTime
     isSolved: Boolean!
+    chat: Chat!
+    reporter: User!
+    reported: User!
 }
 
 type UserReview{

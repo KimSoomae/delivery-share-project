@@ -188,6 +188,7 @@ public class GraphQLAPI {
       .dataFetcher("createCall", callingDataFetcher.createCall())
       .dataFetcher("deleteCall",callingDataFetcher.deleteCall())
       .dataFetcher("createChat", chatDataFetcher.createChat())
+      .dataFetcher("reportUser", reportDataFetcher.reportUser())
     )
     .scalar(ExtendedScalars.DateTime)
     .build();

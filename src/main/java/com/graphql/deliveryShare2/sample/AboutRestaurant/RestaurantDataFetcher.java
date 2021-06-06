@@ -209,7 +209,7 @@ public class RestaurantDataFetcher {
         String dong = environment.getArgument("dong");
         List<DeliverylocEntity> deloc = deliverylocRepository.findAllBySiAndDong(si,dong);
         List<RestaurantEntity> resByloc = new ArrayList<RestaurantEntity>(); 
-        
+
         for(int i = 0; i< deloc.size();i++){
           int idx = deloc.get(i).getResseq();
           RestaurantEntity reloc = restaurantRepository.findBySeq(idx);
@@ -218,7 +218,21 @@ public class RestaurantDataFetcher {
           }
         }
 
-        //메뉴에 keyword 포함 레스토랑들
+        //배달가능한 식당들 중 이름에 keyword 포함
+        for(int i = 0; i<resBymenu.size(); i++){
+          int idx = resBymenu.get(i).getSeq();
+          RestaurantEntity resb = restaurantRepository.findBySeq(idx);
+
+          if(resultRes.contains(resb)){
+            i++;
+            continue;
+          }
+          else if(resByloc.contains(resb) && (resb.getIsopen() == 1)){
+            resultRes.add(resb);
+          }
+        }
+
+        //배달가능한 식당들 중 메뉴에 keyword 포함
         for(int i = 0; i< menuBykey.size(); i++){
           int idx = menuBykey.get(i).getResseq();
 
