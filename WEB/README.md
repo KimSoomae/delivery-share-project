@@ -13,6 +13,9 @@
 
 https://kangyeollee.github.io/delivery-share-project
 
+- Github Pages를 통해 배포
+- Github Pages는 정적 웹이기 때문에 API 요청/응답 처리가 매우 까다로운 관계로 더미데이터를 사용하는 버전을 배포
+
 # Skill Stack
 
 - React CRA / Hooks / rendering optimazation(React.memo, loadable)
