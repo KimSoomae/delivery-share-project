@@ -109,6 +109,10 @@ public class ChatEntity {
         return participant2seq;
     }
 
+    public Integer getParticipant1seq(){
+        return participant1seq;
+    }
+
     public boolean getIsActive(){
         return is_active;
     }

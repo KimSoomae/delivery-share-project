@@ -87,14 +87,24 @@ public class ChatDataFetcher {
        
         //int participant1seq = environment.getArgument("participant1seq");
         Integer participant2seq = environment.getArgument("participant2seq");
+        int participant1seq = 10;
         //int last_message = environment.getArgument("last_message");
 
         for (int i=0; i<chat.size();i++){
-          int a = chat.get(i).getParticipant2seq();
-          if(a == participant2seq) {
-            //return chat.get(i).getSeq();
-            return chat.get(i);
+          boolean c =  chat.get(i).getIsActive();
+          if(c == true) {
+            int a = chat.get(i).getParticipant2seq();
+            int b = chat.get(i).getParticipant1seq();
+            if((a == participant2seq && b == participant1seq) || (a == participant1seq && b == participant2seq) ) {
+              return chat.get(i);
+            }
+
           }
+          
+          
+          
+            
+          
         }
         ChatEntity chatEntity = new ChatEntity();
         chatEntity.setParticipant1(10);
