@@ -105,7 +105,7 @@ export const TableCell = styled.div<{ cellCount?: number; flexStart?: boolean }>
       background-color: #fff6e0;
       color: #ffb800;
     }
-    &.canceled {
+    &.cancled {
       background-color: rgba(215, 215, 215, 0.45);
     }
     &.completed {
