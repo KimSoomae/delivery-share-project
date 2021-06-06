@@ -27,7 +27,7 @@ const Review: VFC<Props> = ({ info }) => {
   const commentSeq = info.seq;
   const images = info?.images;
 
-  const [writeReply, { data }] = useMutation(POST_REPLY);
+  const [writeReply] = useMutation(POST_REPLY);
   const [comment, setComment] = useState(info.reply?.content);
   const [input, setInput] = useState('');
   const [refresh, setRefresh] = useState(comment ? true : false);
