@@ -109,7 +109,7 @@ type Mutation{
     deleteUserReview(seq:Int!): Boolean
     createCall(cart: String!, address: String!, latitude: Float!, longitude: Float!, requestToUser: String, requestToRes: String, timeLimit: Int ):Calling
     deleteCall:Boolean
-    sendMessage(text:String, toseq:Int!, fromseq:Int!, chat_seq:Int): Message
+    sendMessage(text:String, toseq:Int!, chat_seq:Int): Message
     quitChat(seq:Int):Boolean
     createChat(participant2seq:Int): Chat
     createOrder(callSeq: Int!, cart: String!, requestToRestaurant: String):Boolean
