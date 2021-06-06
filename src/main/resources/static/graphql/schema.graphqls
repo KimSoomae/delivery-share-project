@@ -155,6 +155,8 @@ type SelectedMenu {
     menu: Menu
     cart: Cart
     selected_option: [SelectedOption]
+    price: Int
+    isSeperated: Boolean
 }
 
 type SelectedOption{
@@ -306,7 +308,7 @@ type Calling{
     distance: Float
     #cart1: Cart
     cart: [Cart]
-    request: String
+    #request: String
     request_call:String
     time_limit: Int
     user_seq: Long

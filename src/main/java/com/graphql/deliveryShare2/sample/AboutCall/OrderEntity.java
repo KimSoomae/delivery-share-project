@@ -49,6 +49,9 @@ public class OrderEntity {
     @Column(name="call_seq",nullable=true)
     private int call_seq;
 
+    @Column(name="sum",nullable=true)
+    private int sum;
+
     @ManyToOne
     @JoinColumn(name="call_seq", nullable=true, insertable=false, updatable=false)
     private CallingEntity call;
@@ -82,6 +85,10 @@ public class OrderEntity {
 
     public int getCallSeq(){
         return call_seq;
+    }
+
+    public void setSum(int price){
+        this.sum+=price;
     }
 
     public void setCreated_at(){

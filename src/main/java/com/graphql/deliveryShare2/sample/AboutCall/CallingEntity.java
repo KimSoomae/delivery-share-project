@@ -46,8 +46,8 @@ public class CallingEntity {
     @Column(name = "expired_at", nullable=false)
     private OffsetDateTime expired_at;
 
-    @Column(name = "request_R", nullable=true)
-    private String request;
+    //@Column(name = "request_R", nullable=true)
+    //private String request;
 
     @Column(name = "request_call", nullable=false)
     private String request_call;
@@ -104,7 +104,7 @@ public class CallingEntity {
     public CallingEntity(List<CartEntity> cart){
         this.cart=cart;
     }
-    public CallingEntity(OffsetDateTime created_at, OffsetDateTime expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, String request, String request_call, int time_limit, Long user_seq ){
+    public CallingEntity(OffsetDateTime created_at, OffsetDateTime expired_at, String status, String calltext, int price, UserEntity user, RestaurantEntity restaurant, CallLocationEntity callLocation, String request_call, int time_limit, Long user_seq ){
         
         this.created_at=created_at;
         this.expired_at=expired_at;
@@ -115,7 +115,7 @@ public class CallingEntity {
         this.restaurant=restaurant;
         this.callLocation = callLocation;
         //this.cart1 = cart1;
-        this.request = request;
+        //this.request = request;
         this.request_call = request_call;
         this.time_limit = time_limit;
         this.user_seq=user_seq;
@@ -188,9 +188,7 @@ public class CallingEntity {
         this.status=status;
     }
 
-    public void setRequest(String request){
-        this.request=request;
-    }
+    
     
     public void setRequestCall(String request){
         this.request_call=request;

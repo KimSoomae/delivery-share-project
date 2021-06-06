@@ -11,10 +11,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional 
-public interface CallingRepository extends JpaRepository<CallingEntity, Long>, CallingCustomRepository {
+public interface CallingRepository extends JpaRepository<CallingEntity, Long> {
     CallingEntity findBySeq(int seq);
     List<CallingEntity> findAllByUser_seq(Long user_seq);
     Integer deleteBySeq(int seq);
     Integer deleteBySeqAndStatus(int seq, String status);
+    List<CallingEntity> findAllByStatus(String status);
+
     //TimerTask deleteBySeqTimerTask(int seq);
 }

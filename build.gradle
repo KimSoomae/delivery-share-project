@@ -61,6 +61,8 @@ dependencies {
 	implementation 'com.auth0:java-jwt:3.8.3'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.3'
 	implementation 'org.json:json:20190722'
+	//expo push
+	implementation 'io.github.jav:expo-server-sdk:1.1.0'
 
 
 

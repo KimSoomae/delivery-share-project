@@ -44,6 +44,12 @@ public class SelectedMenuEntity {
     @Column(name="cart_seq",nullable=true)
     private int cartSeq;
 
+    @Column(name="price", nullable=true)
+    private int price;
+
+    @Column(name="isSeperated", nullable=true)
+    private Boolean isSeperated;
+
     @ManyToOne
     @JoinColumn(name="cart_seq", nullable=true, insertable=false, updatable=false)
     private CartEntity cart;
@@ -52,10 +58,12 @@ public class SelectedMenuEntity {
     private List<SelectedOptionEntity> selected_option = new ArrayList<>();
 
 
-    public SelectedMenuEntity(int count, int menuSeq, CartEntity cart){
+    public SelectedMenuEntity(int count, int menuSeq, CartEntity cart, int price, Boolean isSeperated){
         this.count=count;
         this.menuSeq=menuSeq;
         this.cart = cart;
+        this.price=price;
+        this.isSeperated=isSeperated;
     }
 
     public int getMenuSeq(){
@@ -67,11 +75,11 @@ public class SelectedMenuEntity {
     }
     public MenuEntity getMenu(){
         return menu;
- }
+    }
 
- public CartEntity getCart(){
-    return cart;
-}
+    public CartEntity getCart(){
+        return cart;
+    }
 
 
     public int getSeq(){
@@ -97,6 +105,13 @@ public class SelectedMenuEntity {
         return selected_option;
     }
 
+    public void setPrice(int price){
+        this.price=price;
+    }
+
+    public void setIsSeperated(Boolean isSeperated){
+        this.isSeperated=isSeperated;
+    }
     
 
 }
