@@ -40,10 +40,10 @@ public class OrderEntity {
     @Column(name = "status",nullable=false)
     private String status;
 
-    @Column(name = "canWriteRestaurantReview",nullable=true)
+    @Column(name = "can_write_restaurant_review",nullable=true)
     private boolean canWriteRestaurantReview;
 
-    @Column(name = "canWriteUserReview",nullable=true)
+    @Column(name = "can_write_user_review",nullable=true)
     private boolean canWriteUserReview;
     
     @Column(name="call_seq",nullable=true)
@@ -81,6 +81,23 @@ public class OrderEntity {
     public void setDelivery_time(int delivery_time){
         this.delivery_time=delivery_time;
     }
+
+    public void setCanWriteResReview1(){
+        this.canWriteRestaurantReview = true;
+    }
+
+    public void setCanWriteUserReview1(){
+        this.canWriteUserReview = true;
+    }
+
+    public void setCanWriteResReview0(){
+        this.canWriteRestaurantReview = false;
+    }
+
+    public void setCanWriteUserReview0(){
+        this.canWriteUserReview = false;
+    }
+
 
 
     public int getCallSeq(){
