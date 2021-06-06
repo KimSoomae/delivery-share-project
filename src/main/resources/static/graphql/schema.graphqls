@@ -69,7 +69,9 @@ type Query {
     allCallLocations: [CallLocation]
     CallLocation: CallLocation
     #식당마다 모든 리뷰들 보여주기
-    getResReviews(resseq:Int): Restaurant
+    getResReviews(resseq:Int, sortingmethod:String): [ResReview]
+
+    #getResReviews(resseq:Int): Restaurant
 
     #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
     getReviewCount(resseq: Int): Restaurant
@@ -101,15 +103,19 @@ type Mutation{
     writeReply(resReviewSeq: Int!, content: String!):Boolean 
     updateReply(replySeq: Int!, content: String!): Reply
 
-    reportUser(chatId: Int!, userId: Int!, content:String, reason: String!): Report!
+    reportUser(chatSeq: Int!, userId: String!, reason: String!, content:String): Report!
+
     createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview
     updateUserReview(content:String, rate:Float, seq: Int!): UserReview
     deleteUserReview(seq:Int!): Boolean
     createCall(cart: String!, address: String!, latitude: Float!, longitude: Float!, requestToUser: String, requestToRes: String, timeLimit: Int ):Calling
     deleteCall:Boolean
-    sendMessage(text:String, toseq:Int!, fromseq:Int!, chat_seq:Int): Message
+    sendMessage(text:String, toseq:Int!, chat_seq:Int): Message
     quitChat(seq:Int):Boolean
     createChat(participant2seq:Int): Chat
+
+    readMessage(seq:Int):Boolean
+
     createOrder(callSeq: Int!, cart: String!, requestToRestaurant: String):Boolean
     WriteRestaurantReview(order_seq: Int, content:String, rate:Float): ResReview
     checkOrder(seq:Int!, isApproved: Boolean, deliveryTime: Int! ): Order
@@ -131,7 +137,7 @@ type User {
     #updatedAt: String
     created_at: String
     updated_at: String
-    thumbnail: String
+    thumbnail: Stringㄹ
     token: String
     status: String!
     rate: Float!
@@ -277,9 +283,12 @@ type Report{
     seq: Int!
     reason: String!
     content: String
-    createdAt: DateTime!
-    updatedAt: DateTime
+    created_at: DateTime!
+    updated_at: DateTime
     isSolved: Boolean!
+    chat: Chat!
+    reporter: User!
+    reported: User!
 }
 
 type UserReview{

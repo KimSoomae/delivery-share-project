@@ -114,6 +114,14 @@ public class MessageEntity {
         this.fromseq=fromseq;
     }
 
+    public void setIsRead(){
+        this.is_read=true;
+    }
+
+    public void setIsRead0(){
+        this.is_read=false;
+    }
+
     public void setCreatedAt(){
         LocalDateTime dateTime = LocalDateTime.now();
         ZoneOffset offset = ZoneOffset.UTC;

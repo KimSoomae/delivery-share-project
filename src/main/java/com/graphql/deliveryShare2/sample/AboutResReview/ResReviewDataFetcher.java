@@ -66,7 +66,17 @@ public class ResReviewDataFetcher {
     public DataFetcher<?> getResReviews () {
       return environment -> {
         int resseq = environment.getArgument("resseq");
-        return resReviewRepository.findByResseq(resseq);
+        String sortingmethod = environment.getArgument("sortingmethod");
+        if(sortingmethod.equals("별점높은순")){
+          return resReviewRepository.findByResseqOrderByRateDesc(resseq);
+        }
+
+        if (sortingmethod.equals("별점낮은순")){
+          return resReviewRepository.findByResseqOrderByRateAsc(resseq);
+        }
+
+        return resReviewRepository.findByResseqOrderByCreatedAtDesc(resseq);
+        
       };
     }
 

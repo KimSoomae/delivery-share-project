@@ -113,7 +113,9 @@ public class ChatEntity {
         return is_active;
     }
 
-   
+    public int getSeq(){
+        return seq;
+    }
 
     public void setParticipant1(int participant1seq){
         this.participant1seq=participant1seq;
@@ -129,6 +131,10 @@ public class ChatEntity {
 
     public void setParticipant1Null(){
         this.participant1seq = (Integer)null; 
+    }
+
+    public void setParticipant2Null(){
+        this.participant2seq = (Integer)null; 
     }
 
     public void setIsActive(){

@@ -155,6 +155,7 @@ public class GraphQLAPI {
       .dataFetcher("allCallLocations",callLocationDataFetcher.allCallLocations())
       .dataFetcher("CallLocation",callLocationDataFetcher.CallLocation())
       .dataFetcher("getResReviews", dataFetcher5.getResReviews())   
+      .dataFetcher("getResReviews", dataFetcher4.getResReviews())   
       .dataFetcher("getReviewCount", dataFetcher4.getReviewCount())   
       .dataFetcher("getRestaurant", dataFetcher5.getRestaurant())  
       .dataFetcher("OptionByMenu", optionDataFetcher.OptionByMenu()) 
@@ -163,6 +164,8 @@ public class GraphQLAPI {
       .dataFetcher("getLikedRestaurants", dataFetcher5.getLikedRestaurants())  
       .dataFetcher("searchRestaurant", dataFetcher5.searchRestaurant())
       .dataFetcher("getMyCall",callingDataFetcher.getMyCall())
+       
+
 
       
       
@@ -190,10 +193,12 @@ public class GraphQLAPI {
       .dataFetcher("createCall", callingDataFetcher.createCall())
       .dataFetcher("deleteCall",callingDataFetcher.deleteCall())
       .dataFetcher("createChat", chatDataFetcher.createChat())
+      .dataFetcher("reportUser", reportDataFetcher.reportUser())
       .dataFetcher("createOrder", orderDataFetcher.createOrder())
       .dataFetcher("WriteRestaurantReview", dataFetcher4.WriteRestaurantReview())
       .dataFetcher("checkOrder", orderDataFetcher.checkOrder())
       .dataFetcher("updateCall", callingDataFetcher.updateCall())
+      .dataFetcher("readMessage",messageDataFetcher.readMessage()) 
     )
     .scalar(ExtendedScalars.DateTime)
     .build();

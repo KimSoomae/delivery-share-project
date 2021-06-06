@@ -12,4 +12,5 @@ public interface RestaurantRepository extends JpaRepository<RestaurantEntity, Lo
     RestaurantEntity findByCategory(String category);
     RestaurantEntity findBySeq(int seq);
     List<RestaurantEntity> findAllByNameContaining(String name);
+    RestaurantEntity findBySeqOrderByRateAsc(int seq);
 }
