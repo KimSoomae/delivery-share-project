@@ -60,9 +60,11 @@ public class ReportDataFetcher {
 
         if(chat.getParticipants1() == reported){
           report.setReporter_seq(chat.getParticipants2().getSeq());
+          chat.setParticipant2Null();
         }
         else{
           report.setReporter_seq(chat.getParticipants1().getSeq());
+          chat.setParticipant1Null();
         }
 
         report.setChatSeq(chatseq);
@@ -70,7 +72,10 @@ public class ReportDataFetcher {
         report.setIsSolved(false);
         
         reportRepository.save(report);
+        
+        chat.setIsActive();
 
+        chatRepository.save(chat);
         return report;
     };
   }

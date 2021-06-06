@@ -103,7 +103,7 @@ type Mutation{
     writeReply(resReviewSeq: Int!, content: String!):Boolean 
     updateReply(replySeq: Int!, content: String!): Reply
 
-    reportUser(chatSeq: Int!, userId: String!, content:String, reason: String!): Report!
+    reportUser(chatSeq: Int!, userId: String!, reason: String!, content:String): Report!
 
     createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview
     updateUserReview(content:String, rate:Float, seq: Int!): UserReview

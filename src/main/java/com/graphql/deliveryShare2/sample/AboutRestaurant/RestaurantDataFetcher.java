@@ -217,10 +217,6 @@ public class RestaurantDataFetcher {
             resByloc.add(reloc);
           }
         }
-        //배달가능한 식당들 중 이름에 keyword 포함
-        for(int i = 0; i<resBymenu.size(); i++){
-          int idx = resBymenu.get(i).getSeq();
-          RestaurantEntity resb = restaurantRepository.findBySeq(idx);
 
         //배달가능한 식당들 중 이름에 keyword 포함
         for(int i = 0; i<resBymenu.size(); i++){
@@ -255,6 +251,8 @@ public class RestaurantDataFetcher {
         return resultRes;
       };
     }
+  
+    
    
 
     public DataFetcher<?> getResReviews () {
