@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Transactional 
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     OrderEntity findBySeq(int seq);
+    OrderEntity findByCall_seq(int call_seq);
 }
