@@ -38,7 +38,7 @@ public class OptionItemEntity {
     private int option_seq;
 
     @ManyToOne
-    @JoinColumn(name="optionseq", nullable=true, insertable=false, updatable=false)
+    @JoinColumn(name="option_seq", nullable=true, insertable=false, updatable=false)
     private OptionEntity option;
     
 

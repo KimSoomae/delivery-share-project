@@ -2,6 +2,7 @@ scalar DateTime
 schema{
     query: Query
     mutation: Mutation
+    
 }
 
 type Query {
@@ -108,7 +109,7 @@ type Mutation{
     createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview
     updateUserReview(content:String, rate:Float, seq: Int!): UserReview
     deleteUserReview(seq:Int!): Boolean
-    createCall(cart: String!, address: String!, latitude: Float!, longitude: Float!, requestToUser: String, requestToRes: String, timeLimit: Int ):Calling
+    createCall(cart: String!, address: String!, latitude: Float!, longitude: Float!, requestToUser: String!, requestToRes: String!, timeLimit: Int! ):Calling
     deleteCall:Boolean
     sendMessage(text:String, toseq:Int!, chat_seq:Int): Message
     quitChat(seq:Int):Boolean
@@ -251,7 +252,7 @@ type OptionItem{
     content:String!
     price:Int!
     Option: Int
-    optionseq: Int
+    option_seq: Int
     #option_seq: [Option] @link(by: "seq")
 }
 
