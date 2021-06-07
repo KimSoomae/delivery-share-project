@@ -201,6 +201,7 @@ public class GraphQLAPI {
       .dataFetcher("readMessage",messageDataFetcher.readMessage()) 
       .dataFetcher("cancelCall", callingDataFetcher.cancelCall())
     )
+    
     .scalar(ExtendedScalars.DateTime)
     .build();
   }

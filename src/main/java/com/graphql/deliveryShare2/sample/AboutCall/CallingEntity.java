@@ -188,7 +188,10 @@ public class CallingEntity {
         this.status=status;
     }
 
-    
+    public void setRestaurant(RestaurantEntity restaurant){
+        this.restaurant=restaurant;
+    }
+
     public void setPrice(int price){
         this.price+=price;
     }
