@@ -94,7 +94,8 @@ public class CallingEntity {
     @OneToMany(mappedBy = "call")
     private List<CartEntity> cart= new ArrayList<>();
 
-    
+    @OneToOne(mappedBy = "call") 
+    private OrderEntity order;
 
 
     private Double distance;
@@ -212,6 +213,9 @@ public class CallingEntity {
         this.location_seq=locationseq;
     }
     
+    public OrderEntity getOrder(){
+        return order;
+    }
  
 }
 

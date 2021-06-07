@@ -1,6 +1,8 @@
 package com.graphql.deliveryShare2.sample.AboutUser;
 
 import com.graphql.deliveryShare2.sample.AboutChat.ChatEntity;
+import com.graphql.deliveryShare2.sample.AboutCart.CartEntity;
+import com.graphql.deliveryShare2.sample.AboutResReview.ResReviewEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,13 +69,22 @@ public class UserEntity {
     @Column(name="rate", nullable=false)
     private Double rate;
 
+    @Column(name = "can_write_review",nullable=true)
+    private boolean canWriteReview;
+
     @OneToMany(mappedBy = "to")
     private List<UserReviewEntity> reviews = new ArrayList<>();
 
-    int orderCounts;
+    @OneToMany(mappedBy = "user") 
+    private List<CartEntity> carts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user") 
+    private List<ResReviewEntity> resReviews = new ArrayList<>();
+
+    private int orderCounts;
 
    
-    public UserEntity(Long seq, String ID, String name, String password, String created_at, String updated_at, String status, Double rate){
+    public UserEntity(Long seq, String ID, String name, String password, String created_at, String updated_at, String status, Double rate, int orderCounts, boolean canWriteReview){
         this.seq=seq;
         this.ID=ID;
         this.name=name;
@@ -84,9 +95,15 @@ public class UserEntity {
         this.updated_at=updated_at;
         this.status=status;
         this.rate=rate;
+        this.orderCounts = orderCounts;
+        this.canWriteReview = canWriteReview;
     }
     public Long getSeq(){
         return seq;
+    }
+
+    public Boolean getCanWriteReview(){
+        return canWriteReview;
     }
 
     public void setOrderCounts(int orderCounts){
@@ -100,6 +117,22 @@ public class UserEntity {
     public void setRate(double rate){
         this.rate=rate;
     }
+    
+    public List<CartEntity> getCart(){
+        return carts;
+    }
 
+    public List<ResReviewEntity> getResReviews(){
+        return resReviews;
+    }
+
+    public void setCanWriteReview(boolean bool){
+        if(bool == true){
+            this.canWriteReview = true;
+        }
+        else{
+            this.canWriteReview = false;
+        }
+    }
     
 }

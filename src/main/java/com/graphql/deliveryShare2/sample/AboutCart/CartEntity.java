@@ -86,6 +86,10 @@ public class CartEntity {
         return user;
     }
 
+    public int getCallseq(){
+        return call_seq;
+    }
+
     //public CallingEntity getCall(){
     //    return call;
     //}

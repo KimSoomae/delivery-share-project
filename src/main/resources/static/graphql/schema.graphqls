@@ -138,14 +138,15 @@ type User {
     #updatedAt: String
     created_at: String
     updated_at: String
-    thumbnail: Stringㄹ
+    thumbnail: String
     token: String
     status: String!
     rate: Float!
     orderCounts: Int
     reviews: [UserReview]
     canWriteReview: Boolean
-
+    carts:[Cart]
+    ResReviews: [ResReview]
 }
 
 type RunTime {
@@ -322,7 +323,7 @@ type Calling{
     request_call:String
     time_limit: Int
     user_seq: Long
-
+    order: Order
 
     
 }
@@ -333,6 +334,7 @@ type Cart{
     delivery_tip: Int
     #selectedmenu: SelectedMenu
     selected_menu: [SelectedMenu]
+    user_seq: Int
     user: User
     call:Calling
     total_cost: Int

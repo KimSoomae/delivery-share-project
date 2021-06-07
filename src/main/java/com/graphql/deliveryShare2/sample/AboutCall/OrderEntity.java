@@ -98,10 +98,24 @@ public class OrderEntity {
         this.canWriteUserReview = false;
     }
 
+    public int getSeq(){
+        return seq;
+    }
 
+    public String getStatus(){
+        return status;
+    }
 
     public int getCallSeq(){
         return call_seq;
+    }
+
+    public OffsetDateTime getCreated_at(){
+        return created_at;
+    }
+
+    public boolean getCanWriteResReview(){
+        return canWriteRestaurantReview;
     }
 
     public void setSum(int price){

@@ -13,4 +13,5 @@ public interface CartRepository extends JpaRepository<CartEntity, Long> {
     CartEntity findBySeq(int seq);
     Integer deleteBySeq(int seq);
     List<CartEntity> findAllByCall_seq(int callseq);
+    List<CartEntity> findByUserSeq(int userSeq);
 }
