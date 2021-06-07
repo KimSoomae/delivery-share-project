@@ -103,9 +103,9 @@ public class UserDataFetcher {
         User.setRate(totalrate);
 
         List<CartEntity> carts = User.getCarts();
-        List<ResReviewEntity> resReviews = User.getResReviews();
-        int totalorders = 0;
 
+        int totalorders = 0;
+        
         //true면 3일이내 주문 중에 식당리뷰 작성 안 한 것 존재 
         Boolean canwriteR = User.getCanWriteReview();
         
@@ -122,7 +122,7 @@ public class UserDataFetcher {
               totalorders += 1;
               OffsetDateTime at = order.getCreated_at();
               if(before3.isBefore(at) && (order.getCanWriteResReview() == true)){
-                //if(reviews)
+                
                 User.setCanWriteReview(true);
               }
             }   
