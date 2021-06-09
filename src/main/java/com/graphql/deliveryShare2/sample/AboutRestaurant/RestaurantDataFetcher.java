@@ -93,10 +93,46 @@ public class RestaurantDataFetcher {
               }
           }
           Double totalrate = 0.0;
+          int cnt1=0;
+          int cnt2=0;
+          int cnt3=0;
+          int cnt4=0;
+          int cnt5=0;
           for (int j=0; j<re.getReviews().size();j++){
             Double rate = re.getReviews().get(j).getRate();
+            if (rate==5.0){
+             
+              cnt5++;
+              //re.setRate5count(cnt);
+          }
+          else if ((rate<5.0)&&(rate>=4.0)){
+              //int cnt = re.getRate4count();
+              cnt4++;
+              //re.setRate4count(cnt);
+          }
+          else if ((rate<4.0)&&(rate>=3.0)){
+              //int cnt = re.getRate3count();
+              cnt3++;
+              //re.setRate3count(cnt);
+          }
+          else if ((rate<3.0)&&(rate>=2.0)){
+              //int cnt = re.getRate2count();
+              cnt2++;
+             // re.setRate2count(cnt);
+          }
+          else if ((rate<2.0)&&(rate>=1.0)){
+             // int cnt = re.getRate1count();
+              cnt1++;
+              //re.setRate1count(cnt);
+          }
             totalrate +=rate;
           }
+          re.setRate1count(cnt1);
+          re.setRate2count(cnt2);
+          re.setRate3count(cnt3);
+          re.setRate4count(cnt4);
+          re.setRate5count(cnt5);
+
           totalrate /= re.getReviews().size();
           totalrate = Math.round(totalrate*10)/10.0;
           re.setRate(totalrate);
