@@ -2,7 +2,6 @@ package com.graphql.deliveryShare2.sample.AboutUser;
 
 import com.graphql.deliveryShare2.sample.AboutChat.ChatEntity;
 import com.graphql.deliveryShare2.sample.AboutCart.CartEntity;
-import com.graphql.deliveryShare2.sample.AboutResReview.ResReviewEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,9 +77,6 @@ public class UserEntity {
     @OneToMany(mappedBy = "user") 
     private List<CartEntity> carts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user") 
-    private List<ResReviewEntity> resReviews = new ArrayList<>();
-
     private int orderCounts;
 
    
@@ -122,9 +118,6 @@ public class UserEntity {
         return carts;
     }
 
-    public List<ResReviewEntity> getResReviews(){
-        return resReviews;
-    }
 
     public void setCanWriteReview(boolean bool){
         if(bool == true){
