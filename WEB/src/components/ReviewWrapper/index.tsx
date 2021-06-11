@@ -22,6 +22,10 @@ const ReviewWrapper: VFC = () => {
   );
 
   useEffect(() => {
+    refetch();
+  }, []);
+
+  useEffect(() => {
     setCurReviews(reversed.slice((page - 1) * PER_PAGE, page * PER_PAGE));
   }, [loading, page]);
 

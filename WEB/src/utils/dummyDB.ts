@@ -424,16 +424,6 @@ export const dummyMenu = [
   },
   {
     id: uuid(),
-    src:
-      'https://user-images.githubusercontent.com/48883344/120107940-efac3a00-c19d-11eb-8fd4-599a4bac4a47.jpg',
-    alt: 'cheeseball-img',
-    name: '짜장떡볶이',
-    category: '떡볶이',
-    price: '15,500',
-    desc: '짜릿한 춘장과 엽떡의 만남!',
-  },
-  {
-    id: uuid(),
     src: 'https://www.yupdduk.com/images/menu/2020_hotmenuY03.png',
     alt: 'cheeseball-img',
     name: '엽기 닭볶음탕',
