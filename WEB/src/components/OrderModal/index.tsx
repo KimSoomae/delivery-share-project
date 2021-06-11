@@ -21,8 +21,6 @@ interface Props {
 }
 
 const OrderModal: VFC<Props> = ({ show, data, setShowModal }) => {
-  console.log(data);
-
   const [updateOrder] = useMutation(UPDATE_ORDER);
 
   const onCloseModal = useCallback(() => {

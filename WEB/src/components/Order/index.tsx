@@ -30,6 +30,10 @@ const Order: VFC<Props> = ({ orders, setShowModal, setModalInfo }) => {
 
   useEffect(() => {
     setCurOrders(reversed.slice((page - 1) * PER_PAGE, page * PER_PAGE));
+  }, [reversed.length]);
+
+  useEffect(() => {
+    setCurOrders(reversed.slice((page - 1) * PER_PAGE, page * PER_PAGE));
   }, [page]);
 
   useEffect(() => {
