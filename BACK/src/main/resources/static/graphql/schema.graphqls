@@ -1,0 +1,409 @@
+scalar DateTime
+schema{
+    query: Query
+    mutation: Mutation
+    
+}
+
+type Query {
+    allUsers: [User]
+    User(seq: Long!) : User
+
+    allRunTimes: [RunTime]
+    RunTime(seq : Int!) : RunTime
+
+    allSelectedMenus: [SelectedMenu]
+    SelectedMenu(seq: Int!) : SelectedMenu
+
+    allSelectedOptions: [SelectedOption]
+    SelectedOption(seq: Int) : SelectedOption
+
+    allResReviews : [ResReview]
+    ResReview(seq: Int!) : ResReview
+
+    allRestaurants: [Restaurant]
+    #사용자의 위치(시,동)에 배달 가능한 지역 & 오픈된 곳만 카테고리별로 레스토랑 띄우기
+    getRestaurants(category: String!, si: String!, dong: String!) : [Restaurant]
+    getRestaurant(seq: Int!) : Restaurant
+    
+    #키워드 검색
+    searchRestaurant(si: String!, dong: String!, keyword: String!) : [Restaurant]
+
+    allUserReviews : [UserReview]
+    UserReview(toseq: Int!) : [UserReview]
+    UserReviewBySeq(seq: Int!) : UserReview
+
+    allOptions: [Option]
+    Option(seq: Int): Option
+    OptionByMenu(menuseq: Int!) : [Option]
+
+    allOptionItems: [OptionItem]
+    OptionItem(seq: Int): OptionItem
+    allOrders: [Order]
+    Order(seq: Int) :Order
+    allReplies: [Reply]
+    Reply(seq: Int) :Reply
+    allReports: [Report]
+    Report(seq: Int) : Report
+
+    allCallings: [Calling]
+    Calling(seq:Int) : Calling
+    
+    allCarts: [Cart]
+    Cart(seq:Int) : Cart
+
+    allChats: [Chat]
+    Chat(seq:Int) : Chat
+    
+    allLocations: [Location]
+    Location(seq:Int) : Location
+
+    allMenues: [Menu]
+    Menu(seq:Int) : Menu
+    MenuByRes(resseq:Int) : [Menu]
+
+    allMessages: [Message]
+    Message(seq:Int) : Message
+
+    getNearCalls(latitude:Float, longitude:Float): [Calling]
+    allResLocations: [ResLocation]
+    allCallLocations: [CallLocation]
+    CallLocation: CallLocation
+    #식당마다 모든 리뷰들 보여주기
+    getResReviews(resseq:Int, sortingmethod:String): [ResReview]
+
+    #getResReviews(resseq:Int): Restaurant
+
+    #식당마다 평점 별 리뷰 개수 세기, rate숫자count로 불러오면 됨
+    getReviewCount(resseq: Int): Restaurant
+
+    
+    getUser(seq:Long!): User
+    getLikedRestaurants: [Restaurant]
+    getMyCall:Calling
+
+}
+
+type Mutation{
+    #선택된 메뉴에 메뉴, 수량 추가
+    createSelectedMenu(menuSeq: Int!, count:Int!): SelectedMenu!
+    #선택된 메뉴에서 수량바꾸기
+    updateSelectedMenu(count: Int!, seq: Int! ): SelectedMenu!
+    #선택된 메뉴 삭제
+    deleteSelectedMenu(seq: Int!): Boolean
+    #선택된 메뉴들 장바구니에 최종 추가(콜 호출하러 가기)
+    createCart(selectedmenuSeq: Int!, userSeq: Int!): Cart!
+    #장바구니에서 수량 바꾸기
+    updateCart(count: Int!, seq:Int!):Cart!
+    #장바구니 삭제
+    deleteCart(seq:Int!):Boolean
+
+    
+    login(email:String!, password:String!):LoginUser
+    toggleLikeRestaurant(resseq: Int!, isLiked: Boolean!):Boolean
+    writeReply(resReviewSeq: Int!, content: String!):Boolean 
+    updateReply(replySeq: Int!, content: String!): Reply
+
+    reportUser(chatSeq: Int!, userId: String!, reason: String!, content:String): Report!
+
+    createUserReview(content:String, rate:Float, fromseq: Int, toseq:Int): UserReview
+    updateUserReview(content:String, rate:Float, seq: Int!): UserReview
+    deleteUserReview(seq:Int!): Boolean
+    createCall(cart: String!, address: String!, latitude: Float!, longitude: Float!, requestToUser: String!, requestToRes: String!, timeLimit: Int! ):Calling
+    deleteCall:Boolean
+    sendMessage(text:String, toseq:Int!, chat_seq:Int): Message
+    quitChat(seq:Int):Boolean
+    createChat(participant2seq:Int): Chat
+
+    readMessage(seq:Int):Boolean
+
+    createOrder(callSeq: Int!, cart: String!, requestToRestaurant: String):Boolean
+    WriteRestaurantReview(order_seq: Int, content:String, rate:Float): ResReview
+    checkOrder(seq:Int!, isApproved: Boolean, deliveryTime: Int! ): Order
+    updateCall(seq:Int!):Calling
+    cancelCall(seq:Int!):Boolean
+    
+}
+
+
+type LoginUser{
+    token: String
+    user: User
+}
+type User {
+    seq: Long!
+    ID: String!
+    password: String!
+    name: String!
+    #createdAt: String
+    #updatedAt: String
+    created_at: String
+    updated_at: String
+    thumbnail: String
+    token: String
+    status: String!
+    rate: Float!
+    orderCounts: Int
+    reviews: [UserReview]
+    canWriteReview: Boolean
+    carts:[Cart]
+}
+
+type RunTime {
+    seq : ID!
+    day : String!
+    open : String!
+    close : String!
+}
+
+
+type SelectedMenu {
+    seq : ID!
+    count : Int!
+    menu: Menu
+    cart: Cart
+    selected_option: [SelectedOption]
+    price: Int
+    isSeperated: Boolean
+}
+
+type SelectedOption{
+    seq: ID!
+    optionitem_seq: Int
+    selectedmenu_seq: Int
+    option_item: OptionItem
+    selected_menu: [SelectedMenu]
+
+}
+
+type ResReview {
+    
+    seq : ID!
+    createdAt : DateTime
+    updatedAt : String
+    rate : Float!
+    content : String!
+    images : [Image]
+    resseq: Int!
+    restaurant: Restaurant!
+    user: User
+    reply: Reply
+    user_seq:Int
+    
+}
+
+type Image{
+    seq: ID!
+    image: String!
+    review_seq: Int!
+}
+
+type Restaurant {
+    seq : ID!
+    name : String!
+    id : String!
+    password : String!
+    created_at : String!
+    dayoff : String!
+    isopen : Int!
+    min_order : Int!
+    delivery_tip : Int
+    seperatable : Boolean
+    introduction : String
+    thumbnail : String
+    rate : Float!
+    category : String!
+    reviews: [ResReview]
+    runtime:RunTime
+    rate1count: Int
+    rate2count: Int
+    rate3count: Int
+    rate4count: Int
+    rate5count: Int
+    menus: [Menu]
+    bestmenus: [Menu]
+    reviewcount: Int
+    likescount: Int
+    isLiked: Boolean
+    deliveryloc: [Deliveryloc]
+}
+
+type Likes{
+    seq: Int!
+    resseq: Int!
+    userseq: Int!
+}
+type Deliveryloc{
+    res_seq: Int!
+    si: String!
+    dong: String!
+}
+type Option{
+    seq: Int!
+    category: String!
+    isRequired: Boolean!
+    isMultiple: Boolean!
+    optionItems: [OptionItem]
+    menuseq: Int!
+}
+
+type OptionItem{
+    seq:Int!
+    content:String!
+    price:Int!
+    Option: Int
+    option_seq: Int
+    #option_seq: [Option] @link(by: "seq")
+}
+
+type Order{
+
+    seq:Int!
+    createdAt: String!
+    updatedAt: String
+    #deliveryTime: String!
+    created_at: String
+    delivery_time: Int
+    call_seq: Int
+    sum: Int
+    canWriteRestaurantReview: Boolean
+    canWriteUserReview: Boolean
+    status: String!
+    call: Calling
+
+}
+
+type Reply{
+    seq:Int!
+    content:String!
+    createdAt: DateTime!
+    updatedAt: DateTime
+    #reviewSeq: Int!
+}
+
+type Report{
+    seq: Int!
+    reason: String!
+    content: String
+    created_at: DateTime!
+    updated_at: DateTime
+    isSolved: Boolean!
+    chat: Chat!
+    reporter: User!
+    reported: User!
+}
+
+type UserReview{
+    seq : Int!
+    created_at: String
+    updated_at: String
+    rate : Float!
+    content : String
+    toseq : Int
+    fromseq : Int
+    from: User
+    to:User
+    user: User
+}
+
+type Calling{
+    seq: Int
+    created_at: DateTime
+    expired_at: DateTime
+    status: String!
+    calltext: String
+    price: Int!
+    user: User
+    restaurant: Restaurant
+    callLocation: CallLocation
+    distance: Float
+    #cart1: Cart
+    cart: [Cart]
+    #request: String
+    request_call:String
+    time_limit: Int
+    user_seq: Long
+    order: Order
+
+    
+}
+
+type Cart{
+    seq: Int!
+    request: String
+    delivery_tip: Int
+    #selectedmenu: SelectedMenu
+    selected_menu: [SelectedMenu]
+    user_seq: Int
+    user: User
+    call:Calling
+    total_cost: Int
+    callSeq: Int
+    
+}
+
+type Location{
+    seq: Int!
+    latitude: Float!
+    longitude: Float!
+    address: String!
+}
+
+type Menu{
+    seq: ID!
+    name: String!
+    thumbnail: String
+    description: String
+    price: Int!
+    isAvailable: Boolean!
+    isBestmenu: Boolean!
+    resseq: Int!
+    restaurant: Restaurant
+    options:[Option]
+    isSeperatable: Boolean
+}
+
+type Chat{
+    seq: Int!
+    created_at: String
+    updated_at: String
+    last_message: Int
+    participant1seq: Int
+    participant2seq:Int
+ 
+    messages: [Message]
+    lastMessage: Message
+    participant1: User
+    participant2: User
+    is_active: Boolean
+    
+}
+
+type Message{
+    seq: Int!
+    is_read: Boolean
+    created_at: DateTime
+    updated_at: DateTime
+    text: String
+    toseq: Int
+    fromseq: Int
+    chat_seq: Int
+    to: User
+    from: User
+}
+
+type ResLocation{
+    id:Int!
+    name:String!
+    loc: [Float]
+    latitude: Float
+    longitude: Float
+    distance: Float
+}
+
+type CallLocation{
+    seq: Int!
+    place: String!
+    latitude: Float!
+    longitude: Float!
+}
