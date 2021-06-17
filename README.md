@@ -12,3 +12,25 @@
 ![image](https://user-images.githubusercontent.com/48883344/122235383-9ca1e900-cef8-11eb-9261-d83f17aad98e.png)
 
 ![123](https://user-images.githubusercontent.com/48883344/122235533-bcd1a800-cef8-11eb-85a2-47888325b594.PNG)
+
+## APP Basic Flow Demonstration
+
+![ezgif-4-e50369579b50](https://user-images.githubusercontent.com/48883344/122381059-79804380-cfa3-11eb-81f7-c6ea8cf47f67.gif)
+
+![ezgif-7-437083656891](https://user-images.githubusercontent.com/48883344/122380258-a849ea00-cfa2-11eb-9bbf-0f6aeb425ca6.gif)
+
+## WEB Basic Flow Demonstation
+
+## Features
+
+### APP
+
+### WEB
+
+## Skill Stack
+
+### FRONTEND
+
+### BACKEND
+
+## Contributors
