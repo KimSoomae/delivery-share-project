@@ -115,43 +115,6 @@ public class CallingDataFetcher  {
     public DataFetcher<?> Calling () {
       return environment -> {
         int seq = environment.getArgument("seq");
-        //List<CartEntity> cart = callingRepository.findBySeq(seq).getCart();
-        //List<SelectedMenuEntity> selected = cart.get(0).getSelectedMenu();
-        //List<SelectedOptionEntity> selectedoption = SelectedMenuRepository.findBySeq(seq).getSelectedOption();
-        
-        //for (int i=0; i<selected.size();i++){
-          //int selectedmenu_seq = selected.get(i).getSeq();
-          //SelectedOptionEntity selectedOption = selectedOptionRepository.findBySelectedMenuSeq(selectedmenu_seq);
-          //int optionitemseq = selectedOption.getOptionItemSeq();
-          //OptionItemEntity optionitem = optionItemRepository.findByOptionItemSeq(optionitemseq);
-
-          //int menuseq= selected.get(i).getMenuSeq();
-          //MenuEntity menu = menuRepository.findBySeq(menuseq);
-
-          //int option_price = optionitem.getPrice();
-
-          //int price = menu.getPrice();
-          //int cnt = selected.get(i).getCount();
-          //int totalprice = price*cnt;
-          //totalprice = totalprice + option_price;
-          //cart.get(0).setTotalCost(totalprice);
-
-        //}
-        //if(cart.size() > 1) {
-          //List<SelectedMenuEntity> selected2 = cart.get(1).getSelectedMenu();
-
-        //for (int i=0; i<selected2.size();i++){
-          //int menuseq= selected2.get(i).getMenuSeq();
-          //MenuEntity menu = menuRepository.findBySeq(menuseq);
-          //int price = menu.getPrice();
-          //int cnt = selected2.get(i).getCount();
-          //int totalprice = price*cnt;
-          //cart.get(1).setTotalCost(totalprice);
-          
-        //}
-
-        //}
-        
         return callingRepository.findBySeq(seq);
 
 
@@ -219,10 +182,6 @@ public class CallingDataFetcher  {
       return callLocationRepository.findBySeq(callingEntity.getCallLocation().getSeq());
     }
 
-    //public CartEntity getCart1(CallingEntity callingEntity){
-    //  return cartRepository.findBySeq(callingEntity.getCart1().getSeq());
-    //}
-
     public List<CartEntity> getCart(CallingEntity callingEntity) {
       return cartRepository.findAll();
       
@@ -256,12 +215,10 @@ public class CallingDataFetcher  {
         CE.setLongitude(longitude);
         callLocationRepository.save(CE);
         int callLocationkey = CE.getSeq();
-        System.out.println("콜장소 아이디"+callLocationkey);
         CallingEntity Call = new CallingEntity();
         int timelimit = environment.getArgument("timeLimit");
         String requestR = environment.getArgument("requestToRes");
         String requestU = environment.getArgument("requestToUser");
-        System.out.println("여기까지들어왔따"+timelimit);
         Call.setCreatedAt();
         Call.setExpiredAt(timelimit);
         Call.setStatus("isActivated");
@@ -331,15 +288,6 @@ public class CallingDataFetcher  {
               selectedOptionRepository.save(Sel_opt);
             }
 
-              //JSONObject Oitems = jitems.getJSONObject(k);
-             
-              //String content = Oitems.getString("content");
-              //int optionItemSeq = optionItemRepository.findByContentAndOption_seq(content, option_seq).getSeq();
-              //SelectedOptionEntity Sel_opt = new SelectedOptionEntity();
-              //Sel_opt.setOptionItemSeq(optionItemSeq);
-              //Sel_opt.setSelectedmenuSeq(selected_menukey);
-              //selectedOptionRepository.save(Sel_opt);
-           // }
           }
         }
         
