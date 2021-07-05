@@ -65,31 +65,20 @@ public class ChatDataFetcher {
     public DataFetcher<?> quitChat(){
       return environment -> {
         int seq=environment.getArgument("seq");
-      
         ChatEntity chat = chatRepository.findBySeq(seq);
         chat.setParticipant1Null();
         chat.setIsActive();
-
         chatRepository.save(chat);
 
-
-        //chatRepository.deleteBySeq(seq);
         return true;
       };
     }
 
     public DataFetcher<?> createChat(){
       return environment -> {
-
-
-        
         List<ChatEntity> chat = chatRepository.findAll();
-       
-        //int participant1seq = environment.getArgument("participant1seq");
         Integer participant2seq = environment.getArgument("participant2seq");
         int participant1seq = 10;
-        //int last_message = environment.getArgument("last_message");
-
         for (int i=0; i<chat.size();i++){
           boolean c =  chat.get(i).getIsActive();
           if(c == true) {
@@ -100,16 +89,11 @@ public class ChatDataFetcher {
             }
 
           }
-          
-          
-          
-            
-          
+         
         }
         ChatEntity chatEntity = new ChatEntity();
         chatEntity.setParticipant1(10);
         chatEntity.setParticipant2(participant2seq);
-        //chatEntity.setLastMessage(last_message);
         chatEntity.setIsActive1();
         chatEntity.setCreatedAt();
 
