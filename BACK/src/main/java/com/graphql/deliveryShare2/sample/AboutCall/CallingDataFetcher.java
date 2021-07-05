@@ -222,7 +222,6 @@ public class CallingDataFetcher  {
         Call.setCreatedAt();
         Call.setExpiredAt(timelimit);
         Call.setStatus("isActivated");
-        //Call.setRequestR(requestR);
         Call.setRequestCall(requestU);
         Call.setTimelimit(timelimit);
         Call.setUserseq(userseq);
